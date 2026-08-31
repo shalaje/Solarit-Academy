@@ -67,7 +67,7 @@ export default function Navbar() {
                 aria-label="Toggle language"
               >
                 <Globe className="w-4 h-4" />
-                {language.toUpperCase()}
+                {language === 'sq' ? 'AL' : language.toUpperCase()}
               </button>
               
               <a 
@@ -86,7 +86,7 @@ export default function Navbar() {
               className={`flex items-center gap-1 text-sm font-medium transition-colors ${isScrolled || isMobileMenuOpen ? 'text-brand-navy' : 'text-white'}`}
             >
               <Globe className="w-4 h-4" />
-              {language.toUpperCase()}
+              {language === 'sq' ? 'AL' : language.toUpperCase()}
             </button>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

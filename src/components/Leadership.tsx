@@ -4,8 +4,8 @@ export default function Leadership() {
   const { t } = useLanguage();
 
   return (
-    <section className="py-24 bg-gradient-to-br from-brand-navy via-brand-navy to-slate-900 text-white relative overflow-hidden">
-      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:24px_24px]"></div>
+    <section className="py-24 bg-brand-navy text-white relative overflow-hidden">
+      <div className="absolute inset-0 bg-solar-motif opacity-[0.03] pointer-events-none"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-white border border-white/20 text-xs font-bold tracking-widest uppercase mb-4">

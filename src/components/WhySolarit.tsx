@@ -9,85 +9,66 @@ export default function WhySolarit() {
       id: 'dual',
       icon: <BookOpenCheck className="w-6 h-6 text-brand-green" />,
       titleKey: 'why.dual.title',
-      descKey: 'why.dual.desc'
+      descKey: 'why.dual.desc',
+      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop'
     },
     {
       id: 'cert',
       icon: <Award className="w-6 h-6 text-brand-green" />,
       titleKey: 'why.cert.title',
-      descKey: 'why.cert.desc'
+      descKey: 'why.cert.desc',
+      image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop'
     },
     {
       id: 'park',
       icon: <MapPin className="w-6 h-6 text-brand-green" />,
       titleKey: 'why.park.title',
-      descKey: 'why.park.desc'
+      descKey: 'why.park.desc',
+      image: 'https://images.unsplash.com/photo-1509391366360-1f9509e1394e?q=80&w=2070&auto=format&fit=crop'
     },
     {
       id: 'eling',
       icon: <ShieldCheck className="w-6 h-6 text-brand-green" />,
       titleKey: 'why.eling.title',
-      descKey: 'why.eling.desc'
+      descKey: 'why.eling.desc',
+      image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop'
     }
   ];
 
   return (
-    <section id="why-solarit" className="py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row gap-16 items-center">
-          <div className="lg:w-1/2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-green/10 text-brand-green text-xs font-bold tracking-widest uppercase mb-4">
-              {t('badge.advantage')}
-            </div>
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-brand-navy mb-8 relative inline-block block">
-              {t('why.title')}
-              <div className="absolute -bottom-2 left-0 w-12 h-1.5 bg-brand-yellow rounded-full"></div>
-            </h2>
-            
-            <div className="space-y-6 mt-12">
-              {reasons.map((reason) => (
-                <div key={reason.id} className="flex gap-4 p-4 rounded-xl transition-all duration-300 hover:shadow-lg hover:scale-105 hover:bg-white border border-transparent hover:border-gray-100 cursor-default">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-white shadow-sm border border-gray-100 flex items-center justify-center">
-                    {reason.icon}
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-heading font-bold text-brand-navy mb-2">
-                      {t(reason.titleKey)}
-                    </h3>
-                    <p className="text-gray-600">
-                      {t(reason.descKey)}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
+    <section id="why-solarit" className="py-20 relative bg-[#F7F8FA]">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+        
+        {/* Common Header */}
+        <div className="mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-green/10 text-brand-green text-xs font-bold tracking-widest uppercase mb-4">
+            {t('badge.advantage')}
           </div>
-          
-          <div className="lg:w-1/2 w-full">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <div className="absolute inset-0 bg-gradient-to-tr from-brand-navy/40 to-transparent z-10"></div>
-              <img 
-                src="/solar-park.jpg" 
-                alt="Students learning at Solarit" 
-                className="w-full h-auto aspect-square lg:aspect-[4/5] object-cover"
-                onError={(e) => {
-                  e.currentTarget.src = 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop';
-                }}
-              />
-              <div className="absolute bottom-6 left-6 right-6 z-20 bg-white/95 backdrop-blur-md p-6 rounded-xl border border-white/20 shadow-lg">
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-full bg-brand-yellow flex items-center justify-center font-heading font-bold text-2xl text-brand-navy">
-                    2
-                  </div>
-                  <div>
-                    <div className="font-heading font-bold text-brand-navy text-lg">{t('why.park_badge.title').replace('2 ', '')}</div>
-                    <div className="text-gray-600 text-sm">{t('why.park_badge.desc')}</div>
-                  </div>
-                </div>
+          <h2 className="text-3xl md:text-5xl font-heading font-bold text-brand-navy">
+            {t('why.title')}
+          </h2>
+        </div>
+
+        {/* NUMBERED LIST */}
+        <div className="flex flex-col">
+          <div className="border-t-2 border-brand-navy/10"></div>
+          {reasons.map((reason, index) => (
+            <div key={reason.id} className="group flex flex-col md:flex-row gap-6 md:gap-12 py-10 border-b-2 border-brand-navy/10 transition-colors hover:border-brand-green">
+              <div className="text-5xl md:text-6xl font-heading font-bold text-gray-200 group-hover:text-brand-green transition-colors">
+                0{index + 1}
+              </div>
+              <div className="flex-1">
+                <h3 className="text-2xl font-heading font-bold text-brand-navy mb-4 group-hover:text-brand-green transition-colors">
+                  {t(reason.titleKey)}
+                </h3>
+                <p className="text-gray-600 text-lg leading-relaxed">
+                  {t(reason.descKey)}
+                </p>
               </div>
             </div>
-          </div>
+          ))}
         </div>
+
       </div>
     </section>
   );

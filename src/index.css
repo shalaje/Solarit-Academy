@@ -8,8 +8,12 @@
   --color-brand-sun-end: #E8892E;
   --color-brand-gray: #F7F8FA;
   
-  --font-heading: "Montserrat", sans-serif;
+  --font-heading: "Space Grotesk", sans-serif;
   --font-body: "Inter", sans-serif;
+}
+
+@utility bg-solar-motif {
+  background-image: repeating-linear-gradient(45deg, currentColor 0, currentColor 1px, transparent 1px, transparent 24px);
 }
 
 body {

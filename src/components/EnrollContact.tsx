@@ -4,9 +4,39 @@ import { useLanguage } from '../context/LanguageContext';
 export default function EnrollContact() {
   const { t } = useLanguage();
 
+  const currentLanguage = t('nav.home') === 'Home' ? 'en' : 'sq';
+
   return (
-    <section id="contact" className="py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-24 relative bg-solar-motif">
+      <div className="absolute inset-0 bg-white/95"></div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Next Cohort Banner */}
+        <div className="bg-brand-navy rounded-2xl p-6 md:p-8 mb-12 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl relative overflow-hidden">
+          <div className="absolute inset-0 bg-solar-motif opacity-10 pointer-events-none"></div>
+          <div className="relative z-10">
+            <div className="text-brand-yellow font-bold tracking-widest uppercase text-sm mb-2">
+              {currentLanguage === 'sq' ? 'Aplikimet e Hapura' : 'Open Applications'}
+            </div>
+            <h3 className="text-2xl font-heading font-bold text-white">
+              {currentLanguage === 'sq' ? 'Grupi i Radhës: [KONFIRMO DATËN ME KLIENTIN]' : 'Next Cohort: [CONFIRM DATE WITH CLIENT]'}
+            </h3>
+            <p className="text-gray-400 mt-1">
+              {currentLanguage === 'sq' ? 'Vendet janë të kufizuara. Siguro vendin tënd sot.' : 'Seats are limited. Secure your spot today.'}
+            </p>
+          </div>
+          <div className="relative z-10">
+            <button
+              onClick={() => {
+                document.getElementById('name')?.focus();
+              }}
+              className="bg-brand-green hover:bg-brand-green/90 text-white font-heading font-bold px-8 py-3 rounded-lg transition-colors whitespace-nowrap shadow-md"
+            >
+              {currentLanguage === 'sq' ? 'Apliko Tani' : 'Apply Now'}
+            </button>
+          </div>
+        </div>
+
         <div className="grid lg:grid-cols-2 gap-16">
           
           {/* Contact Form */}
@@ -113,18 +143,21 @@ export default function EnrollContact() {
               </div>
             </div>
             
-            <div className="flex-grow rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white relative min-h-[300px]">
+            <div className="flex-grow rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-[#E5E3DF] relative min-h-[300px]">
                <iframe 
                  src="https://maps.google.com/maps?q=ELING+GRUP+SH.P.K,+Lipjan,+Kosovo&t=&z=14&ie=UTF8&iwloc=&output=embed"
                  width="100%" 
                  height="100%" 
-                 style={{ border: 0 }} 
+                 style={{ border: 0, filter: 'grayscale(100%) contrast(1.1) opacity(0.8)' }} 
                  allowFullScreen 
                  loading="lazy" 
                  referrerPolicy="no-referrer-when-downgrade"
                  title="Solarit Academy Location"
-                 className="absolute inset-0"
+                 className="absolute inset-0 mix-blend-multiply"
                ></iframe>
+               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-brand-green rounded-full shadow-lg shadow-brand-green/40 flex items-center justify-center animate-bounce pointer-events-none">
+                 <div className="w-4 h-4 bg-white rounded-full"></div>
+               </div>
             </div>
           </div>
 
