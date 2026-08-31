@@ -143,21 +143,18 @@ export default function EnrollContact() {
               </div>
             </div>
             
-            <div className="flex-grow rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-[#E5E3DF] relative min-h-[300px]">
+            <div className="flex-grow rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white relative min-h-[300px]">
                <iframe 
                  src="https://maps.google.com/maps?q=ELING+GRUP+SH.P.K,+Lipjan,+Kosovo&t=&z=14&ie=UTF8&iwloc=&output=embed"
                  width="100%" 
                  height="100%" 
-                 style={{ border: 0, filter: 'grayscale(100%) contrast(1.1) opacity(0.8)' }} 
+                 style={{ border: 0 }} 
                  allowFullScreen 
                  loading="lazy" 
                  referrerPolicy="no-referrer-when-downgrade"
                  title="Solarit Academy Location"
-                 className="absolute inset-0 mix-blend-multiply"
+                 className="absolute inset-0"
                ></iframe>
-               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-brand-green rounded-full shadow-lg shadow-brand-green/40 flex items-center justify-center animate-bounce pointer-events-none">
-                 <div className="w-4 h-4 bg-white rounded-full"></div>
-               </div>
             </div>
           </div>
 
