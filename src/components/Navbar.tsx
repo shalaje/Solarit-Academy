@@ -31,14 +31,18 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/85 backdrop-blur-md border-b border-gray-200/50 py-3 shadow-sm' : 'bg-transparent py-5'
+        isMobileMenuOpen 
+          ? 'bg-white py-3 shadow-sm'
+          : isScrolled 
+            ? 'bg-white/95 backdrop-blur-md border-b border-gray-200/50 py-3 shadow-sm' 
+            : 'bg-transparent py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo Placeholder */}
           <div className="flex items-center gap-2">
-            <div className={`flex items-center font-heading font-bold text-2xl tracking-tight transition-colors ${isScrolled ? 'text-brand-navy' : 'text-white'}`}>
+            <div className={`flex items-center font-heading font-bold text-2xl tracking-tight transition-colors ${isScrolled || isMobileMenuOpen ? 'text-brand-navy' : 'text-white'}`}>
               S<Sun className="w-6 h-6 text-brand-sun-start mx-0.5 mt-1" />LARIT
             </div>
             <div className="text-brand-green font-heading font-bold text-sm leading-none mt-1 uppercase">
@@ -101,7 +105,7 @@ export default function Navbar() {
 
       {/* Mobile Nav */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white/80 backdrop-blur-xl border-t border-gray-100/50 shadow-lg py-6 px-4 flex flex-col space-y-4">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-white border-t border-gray-100 shadow-xl py-6 px-4 flex flex-col space-y-4">
           {navLinks.map((link) => (
             <a
               key={link.href}
