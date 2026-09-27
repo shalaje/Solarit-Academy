@@ -461,39 +461,39 @@ export default function ProgramsGrid() {
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex justify-center mb-16">
-          <div className="inline-flex p-1.5 rounded-xl bg-slate-900/90 border border-slate-800 shadow-xl backdrop-blur-md">
+        <div className="w-full flex justify-center mb-12 sm:mb-16 px-4 sm:px-6">
+          <div className="w-full sm:w-auto max-w-md sm:max-w-none p-1.5 sm:p-2 rounded-2xl sm:rounded-full bg-slate-900/90 border border-slate-800 shadow-xl backdrop-blur-md flex flex-col sm:flex-row gap-1.5 sm:gap-1">
             <button
               onClick={() => setActiveCategory('all')}
-              className={`px-6 py-2.5 rounded-lg text-sm font-heading font-semibold transition-all duration-200 ${
+              className={`w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl sm:rounded-full text-xs sm:text-sm font-heading font-semibold transition-all duration-200 ${
                 activeCategory === 'all'
                   ? 'bg-brand-green text-white shadow-md shadow-brand-green/25'
                   : 'text-gray-400 hover:text-white hover:bg-white/5'
               }`}
             >
-              {currentLanguage === 'sq' ? 'Të Gjitha Programet (6)' : 'All Programs (6)'}
+              <span>{currentLanguage === 'sq' ? 'Të Gjitha Programet (6)' : 'All Programs (6)'}</span>
             </button>
             <button
               onClick={() => setActiveCategory('solar')}
-              className={`flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-heading font-semibold transition-all duration-200 ${
+              className={`w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl sm:rounded-full text-xs sm:text-sm font-heading font-semibold transition-all duration-200 ${
                 activeCategory === 'solar'
                   ? 'bg-brand-green text-white shadow-md shadow-brand-green/25'
                   : 'text-gray-400 hover:text-white hover:bg-white/5'
               }`}
             >
-              <Sun className="w-4 h-4 text-amber-400" />
-              {currentLanguage === 'sq' ? 'Fotovoltaik & O&M (4)' : 'Solar PV & O&M (4)'}
+              <Sun className="w-4 h-4 text-amber-400 shrink-0" />
+              <span>{currentLanguage === 'sq' ? 'Fotovoltaik & O&M (4)' : 'Solar PV & O&M (4)'}</span>
             </button>
             <button
               onClick={() => setActiveCategory('battery')}
-              className={`flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-heading font-semibold transition-all duration-200 ${
+              className={`w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl sm:rounded-full text-xs sm:text-sm font-heading font-semibold transition-all duration-200 ${
                 activeCategory === 'battery'
                   ? 'bg-brand-green text-white shadow-md shadow-brand-green/25'
                   : 'text-gray-400 hover:text-white hover:bg-white/5'
               }`}
             >
-              <Battery className="w-4 h-4 text-emerald-400" />
-              {currentLanguage === 'sq' ? 'Bateri & Mikrorrjete (2)' : 'Storage & Microgrids (2)'}
+              <Battery className="w-4 h-4 text-emerald-400 shrink-0" />
+              <span>{currentLanguage === 'sq' ? 'Bateri & Mikrorrjete (2)' : 'Storage & Microgrids (2)'}</span>
             </button>
           </div>
         </div>
