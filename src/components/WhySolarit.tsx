@@ -7,61 +7,67 @@ export default function WhySolarit() {
   const reasons = [
     {
       id: 'dual',
-      icon: <BookOpenCheck className="w-6 h-6 text-brand-green" />,
+      icon: <BookOpenCheck className="w-5 h-5 text-brand-green" />,
       titleKey: 'why.dual.title',
       descKey: 'why.dual.desc',
-      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop'
     },
     {
       id: 'cert',
-      icon: <Award className="w-6 h-6 text-brand-green" />,
+      icon: <Award className="w-5 h-5 text-brand-green" />,
       titleKey: 'why.cert.title',
       descKey: 'why.cert.desc',
-      image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop'
     },
     {
       id: 'park',
-      icon: <MapPin className="w-6 h-6 text-brand-green" />,
+      icon: <MapPin className="w-5 h-5 text-brand-green" />,
       titleKey: 'why.park.title',
       descKey: 'why.park.desc',
-      image: 'https://images.unsplash.com/photo-1509391366360-1f9509e1394e?q=80&w=2070&auto=format&fit=crop'
     },
     {
       id: 'eling',
-      icon: <ShieldCheck className="w-6 h-6 text-brand-green" />,
+      icon: <ShieldCheck className="w-5 h-5 text-brand-green" />,
       titleKey: 'why.eling.title',
       descKey: 'why.eling.desc',
-      image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop'
     }
   ];
 
   return (
-    <section id="why-solarit" className="py-20 relative bg-[#F7F8FA]">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+    <section id="why-solarit" className="py-20 lg:py-28 relative bg-[#F7F8FA] border-y border-neutral-200/60">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Common Header */}
+        {/* Section Header */}
         <div className="mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-green/10 text-brand-green text-xs font-bold tracking-widest uppercase mb-4">
             {t('badge.advantage')}
           </div>
-          <h2 className="text-3xl md:text-5xl font-heading font-bold text-brand-navy">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-brand-navy tracking-tight">
             {t('why.title')}
           </h2>
         </div>
 
-        {/* NUMBERED LIST */}
-        <div className="flex flex-col">
-          <div className="border-t-2 border-brand-navy/10"></div>
+        {/* Numbered Benefits List with Generous Spacing and Huge Numbers */}
+        <div className="divide-y divide-brand-navy/10 border-y border-brand-navy/10">
           {reasons.map((reason, index) => (
-            <div key={reason.id} className="group flex flex-col md:flex-row gap-6 md:gap-12 py-10 border-b-2 border-brand-navy/10 transition-colors hover:border-brand-green">
-              <div className="text-5xl md:text-6xl font-heading font-bold text-gray-200 group-hover:text-brand-green transition-colors">
+            <div 
+              key={reason.id} 
+              className="group flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12 py-10 md:py-12 px-4 sm:px-6 -mx-4 sm:-mx-6 rounded-2xl transition-all duration-300 hover:bg-white/90 hover:shadow-sm"
+            >
+              {/* Huge Number */}
+              <div className="text-6xl sm:text-7xl md:text-8xl font-heading font-extrabold text-gray-200 group-hover:text-brand-green/80 group-hover:scale-105 transition-all duration-300 select-none shrink-0 w-24 sm:w-28 leading-none">
                 0{index + 1}
               </div>
+
+              {/* Title & Short Description */}
               <div className="flex-1">
-                <h3 className="text-2xl font-heading font-bold text-brand-navy mb-4 group-hover:text-brand-green transition-colors">
-                  {t(reason.titleKey)}
-                </h3>
-                <p className="text-gray-600 text-lg leading-relaxed">
+                <div className="flex items-center gap-2.5 mb-2.5">
+                  <div className="p-1 rounded-md bg-brand-green/10 text-brand-green">
+                    {reason.icon}
+                  </div>
+                  <h3 className="text-2xl sm:text-3xl font-heading font-bold text-brand-navy group-hover:text-brand-navy transition-colors">
+                    {t(reason.titleKey)}
+                  </h3>
+                </div>
+                <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-2xl">
                   {t(reason.descKey)}
                 </p>
               </div>

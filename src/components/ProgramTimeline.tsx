@@ -1,127 +1,266 @@
 import { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { BookOpen, Map, Award, CheckCircle2 } from 'lucide-react';
+import { BookOpen, Cpu, SunMedium, Award, CheckCircle2, ChevronRight, Sparkles } from 'lucide-react';
 import TacticalCard from './TacticalCard';
+
+interface TimelineStep {
+  number: string;
+  weeksSq: string;
+  weeksEn: string;
+  titleSq: string;
+  titleEn: string;
+  badgeSq: string;
+  badgeEn: string;
+  descSq: string;
+  descEn: string;
+  topicsSq: string[];
+  topicsEn: string[];
+  icon: typeof BookOpen;
+}
 
 export default function ProgramTimeline() {
   const { t } = useLanguage();
   const [activeStep, setActiveStep] = useState(0);
 
-  // Note: These would ideally be translated via context, but we use hardcoded strings for demonstration
-  const timelineSteps = [
+  const currentLanguage = t('nav.home') === 'Home' ? 'en' : 'sq';
+
+  const steps: TimelineStep[] = [
     {
-      id: 'theory',
-      icon: <BookOpen className="w-5 h-5" />,
-      title: 'Java 1-4: Teoria dhe Bazat',
-      titleEn: 'Weeks 1-4: Theory & Basics',
-      desc: 'Mësim intensiv në klasë. Modulet mbulojnë bazat e energjisë solare, sigurinë në punë, dhe projektimin e sistemeve fotovoltaike.',
-      descEn: 'Intensive classroom learning. Modules cover solar energy fundamentals, workplace safety, and PV system design.',
-      color: 'bg-brand-navy'
+      number: '01',
+      weeksSq: 'Java 1–3',
+      weeksEn: 'Weeks 1–3',
+      titleSq: 'Bazat Inxhinierike & Fizika Fotovoltaike',
+      titleEn: 'Engineering Foundations & PV Physics',
+      badgeSq: 'FAZA 01 // TEORI & BAZA',
+      badgeEn: 'PHASE 01 // FOUNDATIONS',
+      descSq: 'Mësim intensiv teorik në laborator. Analiza e rrezatimit diellor, teknologjitë e moduleve fotovoltaike (Monokristaline, Bifacial), llogaritja e këndeve optimale dhe bazat elektrike të rrymës së vazhduar (DC) e alternative (AC).',
+      descEn: 'Rigorous classroom and lab instruction covering solar irradiance modeling, silicon and bifacial cell physics, tilt and azimuth optimization, and fundamental electrical DC/AC laws.',
+      topicsSq: [
+        'Fizika fotovoltaike & matjet e rrezatimit diellor',
+        'Siguria në punë dhe mbrojtja në lartësi (HSE)',
+        'Standardet evropiane dhe rregulloret teknike'
+      ],
+      topicsEn: [
+        'PV cell physics & irradiance solar mapping',
+        'Workplace safety & height protection protocols (HSE)',
+        'European IEC standards & local electrical codes'
+      ],
+      icon: BookOpen
     },
     {
-      id: 'practice',
-      icon: <Map className="w-5 h-5" />,
-      title: 'Java 5-8: Praktika në Park',
-      titleEn: 'Weeks 5-8: Park Practice',
-      desc: 'Aplikim praktik në parkun solar 2MW në Pejë. Instalime reale, matje, dhe zgjidhje të problemeve në terren.',
-      descEn: 'Hands-on application at the 2MW solar park in Pejë. Real installations, measurements, and field troubleshooting.',
-      color: 'bg-brand-sun-start'
+      number: '02',
+      weeksSq: 'Java 4–5',
+      weeksEn: 'Weeks 4–5',
+      titleSq: 'Projektimi & Pajisjet Elektrike (BOS)',
+      titleEn: 'System Design & Electrical Equipment',
+      badgeSq: 'FAZA 02 // PROJEKTIMI',
+      badgeEn: 'PHASE 02 // ENGINEERING',
+      descSq: 'Përzgjedhja dhe dimensionimi i inverterave on-grid dhe hibrid, mbrojtjet nga mbingarkesat dhe rrufetë, kabllimi diellor i specializuar dhe modelimi i skemave njëvijore me softuer profesional.',
+      descEn: 'Selection and configuration of on-grid string inverters, DC/AC overvoltage and surge suppression devices, specialized UV-rated solar cabling, and single-line diagram schematic drafting.',
+      topicsSq: [
+        'Dimensionimi i stringjeve dhe raporteve DC/AC',
+        'Konfigurimi i inverterave (Huawei, SMA, Fronius)',
+        'Mbrojtjet diferenciale dhe mbrojtja nga shkarkimet atmosferike'
+      ],
+      topicsEn: [
+        'String sizing and DC-to-AC capacity ratios',
+        'Commercial inverter configuration (Huawei, SMA, Fronius)',
+        'Surge arrestors, grounding and DC disconnect switches'
+      ],
+      icon: Cpu
     },
     {
-      id: 'cert',
-      icon: <Award className="w-5 h-5" />,
-      title: 'Java 9-10: Certifikimi',
-      titleEn: 'Weeks 9-10: Certification',
-      desc: 'Testimet finale teorike dhe praktike, të ndjekura nga lëshimi i certifikatës së njohur ndërkombëtarisht.',
-      descEn: 'Final theoretical and practical exams, followed by the issuance of internationally recognized certification.',
-      color: 'bg-brand-green'
+      number: '03',
+      weeksSq: 'Java 6–8',
+      weeksEn: 'Weeks 6–8',
+      titleSq: 'Praktikë në Terren në Parkun 2MW',
+      titleEn: 'Field Operations at 2MW Solar Park',
+      badgeSq: 'FAZA 03 // TERRENI REALE',
+      badgeEn: 'PHASE 03 // 2MW PARK PRACTICE',
+      descSq: 'Përvojë direkte praktike në impiantin funksional në Pejë. Montimi real i strukturave mbajtëse, fiksimi i paneleve me moment-çelës, krimpimi i lidhëseve MC4 dhe testimet me instrumente profesionale.',
+      descEn: 'Direct hands-on immersion at the active 2MW utility-scale solar plant in Pejë. Real mounting of racking systems, torque-wrench fastening, precision MC4 connector crimping, and electrical safety checks.',
+      topicsSq: [
+        'Montim mekanik në struktura fikse dhe çati',
+        'Matjet e tensionit Voc, rrymës Isc dhe rezistencës së izolimit',
+        'Inspektimi termografik me kamera infra të kuqe'
+      ],
+      topicsEn: [
+        'Mechanical mounting on ground-mount racks and rooftop structures',
+        'Voc open-circuit and Isc short-circuit instrument testing',
+        'Thermographic imaging for hotspot detection and diagnostics'
+      ],
+      icon: SunMedium
+    },
+    {
+      number: '04',
+      weeksSq: 'Java 9–10',
+      weeksEn: 'Weeks 9–10',
+      titleSq: 'Vënia në Punë & Certifikimi Zyrtar',
+      titleEn: 'Commissioning & Official Certification',
+      badgeSq: 'FAZA 04 // CERTIFIKIMI',
+      badgeEn: 'PHASE 04 // CERTIFICATION',
+      descSq: 'Verifikimi përfundimtar i vënies në funksion sipas standardit IEC 62446, lëshimi i raportit të pranimit teknik, testimi final teorik dhe praktik, dhe pajisja me certifikatën e akredituar.',
+      descEn: 'Full commissioning and energization checklists under IEC 62446, generation of electrical safety handover reports, formal examinations, and the conferral of state-accredited diplomas.',
+      topicsSq: [
+        'Procedurat e vënies nën tension dhe sinkronizimit me rrjetin',
+        'Testi përfundimtar teorik dhe provimi praktik në terren',
+        'Pajisja me diplomë të njohur kombëtare dhe ndërkombëtare'
+      ],
+      topicsEn: [
+        'Grid synchronization and utility energization sign-off',
+        'Final written exam and practical commissioning evaluation',
+        'Conferral of accredited professional qualification'
+      ],
+      icon: Award
     }
   ];
 
-  const currentLanguage = t('nav.home') === 'Home' ? 'en' : 'sq';
+  const currentStepData = steps[activeStep];
+  const StepIcon = currentStepData.icon;
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 lg:py-28 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-navy/5 text-brand-navy text-xs font-bold tracking-widest uppercase mb-4">
-            {currentLanguage === 'sq' ? 'Rrugëtimi i Programit' : 'Program Journey'}
+        {/* Section Header */}
+        <div className="mb-14 lg:mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-green/10 text-brand-green text-xs font-bold tracking-widest uppercase mb-4">
+            {currentLanguage === 'sq' ? 'Rrugëtimi i Kurrikulës' : 'Program Journey'}
           </div>
-          <h2 className="text-3xl md:text-5xl font-heading font-bold text-brand-navy">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-brand-navy tracking-tight">
             {currentLanguage === 'sq' ? 'Si duket një program trajnimi?' : 'What does a training program look like?'}
           </h2>
-          <p className="mt-4 text-gray-600 max-w-2xl text-lg">
+          <p className="mt-4 text-base sm:text-lg text-gray-600 max-w-2xl leading-relaxed">
             {currentLanguage === 'sq' 
-              ? 'Një pasqyrë e strukturuar e kurrikulës tonë 10-javore. *[DATAT DHE STRUKTURA E SAKTË DUHET TË KONFIRMOHEM NGA KLIENTI]*' 
-              : 'A structured overview of our 10-week curriculum. *[EXACT DATES AND STRUCTURE TO BE CONFIRMED BY CLIENT]*'}
+              ? 'Një rrugëtim i qartë 4-fazor me 10 javë aftësimi intensiv: nga bazat e fizikës në klasë deri te montimi dhe vënia në punë në parkun diellor 2MW.' 
+              : 'A structured 4-phase, 10-week technical journey: progressing from laboratory theory to full-scale deployment at our operational 2MW solar facility.'}
           </p>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-24">
-          {/* Timeline Navigation */}
-          <div className="lg:w-1/3 relative">
-            {/* Vertical Line */}
-            <div className="absolute left-[27px] top-4 bottom-4 w-1 bg-gray-100 rounded-full hidden md:block"></div>
-            
-            <div className="space-y-6">
-              {timelineSteps.map((step, index) => {
-                const isActive = activeStep === index;
-                const isPassed = activeStep > index;
-                
-                return (
-                  <button
-                    key={step.id}
-                    onClick={() => setActiveStep(index)}
-                    className="relative flex items-center gap-6 w-full text-left group"
+        {/* Timeline Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+          
+          {/* Step Selector Navigation (Left Column) */}
+          <div className="lg:col-span-5 flex flex-col justify-between space-y-3 relative">
+            {/* Visual connecting track */}
+            <div className="absolute left-[34px] top-6 bottom-6 w-0.5 bg-gray-200 hidden sm:block -z-0"></div>
+
+            {steps.map((step, index) => {
+              const isActive = activeStep === index;
+              const isPast = activeStep > index;
+
+              return (
+                <button
+                  key={step.number}
+                  onClick={() => setActiveStep(index)}
+                  onMouseEnter={() => setActiveStep(index)}
+                  className={`w-full text-left p-4 sm:p-5 rounded-2xl border transition-all duration-300 relative z-10 flex items-center gap-4 sm:gap-5 group cursor-pointer ${
+                    isActive
+                      ? 'bg-brand-navy text-white border-brand-navy shadow-lg shadow-brand-navy/15 translate-x-1 sm:translate-x-2'
+                      : 'bg-[#F9FAFB] hover:bg-white text-brand-navy border-gray-200/80 hover:border-brand-green/50 shadow-sm'
+                  }`}
+                >
+                  {/* Step Number Badge */}
+                  <div
+                    className={`w-12 h-12 rounded-xl flex items-center justify-center font-heading font-bold text-base transition-all duration-300 shrink-0 ${
+                      isActive
+                        ? 'bg-brand-green text-white shadow-md shadow-brand-green/30 scale-105'
+                        : isPast
+                        ? 'bg-emerald-100 text-emerald-800'
+                        : 'bg-white border border-gray-200 text-gray-500 group-hover:text-brand-green group-hover:border-brand-green/30'
+                    }`}
                   >
-                    <div className={`relative z-10 w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 shadow-sm
-                      ${isActive ? step.color + ' text-white scale-110 shadow-lg' : 
-                        isPassed ? 'bg-brand-green/20 text-brand-green' : 'bg-white border-2 border-gray-100 text-gray-400 group-hover:border-gray-300'}`}
+                    {step.number}
+                  </div>
+
+                  {/* Step Title & Week Readout */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span
+                        className={`text-[10px] font-mono font-bold uppercase tracking-wider ${
+                          isActive ? 'text-brand-yellow' : 'text-gray-500'
+                        }`}
+                      >
+                        {currentLanguage === 'sq' ? step.weeksSq : step.weeksEn}
+                      </span>
+                    </div>
+                    <div
+                      className={`font-heading font-bold text-sm sm:text-base leading-snug truncate transition-colors ${
+                        isActive ? 'text-white' : 'text-brand-navy group-hover:text-brand-green'
+                      }`}
                     >
-                      {isPassed ? <CheckCircle2 className="w-6 h-6" /> : step.icon}
+                      {currentLanguage === 'sq' ? step.titleSq : step.titleEn}
                     </div>
-                    <div>
-                      <h4 className={`text-lg font-bold font-heading transition-colors ${isActive ? 'text-brand-navy' : 'text-gray-500'}`}>
-                        {currentLanguage === 'sq' ? step.title : step.titleEn}
-                      </h4>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
+                  </div>
+
+                  {/* Active Indicator Chevron */}
+                  <div className={`shrink-0 transition-transform ${isActive ? 'translate-x-0 opacity-100' : '-translate-x-1 opacity-0 group-hover:opacity-60'}`}>
+                    <ChevronRight className={`w-5 h-5 ${isActive ? 'text-brand-yellow' : 'text-gray-400'}`} />
+                  </div>
+                </button>
+              );
+            })}
           </div>
 
-          {/* Timeline Content - Tactical 3D Depth Card */}
-          <div className="lg:w-2/3">
+          {/* Active Step Content Card (Right Column) */}
+          <div className="lg:col-span-7 flex">
             <TacticalCard
               isDark={false}
               radarColor="bg-brand-green"
-              coordinateTag="TIMELINE // ACCREDITED"
-              className="h-full min-h-[340px]"
+              coordinateTag={`PHASE // ${currentStepData.number}`}
+              className="w-full h-full min-h-[420px]"
             >
-              <div className="p-8 md:p-12 relative overflow-hidden h-full flex flex-col justify-center">
-                <div className="relative z-10 transition-all duration-500 animate-in fade-in slide-in-from-right-8" key={activeStep}>
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="text-[9px] font-mono font-bold tracking-[0.3em] uppercase text-brand-navy/60">
-                      SYLLABUS MODULE 0{activeStep + 1}
+              <div className="p-8 sm:p-10 md:p-12 h-full flex flex-col justify-between bg-white rounded-2xl relative overflow-hidden">
+                
+                {/* Header Tag and Icon */}
+                <div>
+                  <div className="flex items-center justify-between gap-4 mb-6">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-[10px] font-mono font-bold tracking-wider uppercase bg-brand-green/10 text-brand-green border border-brand-green/20">
+                      <Sparkles className="w-3.5 h-3.5" />
+                      {currentLanguage === 'sq' ? currentStepData.badgeSq : currentStepData.badgeEn}
+                    </span>
+                    <span className="text-xs font-mono font-semibold text-gray-500 bg-gray-100 px-3 py-1 rounded-md">
+                      {currentLanguage === 'sq' ? currentStepData.weeksSq : currentStepData.weeksEn}
+                    </span>
+                  </div>
+
+                  {/* Title */}
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="w-12 h-12 rounded-xl bg-brand-navy text-white flex items-center justify-center shrink-0 shadow-md">
+                      <StepIcon className="w-6 h-6 text-brand-yellow" />
                     </div>
-                    <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-sm text-white text-xs font-mono font-bold tracking-wider uppercase ${timelineSteps[activeStep].color}`}>
-                      {currentLanguage === 'sq' ? 'MODULI AKTUAL' : 'CURRENT MODULE'}
+                    <div>
+                      <h3 className="text-xl sm:text-2xl font-heading font-bold text-brand-navy leading-snug">
+                        {currentLanguage === 'sq' ? currentStepData.titleSq : currentStepData.titleEn}
+                      </h3>
                     </div>
                   </div>
-                  
-                  <h3 className="text-xl md:text-2xl font-bold uppercase tracking-tight leading-snug text-brand-navy mb-4">
-                    {currentLanguage === 'sq' ? timelineSteps[activeStep].title : timelineSteps[activeStep].titleEn}
-                  </h3>
-                  
-                  <p className="text-base md:text-lg text-gray-600 leading-relaxed max-w-2xl">
-                    {currentLanguage === 'sq' ? timelineSteps[activeStep].desc : timelineSteps[activeStep].descEn}
+
+                  {/* Detailed Description */}
+                  <p className="text-base text-gray-600 leading-relaxed mb-6">
+                    {currentLanguage === 'sq' ? currentStepData.descSq : currentStepData.descEn}
                   </p>
                 </div>
+
+                {/* Key Deliverables / Topics List */}
+                <div className="pt-6 border-t border-gray-100 bg-gray-50/70 -mx-8 sm:-mx-10 md:-mx-12 -mb-8 sm:-mb-10 md:-mb-12 p-6 sm:p-8 rounded-b-2xl">
+                  <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-gray-500 mb-3">
+                    {currentLanguage === 'sq' ? 'KOPMETENCAT KRYESORE TË FITUARA:' : 'KEY LEARNING OUTCOMES:'}
+                  </div>
+                  <div className="space-y-2.5">
+                    {(currentLanguage === 'sq' ? currentStepData.topicsSq : currentStepData.topicsEn).map((topic, i) => (
+                      <div key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-gray-700">
+                        <CheckCircle2 className="w-4 h-4 text-brand-green shrink-0 mt-0.5" />
+                        <span className="leading-snug">{topic}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
               </div>
             </TacticalCard>
           </div>
+
         </div>
 
       </div>

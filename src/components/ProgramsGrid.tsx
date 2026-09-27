@@ -503,7 +503,7 @@ export default function ProgramsGrid() {
           {filteredPrograms.map((course) => (
             <TacticalCard
               key={course.id}
-              className="flex flex-col h-full"
+              className="flex flex-col h-full transform transition-all duration-300 hover:-translate-y-1.5"
               radarColor="bg-emerald-400"
               coordinateTag={`MODULE // ${course.tag}`}
               isDark={true}
@@ -515,7 +515,7 @@ export default function ProgramsGrid() {
                   <img 
                     src={course.bannerImage} 
                     alt={currentLanguage === 'sq' ? course.titleSq : course.titleEn}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-75"
+                    className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500 opacity-80"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#111625] via-[#111625]/40 to-transparent"></div>
                   
@@ -538,24 +538,17 @@ export default function ProgramsGrid() {
                 {/* Card Body */}
                 <div className="p-6 md:p-7 flex flex-col flex-1">
                   
-                  {/* Eyebrow & Title */}
-                  <div className="mb-4">
-                    <h3 className="text-sm md:text-base font-bold uppercase tracking-tight leading-snug text-white group-hover:text-brand-green transition-colors mb-2">
-                      {currentLanguage === 'sq' ? course.titleSq : course.titleEn}
-                    </h3>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-xl md:text-2xl font-heading font-bold text-brand-yellow">
-                        {course.price}
-                      </span>
-                    </div>
-                  </div>
+                  {/* Course Title - Dominant Element after Image */}
+                  <h3 className="text-lg md:text-xl font-heading font-bold uppercase tracking-tight leading-snug text-white group-hover:text-brand-green transition-colors mb-2.5 min-h-[3.25rem] line-clamp-2">
+                    {currentLanguage === 'sq' ? course.titleSq : course.titleEn}
+                  </h3>
 
-                  {/* Description */}
-                  <p className="text-xs text-gray-400 line-clamp-3 mb-6 leading-relaxed flex-grow">
+                  {/* Short Description */}
+                  <p className="text-xs md:text-sm text-gray-400 line-clamp-2 mb-5 leading-relaxed min-h-[2.5rem]">
                     {currentLanguage === 'sq' ? course.descSq : course.descEn}
                   </p>
 
-                  {/* Key Program Specifications Grid */}
+                  {/* Key Metadata Group */}
                   <div className="bg-[#0B0F19]/90 rounded-xl p-3.5 border border-white/5 mb-5 space-y-2 text-xs">
                     <div className="flex items-center justify-between text-gray-300">
                       <span className="flex items-center gap-1.5 text-gray-400 text-[11px] font-mono uppercase">
@@ -570,7 +563,7 @@ export default function ProgramsGrid() {
                         <Layers className="w-3.5 h-3.5 text-brand-green" />
                         {currentLanguage === 'sq' ? 'Formati:' : 'Format:'}
                       </span>
-                      <span className="font-semibold text-white truncate max-w-[160px] text-[11px]" title={currentLanguage === 'sq' ? course.formatSq : course.formatEn}>
+                      <span className="font-semibold text-white truncate max-w-[170px] text-[11px]" title={currentLanguage === 'sq' ? course.formatSq : course.formatEn}>
                         {currentLanguage === 'sq' ? course.formatSq : course.formatEn}
                       </span>
                     </div>
@@ -580,7 +573,7 @@ export default function ProgramsGrid() {
                         <Award className="w-3.5 h-3.5 text-brand-green" />
                         {currentLanguage === 'sq' ? 'Cert:' : 'Cert:'}
                       </span>
-                      <span className="font-semibold text-brand-yellow truncate max-w-[160px] text-[11px]">
+                      <span className="font-semibold text-brand-yellow truncate max-w-[170px] text-[11px]">
                         {currentLanguage === 'sq' ? course.certSq : course.certEn}
                       </span>
                     </div>
@@ -591,23 +584,33 @@ export default function ProgramsGrid() {
                     {(currentLanguage === 'sq' ? course.highlightsSq : course.highlightsEn).slice(0, 2).map((highlight, idx) => (
                       <div key={idx} className="flex items-start gap-2 text-[11px] text-gray-300">
                         <CheckCircle2 className="w-3.5 h-3.5 text-brand-green shrink-0 mt-0.5" />
-                        <span className="leading-tight">{highlight}</span>
+                        <span className="leading-tight text-gray-300 line-clamp-1">{highlight}</span>
                       </div>
                     ))}
                   </div>
 
-                  {/* Action Buttons */}
-                  <div className="pt-2 mt-auto grid grid-cols-2 gap-2.5 border-t border-white/5">
+                  {/* Price Row - Highly Visible above CTA */}
+                  <div className="pt-3.5 pb-3.5 mt-auto flex items-baseline justify-between border-t border-white/10 mb-3">
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-gray-400">
+                      {currentLanguage === 'sq' ? 'Çmimi i Trajnimit' : 'Tuition Fee'}
+                    </span>
+                    <span className="text-2xl md:text-3xl font-heading font-bold text-brand-yellow tracking-tight">
+                      {course.price}
+                    </span>
+                  </div>
+
+                  {/* Action Buttons - Immediately Identifiable CTA */}
+                  <div className="grid grid-cols-2 gap-2.5">
                     <button
                       onClick={() => setSelectedCourse(course)}
-                      className="w-full inline-flex items-center justify-center font-bold tracking-wide rounded-full px-3 py-2.5 text-xs transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 bg-slate-800/80 hover:bg-slate-700 text-gray-200 border border-white/10 gap-1.5"
+                      className="w-full inline-flex items-center justify-center font-heading font-semibold tracking-wide rounded-full px-3 py-2.5 text-xs transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 hover:border-white/20 gap-1.5"
                     >
                       <BookOpen className="w-3.5 h-3.5 text-brand-yellow" />
                       {currentLanguage === 'sq' ? 'SILLABUSI' : 'SYLLABUS'}
                     </button>
                     <a
                       href="#contact"
-                      className="w-full inline-flex items-center justify-center font-bold tracking-wide rounded-full px-3 py-2.5 text-xs transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 bg-brand-green hover:bg-brand-green/90 text-white shadow-md shadow-brand-green/20 gap-1.5"
+                      className="w-full inline-flex items-center justify-center font-heading font-bold tracking-wide rounded-full px-3 py-2.5 text-xs transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 bg-brand-green hover:bg-brand-green/90 text-white shadow-md shadow-brand-green/25 hover:shadow-lg hover:shadow-brand-green/35 gap-1.5"
                     >
                       <span>{currentLanguage === 'sq' ? 'APLIKO' : 'ENROLL'}</span>
                       <ArrowRight className="w-3.5 h-3.5" />
