@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { BookOpen, Cpu, SunMedium, Award, CheckCircle2, ChevronRight, Sparkles } from 'lucide-react';
+import { BookOpen, Cpu, SunMedium, Award, CheckCircle2, ChevronRight } from 'lucide-react';
 import TacticalCard from './TacticalCard';
 
 interface TimelineStep {
@@ -9,8 +9,6 @@ interface TimelineStep {
   weeksEn: string;
   titleSq: string;
   titleEn: string;
-  badgeSq: string;
-  badgeEn: string;
   descSq: string;
   descEn: string;
   topicsSq: string[];
@@ -31,8 +29,6 @@ export default function ProgramTimeline() {
       weeksEn: 'Weeks 1–3',
       titleSq: 'Bazat Inxhinierike & Fizika Fotovoltaike',
       titleEn: 'Engineering Foundations & PV Physics',
-      badgeSq: 'FAZA 01 // TEORI & BAZA',
-      badgeEn: 'PHASE 01 // FOUNDATIONS',
       descSq: 'Mësim intensiv teorik në laborator. Analiza e rrezatimit diellor, teknologjitë e moduleve fotovoltaike (Monokristaline, Bifacial), llogaritja e këndeve optimale dhe bazat elektrike të rrymës së vazhduar (DC) e alternative (AC).',
       descEn: 'Rigorous classroom and lab instruction covering solar irradiance modeling, silicon and bifacial cell physics, tilt and azimuth optimization, and fundamental electrical DC/AC laws.',
       topicsSq: [
@@ -53,8 +49,6 @@ export default function ProgramTimeline() {
       weeksEn: 'Weeks 4–5',
       titleSq: 'Projektimi & Pajisjet Elektrike (BOS)',
       titleEn: 'System Design & Electrical Equipment',
-      badgeSq: 'FAZA 02 // PROJEKTIMI',
-      badgeEn: 'PHASE 02 // ENGINEERING',
       descSq: 'Përzgjedhja dhe dimensionimi i inverterave on-grid dhe hibrid, mbrojtjet nga mbingarkesat dhe rrufetë, kabllimi diellor i specializuar dhe modelimi i skemave njëvijore me softuer profesional.',
       descEn: 'Selection and configuration of on-grid string inverters, DC/AC overvoltage and surge suppression devices, specialized UV-rated solar cabling, and single-line diagram schematic drafting.',
       topicsSq: [
@@ -75,8 +69,6 @@ export default function ProgramTimeline() {
       weeksEn: 'Weeks 6–8',
       titleSq: 'Praktikë në Terren në Parkun 2MW',
       titleEn: 'Field Operations at 2MW Solar Park',
-      badgeSq: 'FAZA 03 // TERRENI REALE',
-      badgeEn: 'PHASE 03 // 2MW PARK PRACTICE',
       descSq: 'Përvojë direkte praktike në impiantin funksional në Pejë. Montimi real i strukturave mbajtëse, fiksimi i paneleve me moment-çelës, krimpimi i lidhëseve MC4 dhe testimet me instrumente profesionale.',
       descEn: 'Direct hands-on immersion at the active 2MW utility-scale solar plant in Pejë. Real mounting of racking systems, torque-wrench fastening, precision MC4 connector crimping, and electrical safety checks.',
       topicsSq: [
@@ -97,8 +89,6 @@ export default function ProgramTimeline() {
       weeksEn: 'Weeks 9–10',
       titleSq: 'Vënia në Punë & Certifikimi Zyrtar',
       titleEn: 'Commissioning & Official Certification',
-      badgeSq: 'FAZA 04 // CERTIFIKIMI',
-      badgeEn: 'PHASE 04 // CERTIFICATION',
       descSq: 'Verifikimi përfundimtar i vënies në funksion sipas standardit IEC 62446, lëshimi i raportit të pranimit teknik, testimi final teorik dhe praktik, dhe pajisja me certifikatën e akredituar.',
       descEn: 'Full commissioning and energization checklists under IEC 62446, generation of electrical safety handover reports, formal examinations, and the conferral of state-accredited diplomas.',
       topicsSq: [
@@ -212,13 +202,9 @@ export default function ProgramTimeline() {
             >
               <div className="p-8 sm:p-10 md:p-12 h-full flex flex-col justify-between bg-white rounded-2xl relative overflow-hidden">
                 
-                {/* Header Tag and Icon */}
+                {/* Card Header */}
                 <div>
-                  <div className="flex items-center justify-between gap-4 mb-6">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-[10px] font-mono font-bold tracking-wider uppercase bg-brand-green/10 text-brand-green border border-brand-green/20">
-                      <Sparkles className="w-3.5 h-3.5" />
-                      {currentLanguage === 'sq' ? currentStepData.badgeSq : currentStepData.badgeEn}
-                    </span>
+                  <div className="flex items-center justify-end mb-6">
                     <span className="text-xs font-mono font-semibold text-gray-500 bg-gray-100 px-3 py-1 rounded-md">
                       {currentLanguage === 'sq' ? currentStepData.weeksSq : currentStepData.weeksEn}
                     </span>

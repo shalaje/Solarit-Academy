@@ -1,6 +1,5 @@
 import { useLanguage } from '../context/LanguageContext';
 import TacticalCard from './TacticalCard';
-import { Quote } from 'lucide-react';
 
 export default function Leadership() {
   const { t } = useLanguage();
@@ -48,11 +47,6 @@ export default function Leadership() {
                 
                 {/* Quote and Leadership Details */}
                 <div className="text-center lg:text-left flex-1">
-                  <div className="inline-flex items-center gap-2 text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-brand-yellow mb-4 bg-brand-yellow/10 px-3 py-1 rounded-md border border-brand-yellow/20">
-                    <Quote className="w-3.5 h-3.5 text-brand-yellow" />
-                    <span>STATEMENT // 2026 MANDATE</span>
-                  </div>
-                  
                   {/* Powerful Quote with Increased Size and Readability */}
                   <blockquote className="text-xl sm:text-2xl md:text-2xl font-heading font-normal leading-relaxed text-gray-100 mb-8 italic">
                     {t('leadership.manager.quote')}
