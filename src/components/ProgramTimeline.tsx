@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { BookOpen, Map, Award, CheckCircle2 } from 'lucide-react';
+import TacticalCard from './TacticalCard';
 
 export default function ProgramTimeline() {
   const { t } = useLanguage();
@@ -91,25 +92,35 @@ export default function ProgramTimeline() {
             </div>
           </div>
 
-          {/* Timeline Content */}
+          {/* Timeline Content - Tactical 3D Depth Card */}
           <div className="lg:w-2/3">
-            <div className="bg-[#F7F8FA] rounded-3xl p-8 md:p-12 relative overflow-hidden h-full min-h-[300px] flex items-center">
-              <div className="absolute inset-0 bg-solar-motif text-brand-navy opacity-[0.03] pointer-events-none"></div>
-              
-              <div className="relative z-10 transition-all duration-500 animate-in fade-in slide-in-from-right-8" key={activeStep}>
-                <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-white font-bold mb-6 ${timelineSteps[activeStep].color}`}>
-                  {currentLanguage === 'sq' ? 'Moduli Aktual' : 'Current Module'}
+            <TacticalCard
+              isDark={false}
+              radarColor="bg-brand-green"
+              coordinateTag="TIMELINE // ACCREDITED"
+              className="h-full min-h-[340px]"
+            >
+              <div className="p-8 md:p-12 relative overflow-hidden h-full flex flex-col justify-center">
+                <div className="relative z-10 transition-all duration-500 animate-in fade-in slide-in-from-right-8" key={activeStep}>
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="text-[9px] font-mono font-bold tracking-[0.3em] uppercase text-brand-navy/60">
+                      SYLLABUS MODULE 0{activeStep + 1}
+                    </div>
+                    <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-sm text-white text-xs font-mono font-bold tracking-wider uppercase ${timelineSteps[activeStep].color}`}>
+                      {currentLanguage === 'sq' ? 'MODULI AKTUAL' : 'CURRENT MODULE'}
+                    </div>
+                  </div>
+                  
+                  <h3 className="text-xl md:text-2xl font-bold uppercase tracking-tight leading-snug text-brand-navy mb-4">
+                    {currentLanguage === 'sq' ? timelineSteps[activeStep].title : timelineSteps[activeStep].titleEn}
+                  </h3>
+                  
+                  <p className="text-base md:text-lg text-gray-600 leading-relaxed max-w-2xl">
+                    {currentLanguage === 'sq' ? timelineSteps[activeStep].desc : timelineSteps[activeStep].descEn}
+                  </p>
                 </div>
-                
-                <h3 className="text-3xl font-heading font-bold text-brand-navy mb-6">
-                  {currentLanguage === 'sq' ? timelineSteps[activeStep].title : timelineSteps[activeStep].titleEn}
-                </h3>
-                
-                <p className="text-xl text-gray-600 leading-relaxed">
-                  {currentLanguage === 'sq' ? timelineSteps[activeStep].desc : timelineSteps[activeStep].descEn}
-                </p>
               </div>
-            </div>
+            </TacticalCard>
           </div>
         </div>
 

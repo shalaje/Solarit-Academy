@@ -52,22 +52,27 @@ export default function FAQ() {
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
-              <div key={faq.id} className="border border-gray-200 rounded-2xl overflow-hidden transition-all duration-300">
+              <div 
+                key={faq.id} 
+                className="relative rounded-2xl border border-neutral-200/80 bg-white shadow-sm overflow-hidden transition-all duration-300 hover:border-neutral-300 hover:shadow-md"
+              >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : index)}
-                  className="flex items-center justify-between w-full p-6 text-left bg-white hover:bg-gray-50 transition-colors"
+                  className="flex items-center justify-between w-full p-6 text-left bg-white hover:bg-neutral-50/50 transition-colors"
                 >
-                  <span className="font-heading font-bold text-lg text-brand-navy">
+                  <span className="text-base md:text-lg font-heading font-bold text-brand-navy">
                     {currentLanguage === 'sq' ? faq.qSq : faq.qEn}
                   </span>
-                  <ChevronDown className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`w-5 h-5 text-brand-navy/60 transition-transform duration-300 shrink-0 ml-4 ${isOpen ? 'rotate-180 text-brand-green' : ''}`} />
                 </button>
                 <div 
                   className={`px-6 overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 pb-6 opacity-100' : 'max-h-0 opacity-0'}`}
                 >
-                  <p className="text-gray-600">
-                    {currentLanguage === 'sq' ? faq.aSq : faq.aEn}
-                  </p>
+                  <div className="pt-2 border-t border-neutral-100">
+                    <p className="text-xs md:text-sm text-gray-600 leading-relaxed font-sans mt-3">
+                      {currentLanguage === 'sq' ? faq.aSq : faq.aEn}
+                    </p>
+                  </div>
                 </div>
               </div>
             );

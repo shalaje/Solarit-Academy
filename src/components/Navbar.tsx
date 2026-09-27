@@ -65,36 +65,102 @@ export default function Navbar() {
             </div>
             
             <div className={`flex items-center gap-4 border-l pl-4 transition-colors ${isScrolled ? 'border-gray-200' : 'border-white/30'}`}>
-              <button 
-                onClick={toggleLanguage}
-                className={`flex items-center gap-1.5 text-sm font-medium transition-colors ${isScrolled ? 'text-brand-navy hover:text-brand-green' : 'text-white hover:text-white/80'}`}
-                aria-label="Toggle language"
+              {/* Language-Switcher Toggle */}
+              <div
+                className={`inline-flex items-center p-0.5 rounded-full border transition-all ${
+                  isScrolled
+                    ? 'border-gray-200 bg-gray-100/90 shadow-inner'
+                    : 'border-white/20 bg-white/10 backdrop-blur-md shadow-sm'
+                }`}
+                role="group"
+                aria-label="Zgjidh gjuhën / Select language"
               >
-                <Globe className="w-4 h-4" />
-                {language === 'sq' ? 'AL' : language.toUpperCase()}
-              </button>
+                <button
+                  type="button"
+                  onClick={() => setLanguage('sq')}
+                  className={`px-2.5 py-1 text-xs rounded-full font-bold tracking-wider transition-all duration-200 ${
+                    language === 'sq'
+                      ? 'bg-brand-green text-white shadow-sm scale-105'
+                      : isScrolled
+                        ? 'text-gray-500 hover:text-brand-navy'
+                        : 'text-white/70 hover:text-white'
+                  }`}
+                  aria-pressed={language === 'sq'}
+                  title="Shqip"
+                >
+                  SQ
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setLanguage('en')}
+                  className={`px-2.5 py-1 text-xs rounded-full font-bold tracking-wider transition-all duration-200 ${
+                    language === 'en'
+                      ? 'bg-brand-green text-white shadow-sm scale-105'
+                      : isScrolled
+                        ? 'text-gray-500 hover:text-brand-navy'
+                        : 'text-white/70 hover:text-white'
+                  }`}
+                  aria-pressed={language === 'en'}
+                  title="English"
+                >
+                  EN
+                </button>
+              </div>
               
               <a 
                 href="#contact"
-                className="bg-brand-green hover:bg-brand-green/90 text-white px-5 py-2.5 rounded-lg font-heading font-semibold text-sm transition-colors shadow-sm"
+                className="inline-flex items-center justify-center font-bold tracking-wide rounded-full px-6 py-2.5 text-sm transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 bg-brand-green hover:bg-brand-green/90 text-white shadow-sm"
               >
                 {t('nav.apply')}
               </a>
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center gap-4">
-            <button 
-              onClick={toggleLanguage}
-              className={`flex items-center gap-1 text-sm font-medium transition-colors ${isScrolled || isMobileMenuOpen ? 'text-brand-navy' : 'text-white'}`}
+          {/* Mobile Menu Button & Mobile Language Toggle */}
+          <div className="md:hidden flex items-center gap-3">
+            {/* Mobile Header Language Toggle */}
+            <div
+              className={`inline-flex items-center p-0.5 rounded-full border transition-all ${
+                isScrolled || isMobileMenuOpen
+                  ? 'border-gray-200 bg-gray-100'
+                  : 'border-white/20 bg-white/10 backdrop-blur-md'
+              }`}
+              role="group"
+              aria-label="Language selection"
             >
-              <Globe className="w-4 h-4" />
-              {language === 'sq' ? 'AL' : language.toUpperCase()}
-            </button>
+              <button
+                type="button"
+                onClick={() => setLanguage('sq')}
+                className={`px-2 py-0.5 text-xs rounded-full font-bold transition-all ${
+                  language === 'sq'
+                    ? 'bg-brand-green text-white shadow-sm'
+                    : isScrolled || isMobileMenuOpen
+                      ? 'text-gray-500 hover:text-brand-navy'
+                      : 'text-white/70 hover:text-white'
+                }`}
+                aria-pressed={language === 'sq'}
+              >
+                SQ
+              </button>
+              <button
+                type="button"
+                onClick={() => setLanguage('en')}
+                className={`px-2 py-0.5 text-xs rounded-full font-bold transition-all ${
+                  language === 'en'
+                    ? 'bg-brand-green text-white shadow-sm'
+                    : isScrolled || isMobileMenuOpen
+                      ? 'text-gray-500 hover:text-brand-navy'
+                      : 'text-white/70 hover:text-white'
+                }`}
+                aria-pressed={language === 'en'}
+              >
+                EN
+              </button>
+            </div>
+
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`transition-colors ${isScrolled || isMobileMenuOpen ? 'text-brand-navy' : 'text-white'}`}
+              className={`p-1 transition-colors ${isScrolled || isMobileMenuOpen ? 'text-brand-navy' : 'text-white'}`}
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -116,10 +182,39 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
+
+          {/* Dedicated Language Selector Row in Mobile Menu */}
+          <div className="flex items-center justify-between py-2 border-b border-gray-100">
+            <span className="text-sm font-medium text-gray-600 flex items-center gap-2">
+              <Globe className="w-4 h-4 text-brand-green" />
+              {language === 'sq' ? 'Gjuha e faqes' : 'Site language'}
+            </span>
+            <div className="inline-flex items-center p-0.5 rounded-full border border-gray-200 bg-gray-100">
+              <button
+                type="button"
+                onClick={() => setLanguage('sq')}
+                className={`px-3 py-1 text-xs rounded-full font-bold transition-all ${
+                  language === 'sq' ? 'bg-brand-green text-white shadow-sm' : 'text-gray-500'
+                }`}
+              >
+                Shqip (SQ)
+              </button>
+              <button
+                type="button"
+                onClick={() => setLanguage('en')}
+                className={`px-3 py-1 text-xs rounded-full font-bold transition-all ${
+                  language === 'en' ? 'bg-brand-green text-white shadow-sm' : 'text-gray-500'
+                }`}
+              >
+                English (EN)
+              </button>
+            </div>
+          </div>
+
           <a
             href="#contact"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="bg-brand-green text-white text-center px-5 py-3 rounded-lg font-heading font-semibold mt-2 shadow-sm hover:bg-brand-green/90 transition-colors"
+            className="inline-flex items-center justify-center font-bold tracking-wide rounded-full px-6 py-2.5 text-sm transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 bg-brand-green hover:bg-brand-green/90 text-white shadow-sm mt-2 text-center"
           >
             {t('nav.apply')}
           </a>

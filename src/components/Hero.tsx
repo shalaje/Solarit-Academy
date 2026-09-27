@@ -30,17 +30,17 @@ export default function Hero() {
             {t('hero.subtitle')}
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row items-center gap-4">
             <a
               href="#contact"
-              className="inline-flex justify-center items-center gap-2 bg-brand-green hover:bg-brand-green/90 text-white px-8 py-4 rounded-lg font-heading font-semibold text-lg transition-colors shadow-lg shadow-brand-green/20"
+              className="inline-flex items-center justify-center font-bold tracking-wide rounded-full px-6 py-2.5 text-sm transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 bg-brand-green hover:bg-brand-green/90 text-white shadow-lg shadow-brand-green/20 gap-2"
             >
               {t('hero.apply')}
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-4 h-4" />
             </a>
             <a
               href="#programs"
-              className="inline-flex justify-center items-center gap-2 bg-transparent border-2 border-white hover:bg-white/10 text-white px-8 py-4 rounded-lg font-heading font-semibold text-lg transition-colors backdrop-blur-sm"
+              className="inline-flex items-center justify-center font-bold tracking-wide rounded-full px-6 py-2.5 text-sm transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 bg-transparent border border-white/60 hover:border-white hover:bg-white/10 text-white backdrop-blur-sm gap-2"
             >
               {t('hero.programs')}
             </a>
