@@ -442,8 +442,7 @@ export default function ProgramsGrid() {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-green/10 border border-brand-green/30 text-brand-green text-xs font-heading font-bold tracking-widest uppercase mb-4 shadow-sm">
-            <Zap className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-brand-green/10 border border-brand-green/30 text-brand-green text-xs font-heading font-bold tracking-widest uppercase mb-4 shadow-sm">
             {currentLanguage === 'sq' ? 'PROGRAMET E AVANCUARA' : 'ADVANCED PROGRAM CATALOG'}
           </div>
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-heading font-bold tracking-tight text-white mb-5">
@@ -623,29 +622,51 @@ export default function ProgramsGrid() {
           ))}
         </div>
 
-        {/* Bottom Guarantee Banner */}
-        <div className="mt-16 rounded-3xl bg-gradient-to-r from-slate-900 via-[#131B2E] to-slate-900 p-8 border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
-          <div className="flex items-center gap-5">
-            <div className="w-14 h-14 rounded-2xl bg-brand-green/10 border border-brand-green/20 flex items-center justify-center text-brand-green shrink-0">
-              <ShieldCheck className="w-7 h-7" />
+        {/* Consultation Callout Banner (Matching Site Brand Colors & Reference Structure) */}
+        <div className="mt-20 rounded-3xl bg-gradient-to-br from-brand-navy via-slate-900 to-[#0d121f] border border-white/10 py-14 sm:py-16 md:py-20 px-6 sm:px-12 text-center max-w-4xl mx-auto shadow-2xl relative overflow-hidden">
+          <div className="absolute inset-0 bg-solar-motif opacity-[0.05] pointer-events-none"></div>
+          <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-brand-green/10 rounded-full blur-3xl pointer-events-none"></div>
+          
+          <div className="relative z-10">
+            <div className="text-[11px] sm:text-xs font-mono font-bold tracking-[0.25em] text-brand-green uppercase mb-4 sm:mb-5">
+              {currentLanguage === 'sq' ? 'GATI PËR TË FILLUAR?' : 'READY TO START?'}
             </div>
-            <div>
-              <h4 className="text-lg font-heading font-bold text-white mb-1">
-                {currentLanguage === 'sq' ? 'Standardi Dual Gjermano-Kosovar i Aftësimit' : 'German-Kosovar Dual Training Standard'}
-              </h4>
-              <p className="text-sm text-gray-400 max-w-xl">
-                {currentLanguage === 'sq' 
-                  ? 'Çdo kursant merr përvojë në impiantin solar 2MW në Pejë të ELING Grup dhe certifikohet për të punuar menjëherë në tregun vendas dhe ndërkombëtar.'
-                  : 'Every trainee completes real-world commissioning at ELING Grup\'s 2MW Pejë plant and obtains immediate qualifications for the regional and European market.'}
-              </p>
+            
+            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-serif font-normal text-white leading-[1.15] mb-5 tracking-tight">
+              {currentLanguage === 'sq' ? (
+                <>
+                  Nuk jeni të sigurt cilin <br />
+                  <span className="italic text-brand-green font-serif font-medium">modul të zgjidhni?</span>
+                </>
+              ) : (
+                <>
+                  Not sure which <br />
+                  <span className="italic text-brand-green font-serif font-medium">module to pick?</span>
+                </>
+              )}
+            </h3>
+
+            <p className="text-sm sm:text-base md:text-lg text-gray-300/90 max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed font-sans font-normal">
+              {currentLanguage === 'sq' 
+                ? 'Këshilltarët tanë do të vlerësojnë profilin tuaj dhe do të rekomandojnë pikën e duhur të fillimit pa pagesë. Rezervoni një thirrje konsultuese 20 minutëshe.'
+                : 'Our advisors will assess your background and recommend the right starting point free of charge. Book a 20 minute consultation call.'}
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4">
+              <a
+                href="#contact"
+                className="w-full sm:w-auto inline-flex items-center justify-center font-heading font-bold tracking-wide rounded-full px-8 py-3.5 text-sm sm:text-base transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 bg-brand-green hover:bg-brand-green/90 text-white shadow-xl shadow-brand-green/25 hover:shadow-2xl hover:shadow-brand-green/40 cursor-pointer"
+              >
+                {currentLanguage === 'sq' ? 'Rezervo Konsultë Falas' : 'Book Free Consultation'}
+              </a>
+              <a
+                href="#contact"
+                className="w-full sm:w-auto inline-flex items-center justify-center font-heading font-semibold tracking-wide rounded-full px-8 py-3.5 text-sm sm:text-base transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 bg-white/5 hover:bg-white/10 text-white/95 hover:text-white border border-white/20 hover:border-white/40 backdrop-blur-sm cursor-pointer"
+              >
+                {currentLanguage === 'sq' ? 'Kontakto Akademinë' : 'Contact Academy'}
+              </a>
             </div>
           </div>
-          <a
-            href="#contact"
-            className="whitespace-nowrap inline-flex items-center justify-center font-bold tracking-wide rounded-full px-6 py-2.5 text-sm transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 bg-white hover:bg-gray-100 text-brand-navy shadow-lg"
-          >
-            {currentLanguage === 'sq' ? 'Bisedo me Këshilltarin e Trajnimit' : 'Talk with an Advisor'}
-          </a>
         </div>
 
       </div>

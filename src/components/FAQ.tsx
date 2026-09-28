@@ -18,10 +18,10 @@ export default function FAQ() {
     },
     {
       id: 'cost',
-      qSq: 'Sa është kostoja e programit dhe mënyrat e pagesës?',
-      qEn: 'What is the program fee and payment plan?',
-      aSq: 'Kostoja e trajnimit përfshin të gjitha materialet laboratorike, pajisjet e sigurisë dhe certifikimin final. Pagesa mund të bëhet e plotë ose me deri në 3 këste mujore.',
-      aEn: 'Tuition includes all lab materials, practical gear at the 2MW park, and official certification. Payments can be made upfront or in up to 3 installments.'
+      qSq: 'Sa është kostoja e programit dhe si bëhet pagesa?',
+      qEn: 'What is the program fee and how is payment handled?',
+      aSq: 'Kostoja e trajnimit përfshin të gjitha materialet laboratorike, pajisjet e sigurisë dhe certifikimin final. Pagesa bëhet e plotë para fillimit të trajnimit; pagesat nuk ofrohen me këste.',
+      aEn: 'Tuition includes all lab materials, practical gear at the 2MW park, and official certification. Payment must be made in full prior to the start of the program; payments are not offered in the form of installments.'
     },
     {
       id: 'cert',

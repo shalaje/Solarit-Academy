@@ -173,41 +173,53 @@ export default function EnrollContact() {
           </div>
 
           {/* Contact Info & Map */}
-          <div className="lg:col-span-5 flex flex-col justify-between gap-6">
+          <div className="lg:col-span-5 flex flex-col justify-between gap-5">
             
-            {/* Contact Details Cards */}
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div className="bg-white rounded-2xl p-5 border border-neutral-200/90 shadow-sm flex items-start gap-4">
-                <div className="w-11 h-11 bg-brand-green/10 rounded-xl flex items-center justify-center text-brand-green shrink-0">
+            {/* Contact Details Cards - Uniform full-width cards on all viewports */}
+            <div className="flex flex-col gap-3.5">
+              <a 
+                href="tel:+38345459948" 
+                className="bg-white rounded-2xl p-4 sm:p-5 border border-neutral-200/90 shadow-sm flex items-center gap-4 hover:border-brand-green/50 hover:shadow-md transition-all duration-200 group"
+              >
+                <div className="w-11 h-11 bg-brand-green/10 rounded-xl flex items-center justify-center text-brand-green shrink-0 group-hover:bg-brand-green group-hover:text-white transition-colors duration-200">
                   <Phone className="w-5 h-5" />
                 </div>
-                <div>
-                  <h3 className="font-heading font-bold text-brand-navy text-sm uppercase tracking-wider mb-1">{t('contact.phone_title')}</h3>
-                  <a href="tel:+38345459948" className="text-gray-700 hover:text-brand-green transition-colors text-sm font-semibold">
+                <div className="min-w-0">
+                  <div className="font-heading font-bold text-brand-navy text-xs uppercase tracking-wider mb-0.5">
+                    {t('contact.phone_title')}
+                  </div>
+                  <div className="text-gray-900 group-hover:text-brand-green transition-colors text-sm sm:text-base font-semibold truncate">
                     +383 45 459 948
-                  </a>
+                  </div>
                 </div>
-              </div>
+              </a>
               
-              <div className="bg-white rounded-2xl p-5 border border-neutral-200/90 shadow-sm flex items-start gap-4">
-                <div className="w-11 h-11 bg-brand-green/10 rounded-xl flex items-center justify-center text-brand-green shrink-0">
+              <a 
+                href="mailto:solarit.academy@gmail.com" 
+                className="bg-white rounded-2xl p-4 sm:p-5 border border-neutral-200/90 shadow-sm flex items-center gap-4 hover:border-brand-green/50 hover:shadow-md transition-all duration-200 group"
+              >
+                <div className="w-11 h-11 bg-brand-green/10 rounded-xl flex items-center justify-center text-brand-green shrink-0 group-hover:bg-brand-green group-hover:text-white transition-colors duration-200">
                   <Mail className="w-5 h-5" />
                 </div>
-                <div>
-                  <h3 className="font-heading font-bold text-brand-navy text-sm uppercase tracking-wider mb-1">{t('contact.email_title')}</h3>
-                  <a href="mailto:solarit.academy@gmail.com" className="text-gray-700 hover:text-brand-green transition-colors text-sm font-semibold truncate block">
+                <div className="min-w-0">
+                  <div className="font-heading font-bold text-brand-navy text-xs uppercase tracking-wider mb-0.5">
+                    {t('contact.email_title')}
+                  </div>
+                  <div className="text-gray-900 group-hover:text-brand-green transition-colors text-sm sm:text-base font-semibold truncate">
                     solarit.academy@gmail.com
-                  </a>
+                  </div>
                 </div>
-              </div>
+              </a>
               
-              <div className="sm:col-span-2 bg-white rounded-2xl p-5 border border-neutral-200/90 shadow-sm flex items-start gap-4">
+              <div className="bg-white rounded-2xl p-4 sm:p-5 border border-neutral-200/90 shadow-sm flex items-center gap-4 hover:border-brand-green/30 transition-all duration-200">
                 <div className="w-11 h-11 bg-brand-green/10 rounded-xl flex items-center justify-center text-brand-green shrink-0">
                   <MapPin className="w-5 h-5" />
                 </div>
-                <div>
-                  <h3 className="font-heading font-bold text-brand-navy text-sm uppercase tracking-wider mb-1">{t('contact.address_title')}</h3>
-                  <p className="text-gray-700 text-sm font-medium">
+                <div className="min-w-0">
+                  <div className="font-heading font-bold text-brand-navy text-xs uppercase tracking-wider mb-0.5">
+                    {t('contact.address_title')}
+                  </div>
+                  <p className="text-gray-900 text-sm sm:text-base font-semibold leading-snug">
                     {t('contact.address_desc')}
                   </p>
                 </div>
@@ -215,7 +227,7 @@ export default function EnrollContact() {
             </div>
             
             {/* Map Container with Substantial Visual Weight */}
-            <div className="flex-1 rounded-2xl overflow-hidden shadow-md border border-neutral-200 bg-white relative min-h-[300px]">
+            <div className="flex-1 rounded-2xl overflow-hidden shadow-md border border-neutral-200 bg-white relative min-h-[280px]">
                <iframe 
                  src="https://maps.google.com/maps?q=ELING+GRUP+SH.P.K,+Lipjan,+Kosovo&t=&z=14&ie=UTF8&iwloc=&output=embed"
                  width="100%" 
