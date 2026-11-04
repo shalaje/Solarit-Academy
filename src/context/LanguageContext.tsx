@@ -21,8 +21,8 @@ const translations = {
     'nav.apply': 'Apliko Tani',
     
     // Hero
-    'hero.title': 'Bëhu Instalues i Certifikuar i Sistemeve Solare',
-    'hero.subtitle': 'Aftësim profesional dhe praktikë në parkun solar më të madh në Kosovë.',
+    'hero.title': 'BËHU INSTALUES I CERTIFIKUAR I SISTEMEVE SOLARE',
+    'hero.subtitle': 'Aftësim profesional dhe praktikë në parqe solare.',
     'hero.apply': 'Apliko Tani',
     'hero.programs': 'Shiko Programet',
     
@@ -43,10 +43,10 @@ const translations = {
     'why.title': 'Pse Solarit Academy?',
     'why.dual.title': 'Model Dual i Mësimit',
     'why.dual.desc': 'Kombinim optimal i teorisë në klasë dhe punës praktike.',
-    'why.cert.title': 'Certifikim Profesional',
-    'why.cert.desc': 'Kualifikim i njohur për zhvillim të menjëhershëm në karrierë.',
-    'why.park.title': '2 MW Park Solar për Praktikë',
-    'why.park.desc': 'Përvojë reale pune në impiantin funksional në Llabjan, Pejë.',
+    'why.cert.title': 'Certifikim',
+    'why.cert.desc': 'Certifikate e vijueshmërisë',
+    'why.park.title': 'Praktika në park solar',
+    'why.park.desc': 'Përvojë reale pune në parkun solar në Pejë.',
     'why.eling.title': 'Përkrahur nga ELING Grup',
     'why.eling.desc': 'Mbështetur nga liderët e industrisë së energjisë në vend.',
     
@@ -55,7 +55,7 @@ const translations = {
     'facility.subtitle': 'Klasa moderne dhe hapësira reale praktike',
     
     // Leadership
-    'leadership.title': 'Udhëheqja & Instruktorët',
+    'leadership.title': 'Themeluesja e akademisë',
     'leadership.manager.role': 'Drejtor Ekzekutiv',
     'leadership.manager.quote': '"Misioni ynë është të ndërtojmë gjeneratën e re të profesionistëve të energjisë së ripërtëritshme, duke ofruar trajnime me standarde ndërkombëtare dhe duke fuqizuar diversitetin gjinor në sektor."',
     
@@ -72,7 +72,7 @@ const translations = {
     'badge.curriculum': 'Kurrikula',
     'badge.advantage': 'Avantazhi Ynë',
     'badge.campus': 'Kampusi',
-    'badge.leadership': 'Ekipi Drejtues',
+    'badge.leadership': 'Themeluesja',
     'badge.enrollment': 'Regjistrimi',
     
     // Additional Text
@@ -111,8 +111,8 @@ const translations = {
     'nav.apply': 'Apply Now',
     
     // Hero
-    'hero.title': 'Become a Certified Solar Installer',
-    'hero.subtitle': 'Professional training and hands-on practice at Kosovo\'s largest solar park.',
+    'hero.title': 'BECOME A CERTIFIED SOLAR INSTALLER',
+    'hero.subtitle': 'Professional training and hands-on practice at solar parks.',
     'hero.apply': 'Apply Now',
     'hero.programs': 'View Programs',
     
@@ -133,10 +133,10 @@ const translations = {
     'why.title': 'Why Solarit Academy?',
     'why.dual.title': 'Dual Learning Model',
     'why.dual.desc': 'Optimal combination of classroom theory and hands-on practice.',
-    'why.cert.title': 'Professional Certification',
-    'why.cert.desc': 'Recognized qualification for immediate career advancement.',
-    'why.park.title': '2 MW Solar Park',
-    'why.park.desc': 'Real-world experience at the functional solar plant in Llabjan, Pejë.',
+    'why.cert.title': 'Certification',
+    'why.cert.desc': 'Certificate of attendance',
+    'why.park.title': 'Practice in Solar Park',
+    'why.park.desc': 'Real-world experience at the solar park in Pejë.',
     'why.eling.title': 'Backed by ELING Grup',
     'why.eling.desc': 'Supported by the leading energy industry company in the country.',
     
@@ -145,7 +145,7 @@ const translations = {
     'facility.subtitle': 'Modern classrooms and real-world practical spaces',
     
     // Leadership
-    'leadership.title': 'Leadership & Instructors',
+    'leadership.title': 'Academy Founder',
     'leadership.manager.role': 'Executive Director',
     'leadership.manager.quote': '"Our mission is to build the next generation of renewable energy professionals, providing training to international standards and empowering gender diversity in the sector."',
     
@@ -162,7 +162,7 @@ const translations = {
     'badge.curriculum': 'Curriculum',
     'badge.advantage': 'Our Advantage',
     'badge.campus': 'The Campus',
-    'badge.leadership': 'Leadership Team',
+    'badge.leadership': 'Founder',
     'badge.enrollment': 'Enrollment',
     
     // Additional Text

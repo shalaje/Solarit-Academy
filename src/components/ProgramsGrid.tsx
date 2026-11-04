@@ -43,6 +43,8 @@ export interface ProgramCourse {
   levelSq: string;
   levelEn: string;
   duration: string;
+  durationSq?: string;
+  durationEn?: string;
   formatSq: string;
   formatEn: string;
   certSq: string;
@@ -69,20 +71,22 @@ export default function ProgramsGrid() {
       tagColor: 'bg-amber-500/20 text-amber-400 border border-amber-500/30',
       accentBorder: 'hover:border-amber-500/50',
       accentGlow: 'hover:shadow-amber-500/10',
-      titleSq: 'Instalues i Certifikuar Fotovoltaik (PV)',
-      titleEn: 'Certified PV Systems Installer',
-      descSq: 'Programi flamur i trajnimit praktik dhe teorik për montimin, lidhjen në rrjet, dhe mirëmbajtjen e impianteve solare fotovoltaike sipas standardeve evropiane.',
-      descEn: 'Comprehensive practical and theoretical certification covering residential & commercial PV installation, grid-tie connections, and IEC compliance.',
+      titleSq: 'INSTALIMI I SISTEMEVE SOLARE',
+      titleEn: 'SOLAR PV SYSTEMS INSTALLATION',
+      descSq: 'Program praktik dhe teorik per: montimin, instalimin, lidhjen në rrjet dhe mirëmbajtjen',
+      descEn: 'Practical and theoretical program for: mounting, installation, grid connection, and maintenance',
       price: '€490',
       pricePeriodSq: 'Pagesë e plotë ose me 3 këste',
       pricePeriodEn: 'Full payment or 3 installments',
       levelSq: 'Niveli Bazë drejt të Avancuarit',
       levelEn: 'Basic to Intermediate',
-      duration: '8 Javë (120 Orë)',
+      duration: '1 javë',
+      durationSq: '1 javë',
+      durationEn: '1 week',
       formatSq: 'Klasë + Park Solar 2MW',
       formatEn: 'Classroom + 2MW Solar Park',
-      certSq: 'Certifikatë e Akredituar Kombëtare',
-      certEn: 'Accredited National Certification',
+      certSq: 'Certifikatë e vijueshmërisë',
+      certEn: 'Certificate of Attendance',
       bgGradient: 'from-amber-500/20 via-slate-900 to-slate-950',
       bannerImage: '/02.jpg',
       seatsLeft: 6,
@@ -132,293 +136,104 @@ export default function ProgramsGrid() {
     {
       id: 'bess-master',
       category: 'battery',
-      tag: 'ENERGY STORAGE (BESS)',
+      tag: 'SOLAR HIBRID',
       tagColor: 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30',
       accentBorder: 'hover:border-emerald-500/50',
       accentGlow: 'hover:shadow-emerald-500/10',
-      titleSq: 'Sistemet e Ruajtjes së Energjisë me Bateri (BESS)',
-      titleEn: 'Battery Energy Storage Systems Specialist',
-      descSq: 'Specializim i avancuar për inxhinierë dhe teknikë mbi sistemet e akumulimit industrial dhe rezidencial me litium-jon (LFP/NMC) dhe menaxhimin e BMS.',
-      descEn: 'Advanced engineering and installation of commercial and utility-scale Battery Energy Storage Systems (BESS), BMS protocols, and microgrid integration.',
+      titleSq: 'Sistemet solare hibride',
+      titleEn: 'Hybrid Solar Systems',
+      descSq: 'Specializim i avancuar për inxhinierë dhe teknikë mbi sistemet solare hibride dhe konfigurimi i tyre',
+      descEn: 'Advanced specialization for engineers and technicians on hybrid solar systems and their configuration',
       price: '€550',
-      pricePeriodSq: 'Pagesë e plotë ose me 3 këste',
-      pricePeriodEn: 'Full payment or 3 installments',
+      pricePeriodSq: 'Pagesë e plotë',
+      pricePeriodEn: 'Full payment',
       levelSq: 'Niveli i Avancuar',
       levelEn: 'Advanced Professional',
-      duration: '6 Javë (90 Orë)',
-      formatSq: 'Lab Elektrik + Laborator Hibrid',
-      formatEn: 'Electrical Lab + Hybrid Systems',
-      certSq: 'Certifikatë Profesionale e Specializuar',
-      certEn: 'Specialized Professional Certification',
+      duration: '1 javë',
+      durationSq: '1 javë',
+      durationEn: '1 week',
+      formatSq: 'Klasë + Praktike',
+      formatEn: 'Classroom + Practice',
+      certSq: 'Certifikatë e vijueshmërisë',
+      certEn: 'Certificate of Attendance',
       bgGradient: 'from-emerald-500/20 via-slate-900 to-slate-950',
       bannerImage: '/03.jpg',
       seatsLeft: 4,
       highlightsSq: [
-        'Kimi e baterive Litium-Hekur-Fosfat (LiFePO4) dhe kërkesat e sigurisë',
-        'Parametrizimi dhe monitorimi i Sistemit të Menaxhimit të Baterive (BMS)',
-        'Integrimi i baterive me inverterë hibridë (Deye, Victron, Sungrow)',
-        'Sistemet e sigurisë kundër rrezikut termik (Thermal Runaway)',
+        'Konfigurimi dhe instalimi i sistemeve solare hibride',
+        'Integrimi me bateri dhe inverterë hibridë',
+        'Parametrizimi dhe menaxhimi i energjisë',
       ],
       highlightsEn: [
-        'Lithium Iron Phosphate (LiFePO4) chemistry and industrial safety codes',
-        'BMS configuration, cell balancing, and CANbus/Modbus telemetry',
-        'Hybrid inverter integration (Deye, Victron, Sungrow)',
-        'Fire suppression standards and thermal runaway prevention protocols',
+        'Configuration and installation of hybrid solar systems',
+        'Integration with battery storage and hybrid inverters',
+        'Parameter setup and energy management',
       ],
       curriculum: [
         {
-          week: 'Java 01 - 02',
-          titleSq: 'Kimia e Qelizave & Arkitektura e Moduleve të Baterive',
-          titleEn: 'Cell Chemistries & Battery Pack Architecture',
-          descSq: 'Krahasimi LFP vs NMC, DoD (Thellësia e shkarkimit), ciklet e jetës, rezistenca e brendshme dhe C-rates.',
-          descEn: 'LFP vs NMC benchmarking, Depth of Discharge, lifecycle analysis, internal impedance, and charge/discharge C-rates.',
+          week: 'Pjesa 1',
+          titleSq: 'Bazat e Sistemeve Solare Hibride & Inverterët',
+          titleEn: 'Hybrid Solar Fundamentals & Inverters',
+          descSq: 'Arkitektura e sistemeve hibride, inverterët hibridë dhe logjika e operimit.',
+          descEn: 'Hybrid architecture, hybrid inverters, and operational logic.',
         },
         {
-          week: 'Java 03 - 04',
-          titleSq: 'BMS, Protokollet e Komunikimit & Inverterët Hibridë',
-          titleEn: 'BMS, Communication Protocols & Hybrid Inverters',
-          descSq: 'Konfigurimi i protokolleve CAN/RS485, integrimi me inverterë hibridë dhe logjika e karikimit/shkarkimit në orët me çmim të lirë.',
-          descEn: 'CAN/RS485 communication setup, hybrid inverter synchronization, peak shaving, and time-of-use optimization.',
-        },
-        {
-          week: 'Java 05 - 06',
-          titleSq: 'Instalimi Praktik, Siguria Kundër Zjarrit & Certifikimi',
-          titleEn: 'Physical Installation, Safety & Commissioning',
-          descSq: 'Instalimi fizik i kabineteve të baterive, ventilimi, sistemet e fikjes së gazit dhe testimi nën ngarkesë reale.',
-          descEn: 'Cabinet deployment, cooling/HVAC, fire detection/suppression integration, and live-load capacity validation.',
+          week: 'Pjesa 2',
+          titleSq: 'Praktikë në Konfigurim & Integrim me Bateri',
+          titleEn: 'Hands-on Configuration & Battery Integration',
+          descSq: 'Lidhja e baterive, parametrizimi dhe testimet praktike në laborator.',
+          descEn: 'Battery connection, parameter setup, and hands-on lab testing.',
         }
       ]
     },
     {
       id: 'pv-design-engineer',
       category: 'solar',
-      tag: 'ENGINEERING & CAD',
+      tag: 'SOFTWARE & CAD',
       tagColor: 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30',
       accentBorder: 'hover:border-cyan-500/50',
       accentGlow: 'hover:shadow-cyan-500/10',
-      titleSq: 'Inxhinieri & Projektim me PV*SOL dhe AutoCAD',
-      titleEn: 'Solar PV Systems Engineering & Software Design',
-      descSq: 'Trajnim kompjuterik për inxhinierë elektrikë e mekanikë mbi modelimin 3D të hijeve, llogaritjen e prodhimit vjetor dhe skemat njëvijore elektrike.',
-      descEn: 'Software-driven engineering training covering 3D shading analysis, annual energy yield simulation in PV*SOL, and AutoCAD electrical single-line diagrams.',
+      titleSq: 'Trajnim Profesional për Softuerët Solarë: AutoCAD, PV*SOL & PVsyst',
+      titleEn: 'Professional Training for Solar Software: AutoCAD, PV*SOL & PVsyst',
+      descSq: 'Trajnim kompjuterik. Modelimin 3D të hijeve, llogaritjen e prodhimit vjetor, simulimet e avancuara dhe skemat elektrike.',
+      descEn: 'Computer training. 3D shading modeling, annual yield calculation, advanced simulations, and electrical schematics.',
       price: '€420',
-      pricePeriodSq: 'Pagesë e plotë ose me 2 këste',
-      pricePeriodEn: 'Full payment or 2 installments',
+      pricePeriodSq: 'Pagesë e plotë',
+      pricePeriodEn: 'Full payment',
       levelSq: 'Nivel Mesatar - i Avancuar',
       levelEn: 'Intermediate - Advanced',
-      duration: '5 Javë (75 Orë)',
-      formatSq: 'Laborator IT & Projekte Reale',
-      formatEn: 'Computer Lab & Real Projects',
-      certSq: 'Certifikatë Teknike e Projektimit',
-      certEn: 'Technical Design Certificate',
+      duration: '1 Javë',
+      durationSq: '1 Javë',
+      durationEn: '1 Week',
+      formatSq: 'Klasë',
+      formatEn: 'Classroom',
+      certSq: 'Certifikatë e Vijueshmërisë.',
+      certEn: 'Certificate of Attendance',
       bgGradient: 'from-cyan-500/20 via-slate-900 to-slate-950',
       bannerImage: '/01.jpg',
       seatsLeft: 8,
       highlightsSq: [
-        'Modelimi 3D i ndërtesave dhe terrenit në PV*SOL',
-        'Analiza e saktë e humbjeve (hije, pluhur, rënie tensioni)',
-        'Dizajnimi i skemave njëvijore (SLD) sipas rregullave të KOSTT/KEDS',
-        'Hartimi i fizibilitetit ekonomik dhe kthimit të investimit (ROI)',
+        'Modelimi 3D i ndërtesave dhe terrenit në PV*SOL & PVsyst',
+        'Analiza e hijeve, llogaritja e prodhimit vjetor dhe skemat në AutoCAD',
       ],
       highlightsEn: [
-        '3D building and terrain modeling in PV*SOL premium',
-        'Detailed loss tree analysis (shading, soiling, cable DC drop)',
-        'Single-line diagram (SLD) drafting for utility interconnection compliance',
-        'Financial modeling, LCOE calculation, and ROI project presentations',
+        '3D building and terrain modeling in PV*SOL & PVsyst',
+        'Shading analysis, annual yield simulation, and AutoCAD schematics',
       ],
       curriculum: [
         {
-          week: 'Java 01',
-          titleSq: 'Mbledhja e të Dhënave të Terrenit & Rrezatimi Diellor',
-          titleEn: 'Site Data Acquisition & Meteorological Datasets',
-          descSq: 'Burimet e të dhënave PVGIS, Meteonorm dhe vlerësimi i hapësirës së çatisë/tokës.',
-          descEn: 'PVGIS, Meteonorm databases, satellite data, roof azimuth, and drone survey modeling.',
+          week: 'Pjesa 1',
+          titleSq: 'Projektimi & Skemat me AutoCAD',
+          titleEn: 'AutoCAD Design & Schematics',
+          descSq: 'Hartimi i skemave njëvijore dhe planeve të instalimit fotovoltaik.',
+          descEn: 'Single-line diagrams and PV installation layouts in AutoCAD.',
         },
         {
-          week: 'Java 02 - 03',
-          titleSq: 'Modelimi 3D & Simulimi me PV*SOL',
-          titleEn: '3D Simulation & String Optimization in PV*SOL',
-          descSq: 'Krijimi i pengesave, simulimi i animuar i hijeve përgjatë 365 ditëve dhe çiftëzimi optimal i vargjeve me MPPT.',
-          descEn: 'Obstacle construction, sun-path shading animations, and automated MPPT inverter string matching.',
-        },
-        {
-          week: 'Java 04 - 05',
-          titleSq: 'Hartimi i Projektit Elektrik & Dosja Teknike',
-          titleEn: 'Electrical Drawings & Final Technical Submission',
-          descSq: 'Përgatitja e skemës njëvijore, lista e materialeve (BOM), dhe raporti përfundimtar për lejen e kyçjes.',
-          descEn: 'AutoCAD SLD generation, bill of materials (BOM), and submission-ready engineering dossier.',
-        }
-      ]
-    },
-    {
-      id: 'solar-om',
-      category: 'solar',
-      tag: 'O&M INSPECTION',
-      tagColor: 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30',
-      accentBorder: 'hover:border-yellow-500/50',
-      accentGlow: 'hover:shadow-yellow-500/10',
-      titleSq: 'Operimi, Mirëmbajtja & Diagnostikimi (O&M)',
-      titleEn: 'Solar Plant O&M & Diagnostics Specialist',
-      descSq: 'Aftësim i thelluar për teknikë të terrenit në mirëmbajtjen parandaluese, zbulimin e defekteve me kamera termike, dhe matjen e kurbave I-V.',
-      descEn: 'Hands-on operational maintenance, preventive testing, I-V curve tracing, drone thermography, and inverter fault troubleshooting on utility-scale plants.',
-      price: '€380',
-      pricePeriodSq: 'Pagesë e plotë',
-      pricePeriodEn: 'One-time payment',
-      levelSq: 'Niveli Mesatar',
-      levelEn: 'Intermediate Level',
-      duration: '4 Javë (60 Orë)',
-      formatSq: 'Park Solar 2MW + Terren',
-      formatEn: '2MW Solar Park + Field',
-      certSq: 'Certifikatë Specialisti O&M',
-      certEn: 'O&M Specialist Certificate',
-      bgGradient: 'from-yellow-500/20 via-slate-900 to-slate-950',
-      bannerImage: '/solar-park.jpg',
-      seatsLeft: 5,
-      highlightsSq: [
-        'Diagnostikim i pikave të nxehta (Hotspots) me kamera termale FLIR',
-        'Matja dhe interpretimi i kurbave I-V (I-V curve tracer)',
-        'Testimi i izolimit të kabllove (Megger insulation resistance)',
-        'Pastrimi automatik dhe menaxhimi i vegjetacionit në parqe solare',
-      ],
-      highlightsEn: [
-        'Hotspot diagnosis via FLIR calibrated thermal imaging cameras',
-        'I-V curve tracing, fill factor analysis, and degradation measurements',
-        'Insulation resistance megohmmeter testing for cable grounding faults',
-        'Automated cleaning systems, vegetation control, and preventive scheduling',
-      ],
-      curriculum: [
-        {
-          week: 'Java 01',
-          titleSq: 'Strategjitë e Mirëmbajtjes (Parandaluese vs Korrigjuese)',
-          titleEn: 'Maintenance Strategies (Preventive vs Corrective)',
-          descSq: 'KPI-të kryesore të një impianti: PR (Performance Ratio), disponueshmëria, dhe llogaritja e humbjeve nga papastërtia.',
-          descEn: 'Key plant KPIs: Performance Ratio (PR), uptime, soiling index, and scheduled overhaul workflows.',
-        },
-        {
-          week: 'Java 02 - 03',
-          titleSq: 'Instrumentet e Testimit në Terren në Parkun 2MW',
-          titleEn: 'Field Instrumentation at 2MW Plant',
-          descSq: 'Përdorimi i kurbomatësit I-V, testuesit të tokëzimit, kamerës termale sipas standardit IEC 62446-3.',
-          descEn: 'Operation of I-V curve tracers, earth loop testers, and IEC 62446-3 thermographic classification.',
-        },
-        {
-          week: 'Java 04',
-          titleSq: 'Zgjidhja e Defekteve të Inverterit & Raportimi',
-          titleEn: 'Inverter Troubleshooting & SCADA Reporting',
-          descSq: 'Diagnostikimi i kodeve të gabimit të inverterave industrialë, zëvendësimi i siguresave dhe platformat SCADA.',
-          descEn: 'Fault code analysis on central/string inverters, component replacement, and digital SCADA analytics.',
-        }
-      ]
-    },
-    {
-      id: 'offgrid-microgrid',
-      category: 'battery',
-      tag: 'OFF-GRID & MICROGRIDS',
-      tagColor: 'bg-indigo-500/20 text-indigo-400 border border-indigo-500/30',
-      accentBorder: 'hover:border-indigo-500/50',
-      accentGlow: 'hover:shadow-indigo-500/10',
-      titleSq: 'Sistemet Autonome Off-Grid & Mikrorrjetet',
-      titleEn: 'Off-Grid Solar & Microgrid Systems',
-      descSq: 'Zgjidhje energjetike të pavarura nga rrjeti për zona rurale, bujqësi, pompa diellore, telekomunikacion dhe impiante hibride me gjeneratorë.',
-      descEn: 'Stand-alone off-grid power systems for rural electrification, agricultural solar water pumping, telecommunication towers, and generator hybrids.',
-      price: '€450',
-      pricePeriodSq: 'Pagesë e plotë ose me 2 këste',
-      pricePeriodEn: 'Full payment or 2 installments',
-      levelSq: 'Niveli Bazë - Mesatar',
-      levelEn: 'Basic - Intermediate',
-      duration: '5 Javë (75 Orë)',
-      formatSq: 'Klasë + Laborator Praktik',
-      formatEn: 'Classroom + Workshop Lab',
-      certSq: 'Certifikatë Ndërkombëtare Off-Grid',
-      certEn: 'International Off-Grid Certificate',
-      bgGradient: 'from-indigo-500/20 via-slate-900 to-slate-950',
-      bannerImage: '/586104350_122199067754355704_647952871261180247_n.jpg',
-      seatsLeft: 7,
-      highlightsSq: [
-        'Dimensionimi i saktë i autonomisë së baterive për ditë pa diell',
-        'Integrimi me kontrollorë karikimi MPPT dhe gjeneratorë dizell (Auto-start)',
-        'Sistemet e pompimit solar për ujitje bujqësore (Solar Water Pumping)',
-        'Menaxhimi i ngarkesave kritike dhe prioritetizimi me rele inteligjente',
-      ],
-      highlightsEn: [
-        'Precise autonomy sizing for consecutive cloudy days (Days of Autonomy)',
-        'MPPT charge controller coupling and automated generator start/stop (ATS)',
-        'Solar DC/AC surface and submersible water pump sizing for irrigation',
-        'Smart load shedding relays and critical sub-panel wiring',
-      ],
-      curriculum: [
-        {
-          week: 'Java 01 - 02',
-          titleSq: 'Auditimi i Ngarkesave & Llogaritja e Kapacitetit',
-          titleEn: 'Load Profiling & Capacity Calculation',
-          descSq: 'Përcaktimi i kërkesës ditore për vat-orë (Wh), llogaritja e rrymave startuese të motorëve dhe koeficientët e sigurisë.',
-          descEn: 'Daily watt-hour audit, motor surge inrush current multipliers, and autonomy reserve sizing.',
-        },
-        {
-          week: 'Java 03 - 04',
-          titleSq: 'Montimi i Inverter-Karikuesve & Pompave Solare',
-          titleEn: 'Inverter-Chargers & Solar Pumping Assemblies',
-          descSq: 'Konfigurimi i Victron MultiPlus, SmartSolar MPPT, dhe inverterëve me frekuencë të ndryshueshme (VFD) për pompa.',
-          descEn: 'Setting up Victron Energy ecosystems, SmartSolar controllers, and Variable Frequency Drives for pumps.',
-        },
-        {
-          week: 'Java 05',
-          titleSq: 'Sinkronizimi Hibrid & Testimi Praktik',
-          titleEn: 'Hybrid Synchronization & Practical Bench Test',
-          descSq: 'Lidhja e impiantit me burim dytësor backup dhe simulimi i dështimit të burimeve primare në laborator.',
-          descEn: 'Backup source synchronization, AC-coupling with existing generators, and black-start commissioning.',
-        }
-      ]
-    },
-    {
-      id: 'industrial-safety-hse',
-      category: 'solar',
-      tag: 'SAFETY & COMPLIANCE',
-      tagColor: 'bg-rose-500/20 text-rose-400 border border-rose-500/30',
-      accentBorder: 'hover:border-rose-500/50',
-      accentGlow: 'hover:shadow-rose-500/10',
-      titleSq: 'Siguria në Punë në Lartësi & Standardet Elektrike (HSE)',
-      titleEn: 'Work at Height Safety & Electrical High Voltage (HSE)',
-      descSq: 'Certifikim thelbësor për çdo montues dhe inxhinier diellor mbi pajisjet e mbrojtjes personale (PPE), shpëtimin në çati dhe rreziqet nga tensioni i lartë DC.',
-      descEn: 'Critical health, safety, and environmental (HSE) qualification focusing on fall arrest harness protocols, roof rope access, and high-voltage DC arc flash prevention.',
-      price: '€220',
-      pricePeriodSq: 'Pagesë e plotë',
-      pricePeriodEn: 'One-time fee',
-      levelSq: 'Të Gjitha Nivelet',
-      levelEn: 'All Levels',
-      duration: '2 Javë (30 Orë)',
-      formatSq: 'Simulim Praktik në Kullë / Çati',
-      formatEn: 'Tower & Roof Practical Rigging',
-      certSq: 'Certifikatë e Sigurisë në Punë (HSE)',
-      certEn: 'Certified HSE Occupational Safety',
-      bgGradient: 'from-rose-500/20 via-slate-900 to-slate-950',
-      bannerImage: '/640933758_122212965542355704_6725679518158766618_n.jpg',
-      seatsLeft: 10,
-      highlightsSq: [
-        'Përdorimi i rripave të sigurimit dhe sistemeve të ankorimit (Lifelines)',
-        'Mbrojtja nga rreziqet e harkut elektrik (Arc Flash) dhe shokut nga 1000V/1500V DC',
-        'Procedurat e bllokimit dhe etiketimit të energjisë (LOTO - Lockout/Tagout)',
-        'Protokolli i shpëtimit dhe ndihmës së shpejtë për punonjësit në lartësi',
-      ],
-      highlightsEn: [
-        'Harness fitment, dynamic lanyard inspection, and certified lifeline rigging',
-        '1000V/1500V DC arc flash protection, insulated PPE, and safe de-energization',
-        'Lockout/Tagout (LOTO) protocols for electrical distribution cabinets',
-        'Suspension trauma rescue and occupational emergency first-response drills',
-      ],
-      curriculum: [
-        {
-          week: 'Java 01',
-          titleSq: 'Rregullat Ligjore & Pajisjet Mbrojtëse Personale (PPE)',
-          titleEn: 'Regulatory Standards & PPE Deployment',
-          descSq: 'Inspektimi i kaskave, rripave truporë me 5 pika ankorimi, litarëve statikë dhe pikave të sigurta të montimit.',
-          descEn: '5-point full-body harness check, anchor point testing, static ropes, and fall arrest rating criteria.',
-        },
-        {
-          week: 'Java 02',
-          titleSq: 'Ushtrime Praktike të Shpëtimit & LOTO Elektrik',
-          titleEn: 'Practical Evacuation Drills & Electrical LOTO',
-          descSq: 'Simulim i personit të varur në litar, përdorimi i pajisjes së zbritjes emergjente dhe vendosja e drynave LOTO në kutitë e kombinuara.',
-          descEn: 'Suspension trauma rapid lowering protocols, descender device drills, and combiner box LOTO isolation practice.',
+          week: 'Pjesa 2',
+          titleSq: 'Simulimi 3D me PV*SOL & PVsyst',
+          titleEn: '3D Simulation with PV*SOL & PVsyst',
+          descSq: 'Modelimi i hijeve, llogaritja e prodhimit vjetor dhe raporti i fizibilitetit.',
+          descEn: 'Shading simulation, annual production yield, and bankable reports.',
         }
       ]
     }
@@ -428,6 +243,9 @@ export default function ProgramsGrid() {
     if (activeCategory === 'all') return true;
     return p.category === activeCategory;
   });
+
+  const solarCount = programs.filter(p => p.category === 'solar').length;
+  const batteryCount = programs.filter(p => p.category === 'battery').length;
 
   return (
     <section id="programs" className="py-24 bg-[#0B0F19] text-white relative overflow-hidden">
@@ -447,15 +265,15 @@ export default function ProgramsGrid() {
           </div>
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-heading font-bold tracking-tight text-white mb-5">
             {currentLanguage === 'sq' ? (
-              <>Kurrikula Profesionale <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green via-emerald-400 to-brand-yellow">e Gjeneratës së Re</span></>
+              <>Kurrikula profesionale <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green via-emerald-400 to-brand-yellow">e gjeneratës së re</span></>
             ) : (
-              <>Professional Curriculum <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green via-emerald-400 to-brand-yellow">for Modern Industry</span></>
+              <>Professional curriculum <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green via-emerald-400 to-brand-yellow">for modern industry</span></>
             )}
           </h2>
-          <p className="text-lg md:text-xl text-gray-400 leading-relaxed">
+          <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
             {currentLanguage === 'sq' 
-              ? 'Trajnime të thelluara teknike me mësim dual: teori inxhinierike në laborator dhe praktikë intensive në parkun diellor 2MW në Pejë.'
-              : 'Engineering-grade technical qualifications combining classroom rigour with hands-on commissioning at Kosovo\'s premier 2MW operational solar plant.'}
+              ? 'Trajnime të avancuara teknike: ky program kombinon teorinë me praktikën intensive drejtpërdrejt në parkun solar në Pejë, duke të përgatitur plotësisht me përvojë reale për tregun e punës.'
+              : 'Advanced technical training: this program combines theory with intensive hands-on practice directly at the solar park in Pejë, thoroughly preparing you with real-world experience for the job market.'}
           </p>
         </div>
 
@@ -470,7 +288,7 @@ export default function ProgramsGrid() {
                   : 'text-gray-400 hover:text-white hover:bg-white/5'
               }`}
             >
-              <span>{currentLanguage === 'sq' ? 'Të Gjitha Programet (6)' : 'All Programs (6)'}</span>
+              <span>{currentLanguage === 'sq' ? `Të Gjitha Programet (${programs.length})` : `All Programs (${programs.length})`}</span>
             </button>
             <button
               onClick={() => setActiveCategory('solar')}
@@ -481,7 +299,7 @@ export default function ProgramsGrid() {
               }`}
             >
               <Sun className="w-4 h-4 text-amber-400 shrink-0" />
-              <span>{currentLanguage === 'sq' ? 'Fotovoltaik & O&M (4)' : 'Solar PV & O&M (4)'}</span>
+              <span>{currentLanguage === 'sq' ? `Instalim i sistemeve solare (${solarCount})` : `Solar PV Installation (${solarCount})`}</span>
             </button>
             <button
               onClick={() => setActiveCategory('battery')}
@@ -492,7 +310,7 @@ export default function ProgramsGrid() {
               }`}
             >
               <Battery className="w-4 h-4 text-emerald-400 shrink-0" />
-              <span>{currentLanguage === 'sq' ? 'Bateri & Mikrorrjete (2)' : 'Storage & Microgrids (2)'}</span>
+              <span>{currentLanguage === 'sq' ? `Sistemet solare hibride (${batteryCount})` : `Hybrid Solar Systems (${batteryCount})`}</span>
             </button>
           </div>
         </div>
@@ -554,7 +372,9 @@ export default function ProgramsGrid() {
                         <Clock className="w-3.5 h-3.5 text-brand-green" />
                         {currentLanguage === 'sq' ? 'Koha:' : 'Dur:'}
                       </span>
-                      <span className="font-semibold text-white font-mono text-[11px]">{course.duration}</span>
+                      <span className="font-semibold text-white font-mono text-[11px]">
+                        {currentLanguage === 'sq' ? (course.durationSq || course.duration) : (course.durationEn || course.duration)}
+                      </span>
                     </div>
                     
                     <div className="flex items-center justify-between text-gray-300">
@@ -588,31 +408,14 @@ export default function ProgramsGrid() {
                     ))}
                   </div>
 
-                  {/* Price Row - Highly Visible above CTA */}
-                  <div className="pt-3.5 pb-3.5 mt-auto flex items-baseline justify-between border-t border-white/10 mb-3">
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-gray-400">
-                      {currentLanguage === 'sq' ? 'Çmimi i Trajnimit' : 'Tuition Fee'}
-                    </span>
-                    <span className="text-2xl md:text-3xl font-heading font-bold text-brand-yellow tracking-tight">
-                      {course.price}
-                    </span>
-                  </div>
-
-                  {/* Action Buttons - Immediately Identifiable CTA */}
-                  <div className="grid grid-cols-2 gap-2.5">
-                    <button
-                      onClick={() => setSelectedCourse(course)}
-                      className="w-full inline-flex items-center justify-center font-heading font-semibold tracking-wide rounded-full px-3 py-2.5 text-xs transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 hover:border-white/20 gap-1.5"
-                    >
-                      <BookOpen className="w-3.5 h-3.5 text-brand-yellow" />
-                      {currentLanguage === 'sq' ? 'SILLABUSI' : 'SYLLABUS'}
-                    </button>
+                  {/* Action Button - Direct Prominent CTA */}
+                  <div className="pt-4 mt-auto border-t border-white/5">
                     <a
                       href="#contact"
-                      className="w-full inline-flex items-center justify-center font-heading font-bold tracking-wide rounded-full px-3 py-2.5 text-xs transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 bg-brand-green hover:bg-brand-green/90 text-white shadow-md shadow-brand-green/25 hover:shadow-lg hover:shadow-brand-green/35 gap-1.5"
+                      className="w-full inline-flex items-center justify-center font-heading font-bold tracking-wide rounded-full px-5 py-3 text-sm transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 bg-brand-green hover:bg-brand-green/90 text-white shadow-md shadow-brand-green/25 hover:shadow-lg hover:shadow-brand-green/35 gap-2"
                     >
-                      <span>{currentLanguage === 'sq' ? 'APLIKO' : 'ENROLL'}</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
+                      <span>{currentLanguage === 'sq' ? 'APLIKO TANI' : 'ENROLL NOW'}</span>
+                      <ArrowRight className="w-4 h-4" />
                     </a>
                   </div>
 
@@ -648,8 +451,8 @@ export default function ProgramsGrid() {
 
             <p className="text-sm sm:text-base md:text-lg text-gray-300/90 max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed font-sans font-normal">
               {currentLanguage === 'sq' 
-                ? 'Këshilltarët tanë do të vlerësojnë profilin tuaj dhe do të rekomandojnë pikën e duhur të fillimit pa pagesë. Rezervoni një thirrje konsultuese 20 minutëshe.'
-                : 'Our advisors will assess your background and recommend the right starting point free of charge. Book a 20 minute consultation call.'}
+                ? 'Trajnerët tanë do të vlerësojnë profilin tuaj dhe do të rekomandojnë pikën e duhur të fillimit.'
+                : 'Our trainers will assess your profile and recommend the right starting point.'}
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4">
@@ -693,7 +496,7 @@ export default function ProgramsGrid() {
                   {selectedCourse.tag}
                 </span>
                 <span className="text-xs text-brand-yellow font-semibold">
-                  {selectedCourse.duration}
+                  {currentLanguage === 'sq' ? (selectedCourse.durationSq || selectedCourse.duration) : (selectedCourse.durationEn || selectedCourse.duration)}
                 </span>
               </div>
 

@@ -5,8 +5,6 @@ import TacticalCard from './TacticalCard';
 
 interface TimelineStep {
   number: string;
-  weeksSq: string;
-  weeksEn: string;
   titleSq: string;
   titleEn: string;
   descSq: string;
@@ -25,81 +23,73 @@ export default function ProgramTimeline() {
   const steps: TimelineStep[] = [
     {
       number: '01',
-      weeksSq: 'Java 1–3',
-      weeksEn: 'Weeks 1–3',
-      titleSq: 'Bazat Inxhinierike & Fizika Fotovoltaike',
-      titleEn: 'Engineering Foundations & PV Physics',
-      descSq: 'Mësim intensiv teorik në laborator. Analiza e rrezatimit diellor, teknologjitë e moduleve fotovoltaike (Monokristaline, Bifacial), llogaritja e këndeve optimale dhe bazat elektrike të rrymës së vazhduar (DC) e alternative (AC).',
-      descEn: 'Rigorous classroom and lab instruction covering solar irradiance modeling, silicon and bifacial cell physics, tilt and azimuth optimization, and fundamental electrical DC/AC laws.',
+      titleSq: 'Bazat e elektroteknikës, siguria dhe mbrojtja e mjedisit.',
+      titleEn: 'Electrotechnical Fundamentals, Safety & Environmental Protection',
+      descSq: 'Njohuri mbi konceptet bazë të elektroteknikës, rregulloret strikte të sigurisë në punë në lartësi (HSE), dhe protokollet e mbrojtjes së mjedisit gjatë instalimeve.',
+      descEn: 'Core electrotechnical concepts, workplace health and height safety standards (HSE), and environmental protection protocols during solar installations.',
       topicsSq: [
-        'Fizika fotovoltaike & matjet e rrezatimit diellor',
-        'Siguria në punë dhe mbrojtja në lartësi (HSE)',
-        'Standardet evropiane dhe rregulloret teknike'
+        'Bazat e elektroteknikës dhe qarqet elektrike',
+        'Siguria dhe shëndeti në punë në lartësi (HSE)',
+        'Mbrojtja e mjedisit dhe standardet teknike'
       ],
       topicsEn: [
-        'PV cell physics & irradiance solar mapping',
-        'Workplace safety & height protection protocols (HSE)',
-        'European IEC standards & local electrical codes'
+        'Electrotechnical fundamentals and electrical circuits',
+        'Workplace safety and height protection (HSE)',
+        'Environmental protection and technical standards'
       ],
       icon: BookOpen
     },
     {
       number: '02',
-      weeksSq: 'Java 4–5',
-      weeksEn: 'Weeks 4–5',
-      titleSq: 'Projektimi & Pajisjet Elektrike (BOS)',
-      titleEn: 'System Design & Electrical Equipment',
-      descSq: 'Përzgjedhja dhe dimensionimi i inverterave on-grid dhe hibrid, mbrojtjet nga mbingarkesat dhe rrufetë, kabllimi diellor i specializuar dhe modelimi i skemave njëvijore me softuer profesional.',
-      descEn: 'Selection and configuration of on-grid string inverters, DC/AC overvoltage and surge suppression devices, specialized UV-rated solar cabling, and single-line diagram schematic drafting.',
+      titleSq: 'Sistemet Solare PV – ndërtimi, operimi dhe legjislacioni.',
+      titleEn: 'Solar PV Systems – Construction, Operation & Legislation',
+      descSq: 'Arkitektura e sistemeve fotovoltaike, parimet themelore të operimit, mënyrat e lidhjes në rrjet dhe kuadri ligjor e rregullativ në fuqi.',
+      descEn: 'Photovoltaic system architecture, operational fundamentals, grid-tie connection methods, and prevailing legal and regulatory frameworks.',
       topicsSq: [
-        'Dimensionimi i stringjeve dhe raporteve DC/AC',
-        'Konfigurimi i inverterave (Huawei, SMA, Fronius)',
-        'Mbrojtjet diferenciale dhe mbrojtja nga shkarkimet atmosferike'
+        'Teknologjitë e moduleve fotovoltaike dhe inverterëve',
+        'Parimet e operimit dhe lidhjes në rrjetin elektrik',
+        'Korniza ligjore, lejet dhe kërkesat rregullative'
       ],
       topicsEn: [
-        'String sizing and DC-to-AC capacity ratios',
-        'Commercial inverter configuration (Huawei, SMA, Fronius)',
-        'Surge arrestors, grounding and DC disconnect switches'
+        'Photovoltaic module and inverter technologies',
+        'Operation and utility grid connection principles',
+        'Regulatory compliance, permitting, and legal framework'
       ],
       icon: Cpu
     },
     {
       number: '03',
-      weeksSq: 'Java 6–8',
-      weeksEn: 'Weeks 6–8',
-      titleSq: 'Praktikë në Terren në Parkun 2MW',
-      titleEn: 'Field Operations at 2MW Solar Park',
-      descSq: 'Përvojë direkte praktike në impiantin funksional në Pejë. Montimi real i strukturave mbajtëse, fiksimi i paneleve me moment-çelës, krimpimi i lidhëseve MC4 dhe testimet me instrumente profesionale.',
-      descEn: 'Direct hands-on immersion at the active 2MW utility-scale solar plant in Pejë. Real mounting of racking systems, torque-wrench fastening, precision MC4 connector crimping, and electrical safety checks.',
+      titleSq: 'Projektimi i sistemeve PV dhe simulimi softuerik.',
+      titleEn: 'PV System Design & Software Simulation',
+      descSq: 'Modelimi kompjuterik me softuerët më të avancuar, simulimi i prodhimit vjetor të energjisë, llogaritja e hijeve dhe hartimi i skemave elektrike.',
+      descEn: 'Computer-aided design with industry-standard software, annual energy yield simulations, shading analyses, and electrical schematics drafting.',
       topicsSq: [
-        'Montim mekanik në struktura fikse dhe çati',
-        'Matjet e tensionit Voc, rrymës Isc dhe rezistencës së izolimit',
-        'Inspektimi termografik me kamera infra të kuqe'
+        'Modelimi dhe simulimi me softuerë diellorë profesionalë',
+        'Analiza e hijeve dhe llogaritja e prodhimit vjetor',
+        'Hartimi i skemave elektrike dhe dosjes së projektimit'
       ],
       topicsEn: [
-        'Mechanical mounting on ground-mount racks and rooftop structures',
-        'Voc open-circuit and Isc short-circuit instrument testing',
-        'Thermographic imaging for hotspot detection and diagnostics'
+        'Modeling and simulation with professional solar design software',
+        'Shading analysis and annual energy yield calculation',
+        'Drafting electrical schematics and project engineering files'
       ],
       icon: SunMedium
     },
     {
       number: '04',
-      weeksSq: 'Java 9–10',
-      weeksEn: 'Weeks 9–10',
-      titleSq: 'Vënia në Punë & Certifikimi Zyrtar',
-      titleEn: 'Commissioning & Official Certification',
-      descSq: 'Verifikimi përfundimtar i vënies në funksion sipas standardit IEC 62446, lëshimi i raportit të pranimit teknik, testimi final teorik dhe praktik, dhe pajisja me certifikatën e akredituar.',
-      descEn: 'Full commissioning and energization checklists under IEC 62446, generation of electrical safety handover reports, formal examinations, and the conferral of state-accredited diplomas.',
+      titleSq: 'Praktikë në terren',
+      titleEn: 'Field Hands-on Practice',
+      descSq: 'Aftësim i plotë praktik i drejtpërdrejtë në park solar: montimi mekanik i strukturave, paneleve, instalimi elektrik, lidhja në rrjet, testimet dhe vënia në funksion.',
+      descEn: 'Direct, comprehensive hands-on practice at the solar park: mechanical rack mounting, PV module assembly, electrical cabling, grid connection, testing, and commissioning.',
       topicsSq: [
-        'Procedurat e vënies nën tension dhe sinkronizimit me rrjetin',
-        'Testi përfundimtar teorik dhe provimi praktik në terren',
-        'Pajisja me diplomë të njohur kombëtare dhe ndërkombëtare'
+        'Montimi mekanik i strukturave dhe moduleve diellore',
+        'Lidhjet elektrike DC/AC dhe krimpimi i konektorëve MC4',
+        'Testimi, matjet elektrike dhe vënia në punë e sistemit solar'
       ],
       topicsEn: [
-        'Grid synchronization and utility energization sign-off',
-        'Final written exam and practical commissioning evaluation',
-        'Conferral of accredited professional qualification'
+        'Mechanical structure and solar module assembly',
+        'DC/AC electrical wiring and MC4 connector crimping',
+        'Testing, electrical measurements, and solar system commissioning'
       ],
       icon: Award
     }
@@ -114,17 +104,45 @@ export default function ProgramTimeline() {
         
         {/* Section Header */}
         <div className="mb-14 lg:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-green/10 text-brand-green text-xs font-bold tracking-widest uppercase mb-4">
-            {currentLanguage === 'sq' ? 'Rrugëtimi i Kurrikulës' : 'Program Journey'}
-          </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-brand-navy tracking-tight">
-            {currentLanguage === 'sq' ? 'Si duket një program trajnimi?' : 'What does a training program look like?'}
+            {currentLanguage === 'sq' ? 'Si është i strukturuar programi?' : 'How is the program structured?'}
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-gray-600 max-w-2xl leading-relaxed">
-            {currentLanguage === 'sq' 
-              ? 'Një rrugëtim i qartë 4-fazor me 10 javë aftësimi intensiv: nga bazat e fizikës në klasë deri te montimi dhe vënia në punë në parkun diellor 2MW.' 
-              : 'A structured 4-phase, 10-week technical journey: progressing from laboratory theory to full-scale deployment at our operational 2MW solar facility.'}
-          </p>
+          
+          <div className="mt-4 max-w-2xl text-gray-600">
+            {currentLanguage === 'sq' ? (
+              <div className="space-y-2">
+                <p className="text-base sm:text-lg font-medium text-brand-navy leading-relaxed">
+                  Një rrugëtim i qartë 4-fazor me 1 javë aftësimi intensiv që të dërgon:
+                </p>
+                <div className="space-y-1.5 pl-1 text-sm sm:text-base text-gray-700">
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-brand-green font-bold text-base mt-0.5">•</span>
+                    <span><strong>Nga teoria:</strong> Bazat teknike dhe inxhinierike në klasë.</span>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-brand-green font-bold text-base mt-0.5">•</span>
+                    <span><strong>Deri te praktika:</strong> Montimi dhe vënia në punë e një sistemi solar</span>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-2">
+                <p className="text-base sm:text-lg font-medium text-brand-navy leading-relaxed">
+                  A structured 4-phase journey with 1 week of intensive training that takes you:
+                </p>
+                <div className="space-y-1.5 pl-1 text-sm sm:text-base text-gray-700">
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-brand-green font-bold text-base mt-0.5">•</span>
+                    <span><strong>From theory:</strong> Technical and engineering fundamentals in the classroom.</span>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-brand-green font-bold text-base mt-0.5">•</span>
+                    <span><strong>To practice:</strong> Mounting and commissioning of a solar system</span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Timeline Layout */}
@@ -163,19 +181,10 @@ export default function ProgramTimeline() {
                     {step.number}
                   </div>
 
-                  {/* Step Title & Week Readout */}
+                  {/* Step Title */}
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span
-                        className={`text-[10px] font-mono font-bold uppercase tracking-wider ${
-                          isActive ? 'text-brand-yellow' : 'text-gray-500'
-                        }`}
-                      >
-                        {currentLanguage === 'sq' ? step.weeksSq : step.weeksEn}
-                      </span>
-                    </div>
                     <div
-                      className={`font-heading font-bold text-sm sm:text-base leading-snug truncate transition-colors ${
+                      className={`font-heading font-bold text-sm sm:text-base leading-snug transition-colors ${
                         isActive ? 'text-white' : 'text-brand-navy group-hover:text-brand-green'
                       }`}
                     >
@@ -198,19 +207,12 @@ export default function ProgramTimeline() {
               isDark={false}
               radarColor="bg-brand-green"
               coordinateTag={`PHASE // ${currentStepData.number}`}
-              className="w-full h-full min-h-[420px]"
+              className="w-full h-full min-h-[400px]"
             >
               <div className="p-8 sm:p-10 md:p-12 h-full flex flex-col justify-between bg-white rounded-2xl relative overflow-hidden">
                 
-                {/* Card Header */}
+                {/* Card Header & Description */}
                 <div>
-                  <div className="flex items-center justify-end mb-6">
-                    <span className="text-xs font-mono font-semibold text-gray-500 bg-gray-100 px-3 py-1 rounded-md">
-                      {currentLanguage === 'sq' ? currentStepData.weeksSq : currentStepData.weeksEn}
-                    </span>
-                  </div>
-
-                  {/* Title */}
                   <div className="flex items-start gap-4 mb-4">
                     <div className="w-12 h-12 rounded-xl bg-brand-navy text-white flex items-center justify-center shrink-0 shadow-md">
                       <StepIcon className="w-6 h-6 text-brand-yellow" />
@@ -222,7 +224,6 @@ export default function ProgramTimeline() {
                     </div>
                   </div>
 
-                  {/* Detailed Description */}
                   <p className="text-base text-gray-600 leading-relaxed mb-6">
                     {currentLanguage === 'sq' ? currentStepData.descSq : currentStepData.descEn}
                   </p>
@@ -231,7 +232,7 @@ export default function ProgramTimeline() {
                 {/* Key Deliverables / Topics List */}
                 <div className="pt-6 border-t border-gray-100 bg-gray-50/70 -mx-8 sm:-mx-10 md:-mx-12 -mb-8 sm:-mb-10 md:-mb-12 p-6 sm:p-8 rounded-b-2xl">
                   <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-gray-500 mb-3">
-                    {currentLanguage === 'sq' ? 'KOPMETENCAT KRYESORE TË FITUARA:' : 'KEY LEARNING OUTCOMES:'}
+                    {currentLanguage === 'sq' ? 'KOMPETENCAT KRYESORE TË FITUARA:' : 'KEY LEARNING OUTCOMES:'}
                   </div>
                   <div className="space-y-2.5">
                     {(currentLanguage === 'sq' ? currentStepData.topicsSq : currentStepData.topicsEn).map((topic, i) => (

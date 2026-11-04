@@ -24,18 +24,11 @@ export default function FAQ() {
       aEn: 'Tuition includes all lab materials, practical gear at the 2MW park, and official certification. Payment must be made in full prior to the start of the program; payments are not offered in the form of installments.'
     },
     {
-      id: 'cert',
-      qSq: 'Sa është vlefshmëria e certifikatës së lëshuar?',
-      qEn: 'What is the accreditation and validity of the certification?',
-      aSq: 'Certifikata e Solarit Academy njihet kombëtarisht nga autoritetet përkatëse dhe përputhet me standardet ndërkombëtare IEC për instalimet fotovoltaike.',
-      aEn: 'The credential awarded by Solarit Academy is officially recognized and adheres to international IEC technical standards for solar PV systems.'
-    },
-    {
       id: 'duration',
       qSq: 'Sa zgjat një program i plotë dhe si organizohet orari?',
       qEn: 'How long does the training program take and what is the schedule?',
-      aSq: 'Programi zgjat 8 deri në 10 javë. Orari është i përshtatshëm edhe për profesionistët në punë, me ligjërata teorike dhe seanca intensive praktike gjatë fundjavave.',
-      aEn: 'Programs run between 8 to 10 weeks with flexible scheduling designed for working professionals, combining evening classroom hours with weekend solar park practicums.'
+      aSq: 'Programi aktual zgjatë deri në 1 javë. Orari është i përshtatshëm edhe për profesionistët në punë, me ligjërata teorike dhe seanca intensive praktike gjatë fundjavave.',
+      aEn: 'The current program runs up to 1 week. The schedule is also convenient for working professionals, featuring theoretical lectures and intensive practical sessions during weekends.'
     }
   ];
 

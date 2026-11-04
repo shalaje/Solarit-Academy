@@ -34,9 +34,6 @@ export default function EnrollContact() {
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold uppercase tracking-tight text-white mb-2">
                   {currentLanguage === 'sq' ? 'Grupi i Radhës: Regjistrimet Janë Hapur' : 'Next Cohort: Registration Is Now Open'}
                 </h3>
-                <p className="text-gray-300 text-sm sm:text-base max-w-xl leading-relaxed">
-                  {currentLanguage === 'sq' ? 'Vendet në impiantin solar 2MW janë të kufizuara në 15 kandidatë për grup për të garantuar cilësinë praktike.' : 'Class sizes at the 2MW solar plant are capped at 15 trainees per cohort to ensure individualized practical supervision.'}
-                </p>
               </div>
               <div className="relative z-10 shrink-0">
                 <button
@@ -126,22 +123,13 @@ export default function EnrollContact() {
                         className="w-full px-4 py-3.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green outline-none transition-all bg-white text-sm text-gray-900"
                       >
                         <option value="pv-installer-pro">
-                          {currentLanguage === 'sq' ? 'Instalues i Certifikuar Fotovoltaik (PV)' : 'Certified PV Systems Installer'}
+                          {currentLanguage === 'sq' ? 'INSTALIMI I SISTEMEVE SOLARE' : 'SOLAR PV SYSTEMS INSTALLATION'}
                         </option>
                         <option value="bess-master">
-                          {currentLanguage === 'sq' ? 'Sistemet e Ruajtjes me Bateri (BESS)' : 'Battery Energy Storage Systems Specialist'}
+                          {currentLanguage === 'sq' ? 'Sistemet solare hibride' : 'Hybrid Solar Systems'}
                         </option>
                         <option value="pv-design-engineer">
-                          {currentLanguage === 'sq' ? 'Inxhinieri & Projektim me PV*SOL dhe CAD' : 'Solar PV Engineering & Software Design'}
-                        </option>
-                        <option value="solar-om">
-                          {currentLanguage === 'sq' ? 'Operimi, Mirëmbajtja & Diagnostikimi (O&M)' : 'Solar Plant O&M & Diagnostics'}
-                        </option>
-                        <option value="offgrid-microgrid">
-                          {currentLanguage === 'sq' ? 'Sistemet Autonome Off-Grid & Mikrorrjetet' : 'Off-Grid Solar & Microgrid Systems'}
-                        </option>
-                        <option value="industrial-safety-hse">
-                          {currentLanguage === 'sq' ? 'Siguria në Punë në Lartësi & HSE' : 'Work at Height Safety & Electrical HSE'}
+                          {currentLanguage === 'sq' ? 'Trajnim Profesional për Softuerët Solarë: AutoCAD, PV*SOL & PVsyst' : 'Professional Training for Solar Software: AutoCAD, PV*SOL & PVsyst'}
                         </option>
                       </select>
                     </div>

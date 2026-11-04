@@ -12,9 +12,9 @@ interface StatItem {
 
 const statsData: StatItem[] = [
   { target: 300, suffix: '+', labelKey: 'impact.trained', code: 'KPI.01' },
-  { target: 100, suffix: '', labelKey: 'impact.capacity', code: 'KPI.02' },
+  { target: 300, suffix: '+', labelKey: 'impact.capacity', code: 'KPI.02' },
   { target: 5, suffix: '', labelKey: 'impact.instructors', code: 'KPI.03' },
-  { target: 60, suffix: '%', labelKey: 'impact.women', code: 'KPI.04' }
+  { target: 70, suffix: '%', labelKey: 'impact.women', code: 'KPI.04' }
 ];
 
 function AnimatedCounter({ 
