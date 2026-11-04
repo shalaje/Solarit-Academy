@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Sun, Globe } from 'lucide-react';
+import { Menu, X, Globe } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function Navbar() {
@@ -40,15 +40,24 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
-          {/* Logo Placeholder */}
-          <div className="flex items-center gap-2">
-            <div className={`flex items-center font-heading font-bold text-2xl tracking-tight transition-colors ${isScrolled || isMobileMenuOpen ? 'text-brand-navy' : 'text-white'}`}>
-              S<Sun className="w-6 h-6 text-brand-sun-start mx-0.5 mt-1" />LARIT
-            </div>
-            <div className="text-brand-green font-heading font-bold text-sm leading-none mt-1 uppercase">
-              Academy
-            </div>
-          </div>
+          {/* Official Solarit Academy Logo */}
+          <a href="#home" className="flex items-center group transition-transform hover:scale-[1.02] focus:outline-none">
+            {isScrolled || isMobileMenuOpen ? (
+              <img
+                src="/solarit-logo-transparent.png"
+                alt="Solarit Academy"
+                className="h-10 sm:h-11 w-auto object-contain"
+              />
+            ) : (
+              <div className="flex items-center gap-2 px-2.5 py-1 rounded-xl bg-slate-900/40 backdrop-blur-md border border-white/10 shadow-sm">
+                <img
+                  src="/solarit-logo-light.png"
+                  alt="Solarit Academy"
+                  className="h-8 sm:h-9 w-auto object-contain"
+                />
+              </div>
+            )}
+          </a>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">

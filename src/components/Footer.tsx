@@ -1,4 +1,4 @@
-import { Sun, Facebook, Linkedin, Instagram } from 'lucide-react';
+import { Facebook, Linkedin, Instagram } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function Footer() {
@@ -13,13 +13,14 @@ export default function Footer() {
           
           {/* Brand Info */}
           <div className="md:col-span-5">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="flex items-center text-white font-heading font-bold text-2xl sm:text-3xl tracking-tight">
-                S<Sun className="w-7 h-7 text-brand-sun-start mx-0.5 mt-0.5" />LARIT
-              </div>
-              <div className="text-brand-green font-heading font-bold text-sm leading-none mt-1 uppercase">
-                Academy
-              </div>
+            <div className="mb-4">
+              <a href="#home" className="inline-block group focus:outline-none">
+                <img
+                  src="/solarit-logo-light.png"
+                  alt="Solarit Academy"
+                  className="h-10 sm:h-12 w-auto object-contain transition-transform group-hover:scale-[1.02]"
+                />
+              </a>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
               {t('footer.tagline')}
