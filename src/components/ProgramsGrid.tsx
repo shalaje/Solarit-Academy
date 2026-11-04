@@ -502,19 +502,19 @@ export default function ProgramsGrid() {
           {filteredPrograms.map((course) => (
             <TacticalCard
               key={course.id}
-              className="flex flex-col h-full transform transition-all duration-300 hover:-translate-y-1.5"
+              className="flex flex-col h-full transition-all duration-300 ease-out hover:-translate-y-2 hover:scale-[1.018] hover:shadow-2xl hover:shadow-brand-green/20"
               radarColor="bg-emerald-400"
               coordinateTag={`MODULE // ${course.tag}`}
               isDark={true}
             >
               {/* Inner Card Container */}
-              <div className="flex flex-col h-full overflow-hidden rounded-2xl">
+              <div className="flex flex-col h-full overflow-hidden rounded-2xl border border-white/5 group-hover:border-brand-green/30 transition-colors duration-300">
                 {/* Card Banner with Photo + Overlay */}
                 <div className="relative h-52 overflow-hidden bg-slate-900 border-b border-white/5">
                   <img 
                     src={course.bannerImage} 
                     alt={currentLanguage === 'sq' ? course.titleSq : course.titleEn}
-                    className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500 opacity-80"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-95"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#111625] via-[#111625]/40 to-transparent"></div>
                   

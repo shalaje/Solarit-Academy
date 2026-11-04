@@ -8,6 +8,12 @@ export default function Partners() {
     {
       name: 'ELING Grup',
       role: currentLanguage === 'sq' ? 'Themelues Strategjik & Industri' : 'Strategic Industrial Founder',
+      url: 'https://eling-ks.com',
+    },
+    {
+      name: 'A+ Electric',
+      role: currentLanguage === 'sq' ? 'Instalime Elektrike & Tension i Ulët' : 'Low-Voltage Electrical & Building Systems',
+      url: 'https://eling-ks.com/2025/04/13/a/',
     },
     {
       name: 'Helvetas',
@@ -40,23 +46,41 @@ export default function Partners() {
             </div>
             
             {/* Partner Modular Tiles with Consistent Breathing Room & Proportion */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {partnersList.map((partner) => (
-                <div
-                  key={partner.name}
-                  className="group rounded-2xl border border-neutral-200/90 hover:border-brand-green/60 bg-white/95 hover:bg-white p-6 transition-all duration-200 hover:shadow-sm flex flex-col justify-center text-center sm:text-left min-h-[120px]"
-                >
-                  {/* Brand name */}
-                  <div className="text-lg font-heading font-bold text-gray-900 mb-2 tracking-tight group-hover:text-brand-green transition-colors">
-                    {partner.name}
-                  </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+              {partnersList.map((partner) => {
+                const CardContent = (
+                  <>
+                    {/* Brand name */}
+                    <div className="text-lg font-heading font-bold text-gray-900 mb-2 tracking-tight group-hover:text-brand-green transition-colors">
+                      {partner.name}
+                    </div>
 
-                  {/* Role / Description */}
-                  <p className="text-xs sm:text-sm text-gray-600 font-medium leading-relaxed">
-                    {partner.role}
-                  </p>
-                </div>
-              ))}
+                    {/* Role / Description */}
+                    <p className="text-xs sm:text-sm text-gray-600 font-medium leading-relaxed">
+                      {partner.role}
+                    </p>
+                  </>
+                );
+
+                return partner.url ? (
+                  <a
+                    key={partner.name}
+                    href={partner.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group rounded-2xl border border-neutral-200/90 hover:border-brand-green/60 bg-white/95 hover:bg-white p-6 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 flex flex-col justify-center text-center sm:text-left min-h-[120px]"
+                  >
+                    {CardContent}
+                  </a>
+                ) : (
+                  <div
+                    key={partner.name}
+                    className="group rounded-2xl border border-neutral-200/90 hover:border-brand-green/60 bg-white/95 hover:bg-white p-6 transition-all duration-200 hover:shadow-sm flex flex-col justify-center text-center sm:text-left min-h-[120px]"
+                  >
+                    {CardContent}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </TacticalCard>

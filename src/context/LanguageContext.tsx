@@ -46,7 +46,7 @@ const translations = {
     'why.cert.title': 'Certifikim Profesional',
     'why.cert.desc': 'Kualifikim i njohur për zhvillim të menjëhershëm në karrierë.',
     'why.park.title': '2 MW Park Solar për Praktikë',
-    'why.park.desc': 'Përvojë reale pune në impiantin funksional në Pejë.',
+    'why.park.desc': 'Përvojë reale pune në impiantin funksional në Llabjan, Pejë.',
     'why.eling.title': 'Përkrahur nga ELING Grup',
     'why.eling.desc': 'Mbështetur nga liderët e industrisë së energjisë në vend.',
     
@@ -136,7 +136,7 @@ const translations = {
     'why.cert.title': 'Professional Certification',
     'why.cert.desc': 'Recognized qualification for immediate career advancement.',
     'why.park.title': '2 MW Solar Park',
-    'why.park.desc': 'Real-world experience at the functional solar plant in Pejë.',
+    'why.park.desc': 'Real-world experience at the functional solar plant in Llabjan, Pejë.',
     'why.eling.title': 'Backed by ELING Grup',
     'why.eling.desc': 'Supported by the leading energy industry company in the country.',
     

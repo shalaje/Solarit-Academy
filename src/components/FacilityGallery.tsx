@@ -10,7 +10,7 @@ export default function FacilityGallery() {
 
   const galleryImages = [
     { url: '/01.jpg', alt: 'Training Classroom', sq: 'Klasa e Trajnimit & Laboratori Teorik', en: 'Training Classroom & Electrical Lab', span: 'md:col-span-8 md:row-span-2 aspect-[16/9] md:aspect-auto' },
-    { url: '/02.jpg', alt: 'Solar Park Visit', sq: 'Parku Diellor 2MW Pejë', en: '2MW Utility-Scale Solar Park', span: 'md:col-span-4 md:row-span-1 aspect-[4/3] md:aspect-auto' },
+    { url: '/02.jpg', alt: 'Solar Park Visit', sq: 'Parku Diellor 2MW Llabjan, Pejë', en: '2MW Utility-Scale Solar Park (Llabjan, Pejë)', span: 'md:col-span-4 md:row-span-1 aspect-[4/3] md:aspect-auto' },
     { url: '/03.jpg', alt: 'Hands-on Equipment', sq: 'Pajisjet & Veglat Profesionale', en: 'Hands-on Installation Tools', span: 'md:col-span-4 md:row-span-1 aspect-[4/3] md:aspect-auto' },
     { url: '/586104350_122199067754355704_647952871261180247_n.jpg', alt: 'Safety Training', sq: 'Trajnimi i Sigurisë & HSE në Lartësi', en: 'Safety Protocols & HSE at Height', span: 'md:col-span-4 md:row-span-1 aspect-[4/3]' },
     { url: '/640933758_122212965542355704_6725679518158766618_n.jpg', alt: 'Practical Application', sq: 'Aplikimi Praktik në Impiant', en: 'Field Commissioning & Grid Intertie', span: 'md:col-span-8 md:row-span-1 aspect-[16/9] md:aspect-[2/1]' },
