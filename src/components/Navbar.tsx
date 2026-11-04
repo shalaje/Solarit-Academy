@@ -46,16 +46,14 @@ export default function Navbar() {
               <img
                 src="/solarit-logo-transparent.png"
                 alt="Solarit Academy"
-                className="h-10 sm:h-11 w-auto object-contain"
+                className="h-10 sm:h-11 w-auto object-contain transition-opacity duration-200"
               />
             ) : (
-              <div className="flex items-center gap-2 px-2.5 py-1 rounded-xl bg-slate-900/40 backdrop-blur-md border border-white/10 shadow-sm">
-                <img
-                  src="/solarit-logo-light.png"
-                  alt="Solarit Academy"
-                  className="h-8 sm:h-9 w-auto object-contain"
-                />
-              </div>
+              <img
+                src="/solarit-logo-light.png"
+                alt="Solarit Academy"
+                className="h-10 sm:h-11 w-auto object-contain transition-opacity duration-200"
+              />
             )}
           </a>
 
