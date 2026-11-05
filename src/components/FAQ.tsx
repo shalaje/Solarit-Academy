@@ -33,12 +33,12 @@ export default function FAQ() {
   ];
 
   return (
-    <section className="py-20 lg:py-28 bg-white border-t border-neutral-100">
+    <section className="pt-20 lg:pt-28 pb-8 lg:pb-10 bg-white border-t border-neutral-100">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center mb-14 lg:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-green/10 text-brand-green text-xs font-bold tracking-widest uppercase mb-4">
+        <div className="text-left mb-14 lg:mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-100 text-neutral-600 border border-neutral-200 text-xs font-semibold tracking-wider uppercase mb-4">
             FAQ
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-brand-navy tracking-tight">

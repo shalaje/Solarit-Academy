@@ -71,8 +71,8 @@ export default function ProgramsGrid() {
       tagColor: 'bg-amber-500/20 text-amber-400 border border-amber-500/30',
       accentBorder: 'hover:border-amber-500/50',
       accentGlow: 'hover:shadow-amber-500/10',
-      titleSq: 'INSTALIMI I SISTEMEVE SOLARE',
-      titleEn: 'SOLAR PV SYSTEMS INSTALLATION',
+      titleSq: 'Instalimi i sistemeve solare',
+      titleEn: 'Solar PV Systems Installation',
       descSq: 'Program praktik dhe teorik per: montimin, instalimin, lidhjen në rrjet dhe mirëmbajtjen',
       descEn: 'Practical and theoretical program for: mounting, installation, grid connection, and maintenance',
       price: '€490',
@@ -259,18 +259,14 @@ export default function ProgramsGrid() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-brand-green/10 border border-brand-green/30 text-brand-green text-xs font-heading font-bold tracking-widest uppercase mb-4 shadow-sm">
+        <div className="text-left max-w-3xl mb-14">
+          <div className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-gray-300 text-xs font-heading font-medium tracking-wider uppercase mb-4">
             {currentLanguage === 'sq' ? 'PROGRAMET E AVANCUARA' : 'ADVANCED PROGRAM CATALOG'}
           </div>
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-heading font-bold tracking-tight text-white mb-5">
-            {currentLanguage === 'sq' ? (
-              <>Kurrikula profesionale <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green via-emerald-400 to-brand-yellow">e gjeneratës së re</span></>
-            ) : (
-              <>Professional curriculum <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green via-emerald-400 to-brand-yellow">for modern industry</span></>
-            )}
+            {currentLanguage === 'sq' ? 'Kurrikula profesionale e gjeneratës së re' : 'Professional curriculum for modern industry'}
           </h2>
-          <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-3xl">
             {currentLanguage === 'sq' 
               ? 'Trajnime të avancuara teknike: ky program kombinon teorinë me praktikën intensive drejtpërdrejt në parkun solar në Pejë, duke të përgatitur plotësisht me përvojë reale për tregun e punës.'
               : 'Advanced technical training: this program combines theory with intensive hands-on practice directly at the solar park in Pejë, thoroughly preparing you with real-world experience for the job market.'}
@@ -356,7 +352,8 @@ export default function ProgramsGrid() {
                 <div className="p-6 md:p-7 flex flex-col flex-1">
                   
                   {/* Course Title - Dominant Element after Image */}
-                  <h3 className="text-lg md:text-xl font-heading font-bold uppercase tracking-tight leading-snug text-white group-hover:text-brand-green transition-colors mb-2.5 min-h-[3.25rem] line-clamp-2">
+                  {/* Course Title - Dominant Element after Image (Sentence Case, up to 3 lines, equal height) */}
+                  <h3 className="text-lg md:text-xl font-heading font-bold tracking-tight leading-snug text-white group-hover:text-brand-green transition-colors mb-2.5 min-h-[4.5rem] line-clamp-3">
                     {currentLanguage === 'sq' ? course.titleSq : course.titleEn}
                   </h3>
 
@@ -408,7 +405,7 @@ export default function ProgramsGrid() {
                     ))}
                   </div>
 
-                  {/* Action Button - Direct Prominent CTA */}
+                  {/* Action Button - Direct Prominent CTA aligned at bottom */}
                   <div className="pt-4 mt-auto border-t border-white/5">
                     <a
                       href="#contact"
@@ -425,26 +422,26 @@ export default function ProgramsGrid() {
           ))}
         </div>
 
-        {/* Consultation Callout Banner (Matching Site Brand Colors & Reference Structure) */}
+        {/* Consultation Callout Banner (Centered CTA) */}
         <div className="mt-20 rounded-3xl bg-gradient-to-br from-brand-navy via-slate-900 to-[#0d121f] border border-white/10 py-14 sm:py-16 md:py-20 px-6 sm:px-12 text-center max-w-4xl mx-auto shadow-2xl relative overflow-hidden">
           <div className="absolute inset-0 bg-solar-motif opacity-[0.05] pointer-events-none"></div>
           <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-brand-green/10 rounded-full blur-3xl pointer-events-none"></div>
           
           <div className="relative z-10">
-            <div className="text-[11px] sm:text-xs font-mono font-bold tracking-[0.25em] text-brand-green uppercase mb-4 sm:mb-5">
+            <div className="text-[11px] sm:text-xs font-heading font-semibold tracking-wider text-gray-400 uppercase mb-4 sm:mb-5">
               {currentLanguage === 'sq' ? 'GATI PËR TË FILLUAR?' : 'READY TO START?'}
             </div>
             
-            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-serif font-normal text-white leading-[1.15] mb-5 tracking-tight">
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-white leading-[1.15] mb-5 tracking-tight">
               {currentLanguage === 'sq' ? (
                 <>
                   Nuk jeni të sigurt cilin <br />
-                  <span className="italic text-brand-green font-serif font-medium">modul të zgjidhni?</span>
+                  <span className="text-brand-green font-heading">modul të zgjidhni?</span>
                 </>
               ) : (
                 <>
                   Not sure which <br />
-                  <span className="italic text-brand-green font-serif font-medium">module to pick?</span>
+                  <span className="text-brand-green font-heading">module to pick?</span>
                 </>
               )}
             </h3>
@@ -464,7 +461,7 @@ export default function ProgramsGrid() {
               </a>
               <a
                 href="#contact"
-                className="w-full sm:w-auto inline-flex items-center justify-center font-heading font-semibold tracking-wide rounded-full px-8 py-3.5 text-sm sm:text-base transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 bg-white/5 hover:bg-white/10 text-white/95 hover:text-white border border-white/20 hover:border-white/40 backdrop-blur-sm cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center font-heading font-semibold tracking-wide rounded-full px-8 py-3.5 text-sm sm:text-base transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 bg-transparent hover:bg-white/10 text-white border border-white/30 hover:border-white/60 backdrop-blur-sm cursor-pointer"
               >
                 {currentLanguage === 'sq' ? 'Kontakto Akademinë' : 'Contact Academy'}
               </a>

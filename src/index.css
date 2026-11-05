@@ -29,23 +29,33 @@
 .animate-marquee-left {
   display: flex;
   width: max-content;
-  animation: marquee-left 42s linear infinite;
+  animation: marquee-left 44s linear infinite;
   will-change: transform;
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  perspective: 1000px;
+  touch-action: pan-y;
 }
 
 .animate-marquee-right {
   display: flex;
   width: max-content;
-  animation: marquee-right 42s linear infinite;
+  animation: marquee-right 44s linear infinite;
   will-change: transform;
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  perspective: 1000px;
+  touch-action: pan-y;
 }
 
 @media (max-width: 640px) {
   .animate-marquee-left {
-    animation-duration: 32s;
+    animation-duration: 38s;
   }
   .animate-marquee-right {
-    animation-duration: 32s;
+    animation-duration: 38s;
   }
 }
 

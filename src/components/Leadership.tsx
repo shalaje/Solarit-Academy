@@ -10,10 +10,9 @@ export default function Leadership() {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header with Refined Pill Badge */}
-        <div className="text-center mb-14 lg:mb-16">
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-brand-green/15 text-emerald-400 border border-brand-green/30 text-xs font-semibold tracking-wider uppercase mb-5 backdrop-blur-sm shadow-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-green animate-pulse"></span>
+        {/* Section Header */}
+        <div className="text-left mb-14 lg:mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-gray-300 border border-white/15 text-xs font-heading font-medium tracking-wider uppercase mb-4">
             <span>{t('badge.leadership')}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold tracking-tight text-white">

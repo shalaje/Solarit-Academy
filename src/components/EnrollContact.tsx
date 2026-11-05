@@ -16,7 +16,7 @@ export default function EnrollContact() {
   };
 
   return (
-    <section id="contact" className="py-20 lg:py-28 relative bg-[#F7F8FA] border-t border-neutral-200/60">
+    <section id="contact" className="pt-10 lg:pt-14 pb-20 lg:pb-28 relative bg-[#F7F8FA] border-t border-neutral-200/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Next Cohort Banner */}
@@ -31,7 +31,7 @@ export default function EnrollContact() {
                 <div className="text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-brand-yellow mb-2">
                   {currentLanguage === 'sq' ? 'STATUSI I REGJISTRIMIT // HAPUR' : 'ENROLLMENT STATUS // OPEN'}
                 </div>
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold uppercase tracking-tight text-white mb-2">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold tracking-tight text-white mb-2">
                   {currentLanguage === 'sq' ? 'Grupi i Radhës: Regjistrimet Janë Hapur' : 'Next Cohort: Registration Is Now Open'}
                 </h3>
               </div>
@@ -60,7 +60,7 @@ export default function EnrollContact() {
               className="h-full"
             >
               <div className="p-8 sm:p-10 md:p-12">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-green/10 text-brand-green text-xs font-bold tracking-widest uppercase mb-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 border border-neutral-200 text-xs font-semibold tracking-wider uppercase mb-4">
                   {t('badge.enrollment')}
                 </div>
                 
@@ -123,7 +123,7 @@ export default function EnrollContact() {
                         className="w-full px-4 py-3.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-green/30 focus:border-brand-green outline-none transition-all bg-white text-sm text-gray-900"
                       >
                         <option value="pv-installer-pro">
-                          {currentLanguage === 'sq' ? 'INSTALIMI I SISTEMEVE SOLARE' : 'SOLAR PV SYSTEMS INSTALLATION'}
+                          {currentLanguage === 'sq' ? 'Instalimi i sistemeve solare' : 'Solar PV systems installation'}
                         </option>
                         <option value="bess-master">
                           {currentLanguage === 'sq' ? 'Sistemet solare hibride' : 'Hybrid Solar Systems'}
@@ -220,7 +220,7 @@ export default function EnrollContact() {
                  src="https://maps.google.com/maps?q=ELING+GRUP+SH.P.K,+Lipjan,+Kosovo&t=&z=14&ie=UTF8&iwloc=&output=embed"
                  width="100%" 
                  height="100%" 
-                 style={{ border: 0 }} 
+                 style={{ border: 0, filter: 'grayscale(100%) contrast(1.05)' }} 
                  allowFullScreen 
                  loading="lazy" 
                  referrerPolicy="no-referrer-when-downgrade"
