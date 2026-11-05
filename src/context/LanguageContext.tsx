@@ -21,8 +21,8 @@ const translations = {
     'nav.apply': 'Apliko Tani',
     
     // Hero
-    'hero.title': 'BËHU INSTALUES I CERTIFIKUAR I SISTEMEVE SOLARE',
-    'hero.subtitle': 'Aftësim profesional dhe praktikë në parqe solare.',
+    'hero.title': 'BËHU INSTALUES I SISTEMEVE SOLARE',
+    'hero.subtitle': 'Zhvillo aftësi profesionale në instalimin e sistemeve fotovoltaike përmes trajnimeve teorike dhe praktikës në parqe solare.',
     'hero.apply': 'Apliko Tani',
     'hero.programs': 'Shiko Programet',
     
@@ -111,8 +111,8 @@ const translations = {
     'nav.apply': 'Apply Now',
     
     // Hero
-    'hero.title': 'BECOME A CERTIFIED SOLAR INSTALLER',
-    'hero.subtitle': 'Professional training and hands-on practice at solar parks.',
+    'hero.title': 'BECOME A SOLAR SYSTEMS INSTALLER',
+    'hero.subtitle': 'Develop professional skills in photovoltaic systems installation through theoretical training and hands-on practice at solar parks.',
     'hero.apply': 'Apply Now',
     'hero.programs': 'View Programs',
     
