@@ -73,7 +73,7 @@ export default function ProgramsGrid() {
       accentGlow: 'hover:shadow-amber-500/10',
       titleSq: 'Instalimi i sistemeve solare',
       titleEn: 'Solar PV Systems Installation',
-      descSq: 'Program praktik dhe teorik per: montimin, instalimin, lidhjen në rrjet dhe mirëmbajtjen',
+      descSq: 'Program praktik dhe teorik për: montimin, instalimin, lidhjen në rrjet dhe mirëmbajtjen',
       descEn: 'Practical and theoretical program for: mounting, installation, grid connection, and maintenance',
       price: '€490',
       pricePeriodSq: 'Pagesë e plotë ose me 3 këste',
@@ -193,21 +193,21 @@ export default function ProgramsGrid() {
       tagColor: 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30',
       accentBorder: 'hover:border-cyan-500/50',
       accentGlow: 'hover:shadow-cyan-500/10',
-      titleSq: 'Trajnim Profesional për Softuerët Solarë: AutoCAD, PV*SOL & PVsyst',
-      titleEn: 'Professional Training for Solar Software: AutoCAD, PV*SOL & PVsyst',
-      descSq: 'Trajnim kompjuterik. Modelimin 3D të hijeve, llogaritjen e prodhimit vjetor, simulimet e avancuara dhe skemat elektrike.',
-      descEn: 'Computer training. 3D shading modeling, annual yield calculation, advanced simulations, and electrical schematics.',
+      titleSq: 'Trajnim profesional për softuerët solarë: AutoCAD, PV*SOL & PVsyst',
+      titleEn: 'Professional training for solar software: AutoCAD, PV*SOL & PVsyst',
+      descSq: 'Trajnim kompjuterik, modelimin 3D të hijeve, llogaritjen e prodhimit vjetor, simulimet e avancuara dhe skemat elektrike.',
+      descEn: 'Computer training, 3D shading modeling, annual yield calculation, advanced simulations, and electrical schematics.',
       price: '€420',
       pricePeriodSq: 'Pagesë e plotë',
       pricePeriodEn: 'Full payment',
       levelSq: 'Nivel Mesatar - i Avancuar',
       levelEn: 'Intermediate - Advanced',
-      duration: '1 Javë',
-      durationSq: '1 Javë',
-      durationEn: '1 Week',
+      duration: '1 javë',
+      durationSq: '1 javë',
+      durationEn: '1 week',
       formatSq: 'Klasë',
       formatEn: 'Classroom',
-      certSq: 'Certifikatë e Vijueshmërisë.',
+      certSq: 'Certifikatë e vijueshmërisë',
       certEn: 'Certificate of Attendance',
       bgGradient: 'from-cyan-500/20 via-slate-900 to-slate-950',
       bannerImage: '/01.jpg',
@@ -284,7 +284,7 @@ export default function ProgramsGrid() {
                   : 'text-gray-400 hover:text-white hover:bg-white/5'
               }`}
             >
-              <span>{currentLanguage === 'sq' ? `Të Gjitha Programet (${programs.length})` : `All Programs (${programs.length})`}</span>
+              <span>{currentLanguage === 'sq' ? `Të gjitha programet (${programs.length})` : `All programs (${programs.length})`}</span>
             </button>
             <button
               onClick={() => setActiveCategory('solar')}

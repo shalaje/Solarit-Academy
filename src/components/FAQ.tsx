@@ -27,7 +27,7 @@ export default function FAQ() {
       id: 'duration',
       qSq: 'Sa zgjat një program i plotë dhe si organizohet orari?',
       qEn: 'How long does the training program take and what is the schedule?',
-      aSq: 'Programi aktual zgjatë deri në 1 javë. Orari është i përshtatshëm edhe për profesionistët në punë, me ligjërata teorike dhe seanca intensive praktike gjatë fundjavave.',
+      aSq: 'Programi aktual zgjat deri në 1 javë. Orari është i përshtatshëm edhe për profesionistët në punë, me ligjërata teorike dhe seanca intensive praktike gjatë fundjavave.',
       aEn: 'The current program runs up to 1 week. The schedule is also convenient for working professionals, featuring theoretical lectures and intensive practical sessions during weekends.'
     }
   ];
@@ -42,7 +42,7 @@ export default function FAQ() {
             FAQ
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-brand-navy tracking-tight">
-            {currentLanguage === 'sq' ? 'Pyetjet e Shpeshta' : 'Frequently Asked Questions'}
+            {currentLanguage === 'sq' ? 'Pyetjet e shpeshta' : 'Frequently asked questions'}
           </h2>
         </div>
         

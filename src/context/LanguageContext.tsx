@@ -22,62 +22,62 @@ const translations = {
     'nav.apply': 'Apliko Tani',
     
     // Hero
-    'hero.title': 'BËHU INSTALUES I SISTEMEVE SOLARE',
+    'hero.title': 'Bëhu instalues i sistemeve solare',
     'hero.subtitle': 'Zhvillo aftësi profesionale në instalimin e sistemeve fotovoltaike përmes trajnimeve teorike dhe praktikës në parqe solare.',
-    'hero.apply': 'Apliko Tani',
-    'hero.programs': 'Shiko Programet',
+    'hero.apply': 'Apliko tani',
+    'hero.programs': 'Shiko programet',
     
     // Programs
-    'programs.title': 'Programet e Trajnimit',
+    'programs.title': 'Programet e trajnimit',
     'programs.subtitle': 'Kurrikula e dizajnuar për tregun e punës',
-    'prog.solar.title': 'Energjia Solare',
+    'prog.solar.title': 'Energjia solare',
     'prog.solar.desc': 'Instalimi dhe mirëmbajtja e sistemeve fotovoltaike.',
-    'prog.solar.duration': 'Niveli Bazë & i Avancuar',
-    'prog.battery.title': 'Ruajtja e Energjisë me Bateri',
+    'prog.solar.duration': 'Niveli bazë & i avancuar',
+    'prog.battery.title': 'Ruajtja e energjisë me bateri',
     'prog.battery.desc': 'Dizajnimi dhe integrimi i sistemeve akumuluese (BESS).',
-    'prog.battery.duration': 'Niveli i Avancuar',
-    'prog.efficiency.title': 'Efiçienca e Energjisë',
+    'prog.battery.duration': 'Niveli i avancuar',
+    'prog.efficiency.title': 'Efiçienca e energjisë',
     'prog.efficiency.desc': 'Praktikat më të mira për objekte komerciale dhe rezidenciale.',
-    'prog.efficiency.duration': 'Niveli Bazë',
+    'prog.efficiency.duration': 'Niveli bazë',
     
     // Why Solarit
     'why.title': 'Pse Solarit Academy?',
-    'why.dual.title': 'Model Dual i Mësimit',
+    'why.dual.title': 'Model dual i mësimit',
     'why.dual.desc': 'Kombinim optimal i teorisë në klasë dhe punës praktike.',
     'why.cert.title': 'Certifikim',
-    'why.cert.desc': 'Certifikate e vijueshmërisë',
+    'why.cert.desc': 'Certifikatë e vijueshmërisë',
     'why.park.title': 'Praktika në park solar',
     'why.park.desc': 'Përvojë reale pune në parkun solar në Pejë.',
     'why.eling.title': 'Përkrahur nga ELING Grup',
     'why.eling.desc': 'Mbështetur nga liderët e industrisë së energjisë në vend.',
     
     // Facility
-    'facility.title': 'Mjedisi i Trajnimit',
+    'facility.title': 'Mjedisi i trajnimit',
     'facility.subtitle': 'Klasa moderne dhe hapësira reale praktike',
     
     // Leadership
     'leadership.title': 'Themeluesja e akademisë',
-    'leadership.manager.role': 'Drejtor Ekzekutiv',
+    'leadership.manager.role': 'Drejtoreshë Ekzekutive',
     'leadership.manager.quote': '"Misioni ynë është të ndërtojmë gjeneratën e re të profesionistëve të energjisë së ripërtëritshme, duke ofruar trajnime me standarde ndërkombëtare dhe duke fuqizuar diversitetin gjinor në sektor."',
     
     // Partners
-    'partners.title': 'Partnerët dhe Bashkëpunëtorët',
+    'partners.title': 'Partnerët dhe bashkëpunëtorët',
     
     // Impact
-    'impact.trained': 'Të Trajnuar',
-    'impact.capacity': 'Kapaciteti Vjetor',
+    'impact.trained': 'Të trajnuar',
+    'impact.capacity': 'Kapaciteti vjetor',
     'impact.instructors': 'Instruktorë',
-    'impact.women': 'Pjesëmarrja e Grave',
+    'impact.women': 'Pjesëmarrja e grave',
     
     // Common Tags / Badges
     'badge.curriculum': 'Kurrikula',
-    'badge.advantage': 'Avantazhi Ynë',
+    'badge.advantage': 'Avantazhi ynë',
     'badge.campus': 'Kampusi',
     'badge.leadership': 'Themeluesja',
     'badge.enrollment': 'Regjistrimi',
     
     // Additional Text
-    'why.park_badge.title': '2 MW Park Solar',
+    'why.park_badge.title': '2 MW park solar',
     'why.park_badge.desc': 'Hapësirë për praktikë në Pejë',
     'contact.name.placeholder': 'Filan Fisteku',
     'contact.email.placeholder': 'email@example.com',
@@ -86,16 +86,16 @@ const translations = {
     'contact.address_title': 'Adresa',
     'contact.address_desc': 'Magjistralja Ferizaj–Prishtinë, afër Qmi 3, Lipjan',
     'footer.nav_title': 'Navigimi',
-    'footer.social_title': 'Rrjetet Sociale',
+    'footer.social_title': 'Rrjetet sociale',
     'footer.built_by': 'Ndërtuar nga',
 
     // Contact
-    'contact.title': 'Apliko ose Na Kontaktoni',
-    'contact.name': 'Emri dhe Mbiemri',
-    'contact.email': 'Email ose Numri i Telefonit',
-    'contact.program': 'Programi i Interesit',
-    'contact.message': 'Mesazhi (Opsionale)',
-    'contact.send': 'Dërgo Kërkesën',
+    'contact.title': 'Apliko ose na kontaktoni',
+    'contact.name': 'Emri dhe mbiemri',
+    'contact.email': 'Email ose numri i telefonit',
+    'contact.program': 'Programi i interesit',
+    'contact.message': 'Mesazhi (opsionale)',
+    'contact.send': 'Dërgo kërkesën',
     
     // Footer
     'footer.tagline': 'Akademia e parë profesionale për energji të ripërtëritshme në Kosovë.',
@@ -113,62 +113,62 @@ const translations = {
     'nav.apply': 'Apply Now',
     
     // Hero
-    'hero.title': 'BECOME A SOLAR SYSTEMS INSTALLER',
+    'hero.title': 'Become a solar systems installer',
     'hero.subtitle': 'Develop professional skills in photovoltaic systems installation through theoretical training and hands-on practice at solar parks.',
-    'hero.apply': 'Apply Now',
-    'hero.programs': 'View Programs',
+    'hero.apply': 'Apply now',
+    'hero.programs': 'View programs',
     
     // Programs
-    'programs.title': 'Training Programs',
+    'programs.title': 'Training programs',
     'programs.subtitle': 'Curriculum designed for the modern job market',
-    'prog.solar.title': 'Solar Energy',
+    'prog.solar.title': 'Solar energy',
     'prog.solar.desc': 'Installation and maintenance of photovoltaic systems.',
-    'prog.solar.duration': 'Basic & Advanced Level',
-    'prog.battery.title': 'Battery Storage Solutions',
+    'prog.solar.duration': 'Basic & advanced level',
+    'prog.battery.title': 'Battery storage solutions',
     'prog.battery.desc': 'Design and integration of energy storage systems (BESS).',
-    'prog.battery.duration': 'Advanced Level',
-    'prog.efficiency.title': 'Energy Efficiency',
+    'prog.battery.duration': 'Advanced level',
+    'prog.efficiency.title': 'Energy efficiency',
     'prog.efficiency.desc': 'Best practices for commercial and residential buildings.',
-    'prog.efficiency.duration': 'Basic Level',
+    'prog.efficiency.duration': 'Basic level',
     
     // Why Solarit
     'why.title': 'Why Solarit Academy?',
-    'why.dual.title': 'Dual Learning Model',
+    'why.dual.title': 'Dual learning model',
     'why.dual.desc': 'Optimal combination of classroom theory and hands-on practice.',
     'why.cert.title': 'Certification',
     'why.cert.desc': 'Certificate of attendance',
-    'why.park.title': 'Practice in Solar Park',
+    'why.park.title': 'Practice in solar park',
     'why.park.desc': 'Real-world experience at the solar park in Pejë.',
     'why.eling.title': 'Backed by ELING Grup',
     'why.eling.desc': 'Supported by the leading energy industry company in the country.',
     
     // Facility
-    'facility.title': 'Training Environment',
+    'facility.title': 'Training environment',
     'facility.subtitle': 'Modern classrooms and real-world practical spaces',
     
     // Leadership
-    'leadership.title': 'Academy Founder',
+    'leadership.title': 'Academy founder',
     'leadership.manager.role': 'Executive Director',
     'leadership.manager.quote': '"Our mission is to build the next generation of renewable energy professionals, providing training to international standards and empowering gender diversity in the sector."',
     
     // Partners
-    'partners.title': 'Partners & Collaborators',
+    'partners.title': 'Partners & collaborators',
     
     // Impact
-    'impact.trained': 'Trained Professionals',
-    'impact.capacity': 'Annual Capacity',
-    'impact.instructors': 'Certified Instructors',
-    'impact.women': 'Women Participation',
+    'impact.trained': 'Trained professionals',
+    'impact.capacity': 'Annual capacity',
+    'impact.instructors': 'Certified instructors',
+    'impact.women': 'Women participation',
     
     // Common Tags / Badges
     'badge.curriculum': 'Curriculum',
-    'badge.advantage': 'Our Advantage',
-    'badge.campus': 'The Campus',
+    'badge.advantage': 'Our advantage',
+    'badge.campus': 'The campus',
     'badge.leadership': 'Founder',
     'badge.enrollment': 'Enrollment',
     
     // Additional Text
-    'why.park_badge.title': '2 MW Solar Park',
+    'why.park_badge.title': '2 MW solar park',
     'why.park_badge.desc': 'Practice facility in Pejë',
     'contact.name.placeholder': 'John Doe',
     'contact.email.placeholder': 'email@example.com',
@@ -177,16 +177,16 @@ const translations = {
     'contact.address_title': 'Address',
     'contact.address_desc': 'Ferizaj-Prishtina Highway, near Qmi 3, Lipjan',
     'footer.nav_title': 'Navigation',
-    'footer.social_title': 'Social Media',
+    'footer.social_title': 'Social media',
     'footer.built_by': 'Built by',
 
     // Contact
-    'contact.title': 'Enroll or Contact Us',
-    'contact.name': 'Full Name',
-    'contact.email': 'Email or Phone Number',
-    'contact.program': 'Program of Interest',
-    'contact.message': 'Message (Optional)',
-    'contact.send': 'Send Request',
+    'contact.title': 'Enroll or contact us',
+    'contact.name': 'Full name',
+    'contact.email': 'Email or phone number',
+    'contact.program': 'Program of interest',
+    'contact.message': 'Message (optional)',
+    'contact.send': 'Send request',
     
     // Footer
     'footer.tagline': 'The first professional renewable energy academy in Kosovo.',

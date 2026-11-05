@@ -32,7 +32,7 @@ export default function EnrollContact() {
                   {currentLanguage === 'sq' ? 'STATUSI I REGJISTRIMIT // HAPUR' : 'ENROLLMENT STATUS // OPEN'}
                 </div>
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold tracking-tight text-white mb-2">
-                  {currentLanguage === 'sq' ? 'Grupi i Radhës: Regjistrimet Janë Hapur' : 'Next Cohort: Registration Is Now Open'}
+                  {currentLanguage === 'sq' ? 'Grupi i radhës: Regjistrimet janë hapur' : 'Next cohort: Registration is now open'}
                 </h3>
               </div>
               <div className="relative z-10 shrink-0">
@@ -129,7 +129,7 @@ export default function EnrollContact() {
                           {currentLanguage === 'sq' ? 'Sistemet solare hibride' : 'Hybrid Solar Systems'}
                         </option>
                         <option value="pv-design-engineer">
-                          {currentLanguage === 'sq' ? 'Trajnim Profesional për Softuerët Solarë: AutoCAD, PV*SOL & PVsyst' : 'Professional Training for Solar Software: AutoCAD, PV*SOL & PVsyst'}
+                          {currentLanguage === 'sq' ? 'Trajnim profesional për softuerët solarë: AutoCAD, PV*SOL & PVsyst' : 'Professional training for solar software: AutoCAD, PV*SOL & PVsyst'}
                         </option>
                       </select>
                     </div>

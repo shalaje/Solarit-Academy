@@ -23,7 +23,7 @@ export default function ProgramTimeline() {
   const steps: TimelineStep[] = [
     {
       number: '01',
-      titleSq: 'Bazat e elektroteknikës, siguria dhe mbrojtja e mjedisit.',
+      titleSq: 'Bazat e elektroteknikës, siguria dhe mbrojtja e mjedisit',
       titleEn: 'Electrotechnical Fundamentals, Safety & Environmental Protection',
       descSq: 'Njohuri mbi konceptet bazë të elektroteknikës, rregulloret strikte të sigurisë në punë në lartësi (HSE), dhe protokollet e mbrojtjes së mjedisit gjatë instalimeve.',
       descEn: 'Core electrotechnical concepts, workplace health and height safety standards (HSE), and environmental protection protocols during solar installations.',
@@ -41,7 +41,7 @@ export default function ProgramTimeline() {
     },
     {
       number: '02',
-      titleSq: 'Sistemet Solare PV – ndërtimi, operimi dhe legjislacioni.',
+      titleSq: 'Sistemet solare PV – ndërtimi, operimi dhe legjislacioni',
       titleEn: 'Solar PV Systems – Construction, Operation & Legislation',
       descSq: 'Arkitektura e sistemeve fotovoltaike, parimet themelore të operimit, mënyrat e lidhjes në rrjet dhe kuadri ligjor e rregullativ në fuqi.',
       descEn: 'Photovoltaic system architecture, operational fundamentals, grid-tie connection methods, and prevailing legal and regulatory frameworks.',
@@ -59,7 +59,7 @@ export default function ProgramTimeline() {
     },
     {
       number: '03',
-      titleSq: 'Projektimi i sistemeve PV dhe simulimi softuerik.',
+      titleSq: 'Projektimi i sistemeve PV dhe simulimi softuerik',
       titleEn: 'PV System Design & Software Simulation',
       descSq: 'Modelimi kompjuterik me softuerët më të avancuar, simulimi i prodhimit vjetor të energjisë, llogaritja e hijeve dhe hartimi i skemave elektrike.',
       descEn: 'Computer-aided design with industry-standard software, annual energy yield simulations, shading analyses, and electrical schematics drafting.',
