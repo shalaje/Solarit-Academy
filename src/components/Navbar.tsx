@@ -20,6 +20,7 @@ export default function Navbar() {
     { href: '#programs', label: t('nav.programs') },
     { href: '#why-solarit', label: t('nav.why_solarit') },
     { href: '#facility', label: t('nav.facility') },
+    { href: '#testimonials', label: t('nav.testimonials') },
     { href: '#partners', label: t('nav.partners') },
     { href: '#contact', label: t('nav.contact') },
   ];

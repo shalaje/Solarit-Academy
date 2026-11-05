@@ -53,6 +53,11 @@ export default function Footer() {
                   {t('nav.facility')}
                 </a>
               </li>
+              <li>
+                <a href="#testimonials" className="text-gray-400 hover:text-brand-green transition-colors inline-block py-0.5">
+                  {t('nav.testimonials')}
+                </a>
+              </li>
             </ul>
           </div>
           

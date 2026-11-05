@@ -10,6 +10,7 @@ import ProgramsGrid from './components/ProgramsGrid';
 import ProgramTimeline from './components/ProgramTimeline';
 import WhySolarit from './components/WhySolarit';
 import FacilityGallery from './components/FacilityGallery';
+import TestimonialsGallery from './components/TestimonialsGallery';
 import Leadership from './components/Leadership';
 import Partners from './components/Partners';
 import ImpactStats from './components/ImpactStats';
@@ -29,6 +30,7 @@ export default function App() {
           <FadeIn><ProgramTimeline /></FadeIn>
           <FadeIn><WhySolarit /></FadeIn>
           <FadeIn><FacilityGallery /></FadeIn>
+          <FadeIn><TestimonialsGallery /></FadeIn>
           <FadeIn><Leadership /></FadeIn>
           <FadeIn><Partners /></FadeIn>
           <FadeIn><ImpactStats /></FadeIn>
