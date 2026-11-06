@@ -40,6 +40,9 @@ export default function Partners() {
           <div className="p-8 sm:p-10 md:p-12">
             {/* Header Readout */}
             <div className="text-left mb-10">
+              <span className="text-xs font-mono uppercase tracking-wider text-brand-green font-semibold mb-1 block">
+                {currentLanguage === 'sq' ? 'Bashkëpunimi Edukativ & Industrial' : 'Educational & Industrial Alliance'}
+              </span>
               <h2 className="text-2xl sm:text-3xl font-heading font-bold tracking-tight text-brand-navy">
                 {t('partners.title')}
               </h2>

@@ -11,6 +11,8 @@ export default function FAQ() {
   const faqs = [
     {
       id: 'req',
+      categorySq: 'Kërkesat',
+      categoryEn: 'Requirements',
       qSq: 'Cilat janë kërkesat për aplikim?',
       qEn: 'What are the application requirements?',
       aSq: 'Aplikantët duhet të kenë përfunduar shkollën e mesme. Përvoja paraprake në fushën e energjisë nuk është e detyrueshme por është përparësi.',
@@ -18,13 +20,18 @@ export default function FAQ() {
     },
     {
       id: 'cost',
+      categorySq: 'Pagesa',
+      categoryEn: 'Payment',
       qSq: 'Sa është kostoja e programit dhe si bëhet pagesa?',
       qEn: 'What is the program fee and how is payment handled?',
       aSq: 'Kostoja e trajnimit përfshin të gjitha materialet laboratorike, pajisjet e sigurisë dhe certifikimin final. Pagesa bëhet e plotë para fillimit të trajnimit; pagesat nuk ofrohen me këste.',
-      aEn: 'Tuition includes all lab materials, practical gear at the 2MW park, and official certification. Payment must be made in full prior to the start of the program; payments are not offered in the form of installments.'
+      aEn: 'Tuition includes all lab materials, practical gear at the 2MW park, and official certification. Payment must be made in full prior to the start of the program; payments are not offered in the form of installments.',
+      hasAction: true
     },
     {
       id: 'duration',
+      categorySq: 'Orari',
+      categoryEn: 'Schedule',
       qSq: 'Sa zgjat një program i plotë dhe si organizohet orari?',
       qEn: 'How long does the training program take and what is the schedule?',
       aSq: 'Programi aktual zgjat deri në 1 javë. Orari është i përshtatshëm edhe për profesionistët në punë, me ligjërata teorike dhe seanca intensive praktike gjatë fundjavave.',
@@ -64,14 +71,19 @@ export default function FAQ() {
                   className="flex items-center justify-between w-full p-6 sm:p-7 text-left group cursor-pointer"
                   aria-expanded={isOpen}
                 >
-                  <span className={`text-base sm:text-lg md:text-xl font-heading font-bold leading-snug transition-colors ${
-                    isOpen ? 'text-brand-green' : 'text-brand-navy group-hover:text-brand-green'
-                  }`}>
-                    {currentLanguage === 'sq' ? faq.qSq : faq.qEn}
-                  </span>
+                  <div className="flex-1 pr-4">
+                    <span className="inline-block text-[10px] font-mono uppercase tracking-wider text-gray-500 bg-neutral-100 border border-neutral-200/80 px-2.5 py-0.5 rounded-full mb-2">
+                      {currentLanguage === 'sq' ? faq.categorySq : faq.categoryEn}
+                    </span>
+                    <h3 className={`text-base sm:text-lg md:text-xl font-heading font-bold leading-snug transition-colors ${
+                      isOpen ? 'text-brand-green' : 'text-brand-navy group-hover:text-brand-green'
+                    }`}>
+                      {currentLanguage === 'sq' ? faq.qSq : faq.qEn}
+                    </h3>
+                  </div>
                   
                   {/* Rotating Expand/Collapse Plus Icon */}
-                  <span className={`w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 shrink-0 ml-4 ${
+                  <span className={`w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 shrink-0 ml-2 ${
                     isOpen 
                       ? 'bg-brand-green text-white rotate-45 shadow-sm shadow-brand-green/30' 
                       : 'bg-neutral-100 text-brand-navy/70 group-hover:bg-brand-green/10 group-hover:text-brand-green'
@@ -89,6 +101,16 @@ export default function FAQ() {
                     <p className="text-sm sm:text-base text-gray-600 leading-relaxed font-sans mt-2">
                       {currentLanguage === 'sq' ? faq.aSq : faq.aEn}
                     </p>
+                    {faq.hasAction && (
+                      <div className="mt-3 pt-2">
+                        <a
+                          href="#contact"
+                          className="inline-flex items-center gap-1.5 text-xs font-heading font-semibold text-brand-green hover:underline cursor-pointer"
+                        >
+                          <span>{currentLanguage === 'sq' ? '→ Apliko këtu për trajnim' : '→ Apply here for training'}</span>
+                        </a>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

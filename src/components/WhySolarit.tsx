@@ -50,12 +50,12 @@ export default function WhySolarit() {
           {reasons.map((reason, index) => (
             <div 
               key={reason.id} 
-              className="group bg-white rounded-2xl p-7 sm:p-9 border border-neutral-200/90 shadow-sm hover:shadow-md hover:border-brand-green/40 transition-all duration-300 flex flex-col justify-between h-full"
+              className="group bg-white rounded-2xl p-7 sm:p-9 border border-neutral-200/90 shadow-sm hover:shadow-md hover:border-brand-green/40 transition-all duration-300 flex flex-col justify-between h-full border-t-2 border-t-transparent hover:border-t-brand-green"
             >
               <div>
                 {/* Top Row with full-colour number and icon */}
                 <div className="flex items-center justify-between mb-6 pb-4 border-b border-neutral-100">
-                  <div className="text-4xl sm:text-5xl font-heading font-extrabold text-brand-green tracking-tight select-none leading-none">
+                  <div className="text-4xl sm:text-5xl font-mono tabular-nums font-extrabold text-brand-green tracking-tight select-none leading-none">
                     0{index + 1}
                   </div>
                   <div className="p-2.5 rounded-xl bg-brand-green/10 text-brand-green">

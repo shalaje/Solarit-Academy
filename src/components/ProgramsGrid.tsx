@@ -55,6 +55,8 @@ export interface ProgramCourse {
   highlightsEn: string[];
   curriculum: ModuleItem[];
   seatsLeft?: number;
+  outcomeTagSq?: string;
+  outcomeTagEn?: string;
 }
 
 export default function ProgramsGrid() {
@@ -90,6 +92,8 @@ export default function ProgramsGrid() {
       bgGradient: 'from-amber-500/20 via-slate-900 to-slate-950',
       bannerImage: '/02.jpg',
       seatsLeft: 6,
+      outcomeTagSq: 'Park Solar 2MW',
+      outcomeTagEn: '2MW Solar Park',
       highlightsSq: [
         'Praktikë direkte në parkun solar funksional 2MW në Pejë',
         'Montim mekanik i strukturave dhe moduleve fotovoltaike',
@@ -159,6 +163,8 @@ export default function ProgramsGrid() {
       bgGradient: 'from-emerald-500/20 via-slate-900 to-slate-950',
       bannerImage: '/03.jpg',
       seatsLeft: 4,
+      outcomeTagSq: 'Sisteme Hibride & Bateri',
+      outcomeTagEn: 'Hybrid & Battery Storage',
       highlightsSq: [
         'Konfigurimi dhe instalimi i sistemeve solare hibride',
         'Integrimi me bateri dhe inverterë hibridë',
@@ -212,6 +218,8 @@ export default function ProgramsGrid() {
       bgGradient: 'from-cyan-500/20 via-slate-900 to-slate-950',
       bannerImage: '/01.jpg',
       seatsLeft: 8,
+      outcomeTagSq: 'AutoCAD + PV*SOL',
+      outcomeTagEn: 'AutoCAD + PV*SOL',
       highlightsSq: [
         'Modelimi 3D i ndërtesave dhe terrenit në PV*SOL & PVsyst',
         'Analiza e hijeve, llogaritja e prodhimit vjetor dhe skemat në AutoCAD',
@@ -337,6 +345,11 @@ export default function ProgramsGrid() {
                     <span className={`px-2.5 py-1 rounded-sm text-[9px] font-mono font-bold tracking-[0.3em] uppercase backdrop-blur-md ${course.tagColor}`}>
                       {course.tag}
                     </span>
+                    {course.outcomeTagSq && (
+                      <span className="px-2 py-0.5 rounded-sm text-[9px] font-mono font-semibold tracking-wider text-gray-200 bg-black/65 border border-white/10 backdrop-blur-md">
+                        {currentLanguage === 'sq' ? course.outcomeTagSq : course.outcomeTagEn}
+                      </span>
+                    )}
                   </div>
 
                   {/* Level Badge in lower corner of banner */}

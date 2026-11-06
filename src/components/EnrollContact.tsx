@@ -214,8 +214,23 @@ export default function EnrollContact() {
               </div>
             </div>
             
-            {/* Map Container with Substantial Visual Weight */}
-            <div className="flex-1 rounded-2xl overflow-hidden shadow-md border border-neutral-200 bg-white relative min-h-[280px]">
+            {/* Map Container with Substantial Visual Weight & Custom Branded Pin (Point 12) */}
+            <div className="flex-1 rounded-2xl overflow-hidden shadow-md border border-neutral-200 bg-white relative min-h-[300px]">
+               {/* Floating Branded Badge over Map */}
+               <div className="absolute top-3 left-3 z-10 bg-white/95 backdrop-blur-md rounded-xl p-2.5 sm:p-3 border border-neutral-200/90 shadow-md flex items-center gap-2.5 pointer-events-none">
+                 <div className="w-8 h-8 rounded-lg bg-brand-green/10 flex items-center justify-center text-brand-green shrink-0">
+                   <MapPin className="w-4 h-4" />
+                 </div>
+                 <div>
+                   <div className="font-heading font-bold text-brand-navy text-xs leading-none mb-0.5">
+                     ELING Grup / Solarit Academy
+                   </div>
+                   <div className="text-[11px] text-gray-500 font-sans">
+                     Lipjan, Kosovë
+                   </div>
+                 </div>
+               </div>
+
                <iframe 
                  src="https://maps.google.com/maps?q=ELING+GRUP+SH.P.K,+Lipjan,+Kosovo&t=&z=14&ie=UTF8&iwloc=&output=embed"
                  width="100%" 

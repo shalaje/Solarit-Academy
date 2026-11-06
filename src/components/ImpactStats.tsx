@@ -90,7 +90,7 @@ export default function ImpactStats() {
                 return (
                   <div 
                     key={index} 
-                    className={`flex flex-col items-center justify-center text-center p-4 sm:p-6 lg:p-4 transition-all ${
+                    className={`flex flex-col items-center justify-center text-center p-4 sm:p-6 lg:p-4 transition-all hover:bg-white/[0.03] rounded-xl ${
                       isLeftColumn ? 'border-r border-white/10' : ''
                     } ${
                       isTopRow ? 'border-b lg:border-b-0 border-white/10 pb-6 lg:pb-4' : 'pt-6 lg:pt-4'

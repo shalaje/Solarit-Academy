@@ -11,6 +11,8 @@ interface TimelineStep {
   descEn: string;
   topicsSq: string[];
   topicsEn: string[];
+  tagsSq: string[];
+  tagsEn: string[];
   icon: typeof BookOpen;
 }
 
@@ -37,6 +39,8 @@ export default function ProgramTimeline() {
         'Workplace safety and height protection (HSE)',
         'Environmental protection and technical standards'
       ],
+      tagsSq: ['Teori', 'Siguri HSE', 'Standarde'],
+      tagsEn: ['Theory', 'HSE Safety', 'Standards'],
       icon: BookOpen
     },
     {
@@ -55,6 +59,8 @@ export default function ProgramTimeline() {
         'Operation and utility grid connection principles',
         'Regulatory compliance, permitting, and legal framework'
       ],
+      tagsSq: ['Teknologji', 'Operim Rrjeti', 'Kuadri Ligjor'],
+      tagsEn: ['Technology', 'Grid Intertie', 'Regulations'],
       icon: Cpu
     },
     {
@@ -73,6 +79,8 @@ export default function ProgramTimeline() {
         'Shading analysis and annual energy yield calculation',
         'Drafting electrical schematics and project engineering files'
       ],
+      tagsSq: ['Simulim 3D', 'PV*SOL & CAD', 'Fizibilitet'],
+      tagsEn: ['3D Simulation', 'PV*SOL & CAD', 'Feasibility'],
       icon: SunMedium
     },
     {
@@ -91,6 +99,8 @@ export default function ProgramTimeline() {
         'DC/AC electrical wiring and MC4 connector crimping',
         'Testing, electrical measurements, and solar system commissioning'
       ],
+      tagsSq: ['Montim Terreni', 'Lidhje DC/AC', 'Komisionim'],
+      tagsEn: ['Field Mounting', 'DC/AC Wiring', 'Commissioning'],
       icon: Award
     }
   ];
@@ -150,6 +160,14 @@ export default function ProgramTimeline() {
           
           {/* Step Selector Navigation (Left Column) */}
           <div className="lg:col-span-5 flex flex-col justify-between space-y-3 relative">
+            {/* Mobile Progress Step Indicator (Point 4) */}
+            <div className="lg:hidden flex items-center justify-between px-3 py-1.5 rounded-xl bg-gray-100 text-xs font-mono text-gray-600">
+              <span className="font-semibold text-brand-navy">
+                {currentLanguage === 'sq' ? `Faza 0${activeStep + 1} nga 0${steps.length}` : `Phase 0${activeStep + 1} of 0${steps.length}`}
+              </span>
+              <span className="text-[11px] text-gray-500">{currentLanguage === 'sq' ? 'Zgjidhni fazën për detaje' : 'Select phase for details'}</span>
+            </div>
+
             {/* Visual connecting track */}
             <div className="absolute left-[34px] top-6 bottom-6 w-0.5 bg-gray-200 hidden sm:block -z-0"></div>
 
@@ -229,18 +247,28 @@ export default function ProgramTimeline() {
                   </p>
                 </div>
 
-                {/* Key Deliverables / Topics List */}
+                {/* Key Deliverables / Topics List with Category Tags (Point 4) */}
                 <div className="pt-6 border-t border-gray-100 bg-gray-50/70 -mx-8 sm:-mx-10 md:-mx-12 -mb-8 sm:-mb-10 md:-mb-12 p-6 sm:p-8 rounded-b-2xl">
                   <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-gray-500 mb-3">
                     {currentLanguage === 'sq' ? 'KOMPETENCAT KRYESORE TË FITUARA:' : 'KEY LEARNING OUTCOMES:'}
                   </div>
                   <div className="space-y-2.5">
-                    {(currentLanguage === 'sq' ? currentStepData.topicsSq : currentStepData.topicsEn).map((topic, i) => (
-                      <div key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-gray-700">
-                        <CheckCircle2 className="w-4 h-4 text-brand-green shrink-0 mt-0.5" />
-                        <span className="leading-snug">{topic}</span>
-                      </div>
-                    ))}
+                    {(currentLanguage === 'sq' ? currentStepData.topicsSq : currentStepData.topicsEn).map((topic, i) => {
+                      const tag = (currentLanguage === 'sq' ? currentStepData.tagsSq : currentStepData.tagsEn)[i];
+                      return (
+                        <div key={i} className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-2.5 rounded-xl bg-white border border-gray-100 text-xs sm:text-sm text-gray-700 shadow-2xs">
+                          <div className="flex items-start gap-2.5">
+                            <CheckCircle2 className="w-4 h-4 text-brand-green shrink-0 mt-0.5" />
+                            <span className="leading-snug">{topic}</span>
+                          </div>
+                          {tag && (
+                            <span className="self-start sm:self-center text-[10px] font-mono font-semibold uppercase px-2 py-0.5 rounded bg-brand-green/10 text-brand-green border border-brand-green/20 shrink-0">
+                              {tag}
+                            </span>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
 

@@ -44,15 +44,20 @@ export default function Leadership() {
                   />
                 </div>
                 
-                {/* Quote and Leadership Details */}
-                <div className="text-center lg:text-left flex-1">
+                {/* Quote and Leadership Details (Point 8: editorial styling) */}
+                <div className="text-center lg:text-left flex-1 relative">
+                  {/* Decorative oversized quotation mark */}
+                  <span className="absolute -top-6 -left-3 sm:-left-6 text-7xl sm:text-8xl font-serif text-brand-green/15 select-none pointer-events-none leading-none z-0">
+                    “
+                  </span>
+                  
                   {/* Powerful Quote with Increased Size and Readability */}
-                  <blockquote className="text-xl sm:text-2xl md:text-2xl font-heading font-normal leading-relaxed text-gray-100 mb-8 italic">
+                  <blockquote className="relative z-10 text-xl sm:text-2xl md:text-2xl font-heading font-normal leading-relaxed text-gray-100 mb-8 italic">
                     {t('leadership.manager.quote')}
                   </blockquote>
                   
                   {/* Instructor Name & Clear Role */}
-                  <div className="pt-4 border-t border-white/10">
+                  <div className="relative z-10 pt-4 border-t border-white/10">
                     <div className="text-xl sm:text-2xl font-heading font-bold uppercase tracking-tight text-white mb-1">
                       Rita Nitaj
                     </div>

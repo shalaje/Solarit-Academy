@@ -1,12 +1,10 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, TouchEvent } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { 
   Maximize2, 
   X, 
   ChevronLeft, 
   ChevronRight, 
-  LayoutGrid, 
-  Film,
   Camera
 } from 'lucide-react';
 
@@ -24,9 +22,7 @@ export default function TestimonialsGallery() {
   const { t } = useLanguage();
   const currentLanguage = t('nav.home') === 'Home' ? 'en' : 'sq';
 
-  const [viewMode, setViewMode] = useState<'reel' | 'grid'>('reel');
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const [visibleGridCount, setVisibleGridCount] = useState(10);
 
   // Clean photo album of 21 actual training pictures, prioritizing women participants first
   const photos: AlbumPhoto[] = [
@@ -141,22 +137,26 @@ export default function TestimonialsGallery() {
   const rowOne = useMemo(() => photos.filter((_, idx) => idx % 2 === 0), [photos]);
   const rowTwo = useMemo(() => photos.filter((_, idx) => idx % 2 !== 0), [photos]);
 
-  // Keyboard navigation for lightbox
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setLightboxIndex(null);
-      if (e.key === 'ArrowRight' && lightboxIndex !== null) {
-        setLightboxIndex((prev) => (prev !== null ? (prev + 1) % photos.length : null));
-      }
-      if (e.key === 'ArrowLeft' && lightboxIndex !== null) {
-        setLightboxIndex((prev) => (prev !== null ? (prev - 1 + photos.length) % photos.length : null));
-      }
-    };
-    if (lightboxIndex !== null) {
-      window.addEventListener('keydown', handleKeyDown);
+  // Touch swipe support for mobile lightbox (Point 7)
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+
+  const handleTouchStart = (e: TouchEvent) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: TouchEvent) => {
+    if (touchStartX === null || lightboxIndex === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX - touchEndX;
+    if (diff > 45) {
+      // Swiped left -> next photo
+      setLightboxIndex((prev) => (prev !== null ? (prev + 1) % photos.length : null));
+    } else if (diff < -45) {
+      // Swiped right -> previous photo
+      setLightboxIndex((prev) => (prev !== null ? (prev - 1 + photos.length) % photos.length : null));
     }
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxIndex, photos.length]);
+    setTouchStartX(null);
+  };
 
   const activePhoto = lightboxIndex !== null ? photos[lightboxIndex] : null;
 
@@ -188,143 +188,74 @@ export default function TestimonialsGallery() {
               : 'Moments from previous trainings, including lectures, practice at the solar park, and participant certification.'}
           </p>
         </div>
+      </div>
 
-        {/* View Mode Switcher Toolbar */}
-        <div className="flex items-center justify-end mb-8 pb-4 border-b border-white/10">
-          <div className="flex items-center gap-1.5 p-1 bg-white/5 border border-white/10 rounded-xl">
-            <button
-              onClick={() => setViewMode('reel')}
-              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-heading font-medium transition-all cursor-pointer ${
-                viewMode === 'reel' ? 'bg-brand-green text-white shadow-sm' : 'text-gray-400 hover:text-white'
-              }`}
-            >
-              <Film className="w-3.5 h-3.5" />
-              <span>{currentLanguage === 'sq' ? 'Lëvizje e butë' : 'Smooth reel'}</span>
-            </button>
-            <button
-              onClick={() => setViewMode('grid')}
-              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-heading font-medium transition-all cursor-pointer ${
-                viewMode === 'grid' ? 'bg-brand-green text-white shadow-sm' : 'text-gray-400 hover:text-white'
-              }`}
-            >
-              <LayoutGrid className="w-3.5 h-3.5" />
-              <span>{currentLanguage === 'sq' ? 'Mozaik' : 'Grid'}</span>
-            </button>
+      {/* Dual-Row Continuous Smooth Auto-Scrolling Reel (GPU accelerated) */}
+      <div className="space-y-3 sm:space-y-4 overflow-hidden py-2 select-none">
+        
+        {/* Row 1 (moving left) */}
+        <div className="relative w-full overflow-hidden">
+          <div className="flex gap-3 sm:gap-4 animate-marquee-left hover:[animation-play-state:paused] cursor-pointer">
+            {[...rowOne, ...rowOne].map((photo, index) => {
+              const originalIndex = photos.findIndex(p => p.id === photo.id);
+              return (
+                <div
+                  key={`r1-${photo.id}-${index}`}
+                  onClick={() => setLightboxIndex(originalIndex !== -1 ? originalIndex : 0)}
+                  className="relative w-60 sm:w-80 md:w-96 h-40 sm:h-52 md:h-60 flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 shadow-lg group/card transition-all duration-300 hover:scale-[1.02] hover:border-brand-green/60 bg-[#161D2E]"
+                >
+                  <img
+                    src={photo.url}
+                    alt="Solarit Academy"
+                    decoding="async"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105 pointer-events-none select-none"
+                    onError={(e) => {
+                      e.currentTarget.src = photo.fullUrl || 'https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=800&auto=format&fit=crop';
+                    }}
+                  />
+                  
+                  {/* Clean Hover Enlarge Button */}
+                  <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover/card:opacity-100 transition-opacity">
+                    <Maximize2 className="w-4 h-4" />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Row 2 (moving right) */}
+        <div className="relative w-full overflow-hidden">
+          <div className="flex gap-3 sm:gap-4 animate-marquee-right hover:[animation-play-state:paused] cursor-pointer">
+            {[...rowTwo, ...rowTwo].map((photo, index) => {
+              const originalIndex = photos.findIndex(p => p.id === photo.id);
+              return (
+                <div
+                  key={`r2-${photo.id}-${index}`}
+                  onClick={() => setLightboxIndex(originalIndex !== -1 ? originalIndex : 0)}
+                  className="relative w-60 sm:w-80 md:w-96 h-40 sm:h-52 md:h-60 flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 shadow-lg group/card transition-all duration-300 hover:scale-[1.02] hover:border-brand-green/60 bg-[#161D2E]"
+                >
+                  <img
+                    src={photo.url}
+                    alt="Solarit Academy"
+                    decoding="async"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105 pointer-events-none select-none"
+                    onError={(e) => {
+                      e.currentTarget.src = photo.fullUrl || 'https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=800&auto=format&fit=crop';
+                    }}
+                  />
+                  
+                  {/* Clean Hover Enlarge Button */}
+                  <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover/card:opacity-100 transition-opacity">
+                    <Maximize2 className="w-4 h-4" />
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
       </div>
-
-      {/* VIEW 1: Dual-Row Continuous Smooth Auto-Scrolling Reel (GPU accelerated) */}
-      {viewMode === 'reel' ? (
-        <div className="space-y-3 sm:space-y-4 overflow-hidden py-2 select-none">
-          
-          {/* Row 1 (moving left) */}
-          <div className="relative w-full overflow-hidden">
-            <div className="flex gap-3 sm:gap-4 animate-marquee-left hover:[animation-play-state:paused] cursor-pointer">
-              {[...rowOne, ...rowOne].map((photo, index) => {
-                const originalIndex = photos.findIndex(p => p.id === photo.id);
-                return (
-                  <div
-                    key={`r1-${photo.id}-${index}`}
-                    onClick={() => setLightboxIndex(originalIndex !== -1 ? originalIndex : 0)}
-                    className="relative w-60 sm:w-80 md:w-96 h-40 sm:h-52 md:h-60 flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 shadow-lg group/card transition-all duration-300 hover:scale-[1.02] hover:border-brand-green/60 bg-[#161D2E]"
-                  >
-                    <img
-                      src={photo.url}
-                      alt="Solarit Academy"
-                      decoding="async"
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105 pointer-events-none select-none"
-                      onError={(e) => {
-                        e.currentTarget.src = photo.fullUrl || 'https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=800&auto=format&fit=crop';
-                      }}
-                    />
-                    
-                    {/* Clean Hover Enlarge Button */}
-                    <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover/card:opacity-100 transition-opacity">
-                      <Maximize2 className="w-4 h-4" />
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Row 2 (moving right) */}
-          <div className="relative w-full overflow-hidden">
-            <div className="flex gap-3 sm:gap-4 animate-marquee-right hover:[animation-play-state:paused] cursor-pointer">
-              {[...rowTwo, ...rowTwo].map((photo, index) => {
-                const originalIndex = photos.findIndex(p => p.id === photo.id);
-                return (
-                  <div
-                    key={`r2-${photo.id}-${index}`}
-                    onClick={() => setLightboxIndex(originalIndex !== -1 ? originalIndex : 0)}
-                    className="relative w-60 sm:w-80 md:w-96 h-40 sm:h-52 md:h-60 flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 shadow-lg group/card transition-all duration-300 hover:scale-[1.02] hover:border-brand-green/60 bg-[#161D2E]"
-                  >
-                    <img
-                      src={photo.url}
-                      alt="Solarit Academy"
-                      decoding="async"
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105 pointer-events-none select-none"
-                      onError={(e) => {
-                        e.currentTarget.src = photo.fullUrl || 'https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=800&auto=format&fit=crop';
-                      }}
-                    />
-                    
-                    {/* Clean Hover Enlarge Button */}
-                    <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover/card:opacity-100 transition-opacity">
-                      <Maximize2 className="w-4 h-4" />
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-        </div>
-      ) : (
-        /* VIEW 2: Full Responsive Clean Grid (2 columns on mobile, 4 on desktop) */
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
-            {photos.slice(0, visibleGridCount).map((photo, idx) => (
-              <div
-                key={`grid-${photo.id}`}
-                onClick={() => setLightboxIndex(idx)}
-                className="relative aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden border border-white/10 group cursor-pointer shadow-md hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] hover:border-brand-green/60 bg-[#161D2E]"
-              >
-                <img
-                  src={photo.url}
-                  alt="Solarit Academy"
-                  decoding="async"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  onError={(e) => {
-                    e.currentTarget.src = photo.fullUrl || 'https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=800&auto=format&fit=crop';
-                  }}
-                />
-                <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors flex items-start justify-end p-2 sm:p-3">
-                  <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Maximize2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Load More Button for Grid */}
-          {visibleGridCount < photos.length && (
-            <div className="text-center mt-8 sm:mt-10">
-              <button
-                onClick={() => setVisibleGridCount(prev => prev + 12)}
-                className="inline-flex items-center justify-center font-heading font-medium tracking-wide rounded-full px-7 py-3 text-xs sm:text-sm transition-all duration-200 bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-brand-green/50 cursor-pointer shadow-lg"
-              >
-                {currentLanguage === 'sq' 
-                  ? `Shiko më shumë foto (${photos.length - visibleGridCount} të mbetura)` 
-                  : `Show more photos (${photos.length - visibleGridCount} remaining)`}
-              </button>
-            </div>
-          )}
-        </div>
-      )}
 
       {/* FULLSCREEN LIGHTBOX MODAL */}
       {activePhoto && lightboxIndex !== null && (
@@ -351,13 +282,17 @@ export default function TestimonialsGallery() {
               </button>
             </div>
 
-            {/* Modal Image */}
-            <div className="relative flex-1 bg-black flex items-center justify-center overflow-hidden min-h-[300px] sm:min-h-[480px]">
+            {/* Modal Image (with mobile touch swipe support) */}
+            <div 
+              className="relative flex-1 bg-black flex items-center justify-center overflow-hidden min-h-[300px] sm:min-h-[480px] touch-pan-y"
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+            >
               <img
                 src={activePhoto.fullUrl || activePhoto.url}
                 alt="Solarit Academy"
                 decoding="async"
-                className="max-h-[78vh] w-auto max-w-full object-contain mx-auto"
+                className="max-h-[78vh] w-auto max-w-full object-contain mx-auto select-none pointer-events-none"
                 onError={(e) => {
                   e.currentTarget.src = activePhoto.url;
                 }}

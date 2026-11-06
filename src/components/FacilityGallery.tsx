@@ -9,11 +9,51 @@ export default function FacilityGallery() {
   const currentLanguage = t('nav.home') === 'Home' ? 'en' : 'sq';
 
   const galleryImages = [
-    { url: '/01.jpg', alt: 'Training Classroom', sq: 'Klasa e Trajnimit & Laboratori Teorik', en: 'Training Classroom & Electrical Lab', span: 'md:col-span-8 md:row-span-2 aspect-[16/9] md:aspect-auto' },
-    { url: '/02.jpg', alt: 'Solar Park Visit', sq: 'Parku Diellor 2MW Llabjan, Pejë', en: '2MW Utility-Scale Solar Park (Llabjan, Pejë)', span: 'md:col-span-4 md:row-span-1 aspect-[4/3] md:aspect-auto' },
-    { url: '/03.jpg', alt: 'Hands-on Equipment', sq: 'Pajisjet & Veglat Profesionale', en: 'Hands-on Installation Tools', span: 'md:col-span-4 md:row-span-1 aspect-[4/3] md:aspect-auto' },
-    { url: '/586104350_122199067754355704_647952871261180247_n.jpg', alt: 'Safety Training', sq: 'Trajnimi i Sigurisë & HSE në Lartësi', en: 'Safety Protocols & HSE at Height', span: 'md:col-span-4 md:row-span-1 aspect-[4/3]' },
-    { url: '/640933758_122212965542355704_6725679518158766618_n.jpg', alt: 'Practical Application', sq: 'Aplikimi Praktik në Impiant', en: 'Field Commissioning & Grid Intertie', span: 'md:col-span-8 md:row-span-1 aspect-[16/9] md:aspect-[2/1]' },
+    { 
+      url: '/01.jpg', 
+      alt: 'Training Classroom', 
+      sq: 'Klasa e Trajnimit & Laboratori Teorik', 
+      en: 'Training Classroom & Electrical Lab', 
+      specSq: 'Laborator Didaktik • Skema & Teori', 
+      specEn: 'Didactic Lab • Schematics & Theory',
+      span: 'md:col-span-8 md:row-span-2 aspect-[16/9] md:aspect-auto' 
+    },
+    { 
+      url: '/02.jpg', 
+      alt: 'Solar Park Visit', 
+      sq: 'Parku Diellor 2MW Llabjan, Pejë', 
+      en: '2MW Utility-Scale Solar Park (Llabjan, Pejë)', 
+      specSq: 'Park Funksional • 3,000+ Module PV', 
+      specEn: 'Operational Park • 3,000+ PV Modules',
+      span: 'md:col-span-4 md:row-span-1 aspect-[4/3] md:aspect-auto' 
+    },
+    { 
+      url: '/03.jpg', 
+      alt: 'Hands-on Equipment', 
+      sq: 'Pajisjet & Veglat Profesionale', 
+      en: 'Hands-on Installation Tools', 
+      specSq: 'Vegla Montimi • Inverterë DC/AC', 
+      specEn: 'Mounting Tools • DC/AC Inverters',
+      span: 'md:col-span-4 md:row-span-1 aspect-[4/3] md:aspect-auto' 
+    },
+    { 
+      url: '/586104350_122199067754355704_647952871261180247_n.jpg', 
+      alt: 'Safety Training', 
+      sq: 'Trajnimi i Sigurisë & HSE në Lartësi', 
+      en: 'Safety Protocols & HSE at Height', 
+      specSq: 'Standarde Ndërkombëtare • HSE në Lartësi', 
+      specEn: 'International Standards • HSE at Height',
+      span: 'md:col-span-4 md:row-span-1 aspect-[4/3]' 
+    },
+    { 
+      url: '/640933758_122212965542355704_6725679518158766618_n.jpg', 
+      alt: 'Practical Application', 
+      sq: 'Aplikimi Praktik në Impiant', 
+      en: 'Field Commissioning & Grid Intertie', 
+      specSq: 'Testime Elektrike • Lidhja në Rrjet', 
+      specEn: 'Electrical Testing • Utility Grid Intertie',
+      span: 'md:col-span-8 md:row-span-1 aspect-[16/9] md:aspect-[2/1]' 
+    },
   ];
 
   // Handle escape key for lightbox
@@ -58,23 +98,26 @@ export default function FacilityGallery() {
               onClick={() => setLightboxIndex(idx)}
               className={`${img.span} relative rounded-2xl overflow-hidden group cursor-pointer border border-neutral-200 shadow-sm hover:shadow-lg transition-all duration-300`}
             >
-              {/* Overlay with subtle view indicator */}
-              <div className="absolute inset-0 bg-brand-navy/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex flex-col items-center justify-center p-6 text-center">
+              {/* Overlay with subtle view indicator & technical spec (Point 6) */}
+              <div className="absolute inset-0 bg-brand-navy/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex flex-col items-center justify-center p-6 text-center backdrop-blur-xs">
                 <div className="w-11 h-11 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white mb-3 transform translate-y-3 group-hover:translate-y-0 transition-transform duration-300">
                   <Maximize2 className="w-5 h-5" />
                 </div>
                 <h3 className="text-white text-lg sm:text-xl font-heading font-bold translate-y-3 group-hover:translate-y-0 transition-transform duration-300">
                   {currentLanguage === 'sq' ? img.sq : img.en}
                 </h3>
-                <span className="text-[11px] font-mono uppercase tracking-wider text-brand-yellow mt-1">
-                  {currentLanguage === 'sq' ? 'Kliko për zmadhim' : 'Click to inspect'}
+                <span className="inline-block mt-2 px-2.5 py-1 rounded bg-black/60 border border-white/15 text-[10px] font-mono tracking-wider text-brand-yellow uppercase">
+                  {currentLanguage === 'sq' ? img.specSq : img.specEn}
+                </span>
+                <span className="text-[10px] font-mono uppercase tracking-wider text-gray-300 mt-2">
+                  {currentLanguage === 'sq' ? 'Kliko për inspektim të plotë' : 'Click to inspect full resolution'}
                 </span>
               </div>
               
               <img 
                 src={img.url} 
                 alt={img.alt} 
-                className="w-full h-full object-cover transform group-hover:scale-[1.02] transition-transform duration-500 ease-out"
+                className="w-full h-full object-cover transform group-hover:scale-[1.03] transition-transform duration-700 ease-out"
               />
             </div>
           ))}
@@ -126,10 +169,13 @@ export default function FacilityGallery() {
               />
             </div>
 
-            {/* Image Caption */}
+            {/* Image Caption with Technical Scale Details */}
             <div className="mt-4 text-center">
               <p className="text-white font-heading font-bold text-lg">
                 {currentLanguage === 'sq' ? galleryImages[lightboxIndex].sq : galleryImages[lightboxIndex].en}
+              </p>
+              <p className="text-xs text-brand-yellow font-mono mt-1 uppercase tracking-wider">
+                {currentLanguage === 'sq' ? galleryImages[lightboxIndex].specSq : galleryImages[lightboxIndex].specEn}
               </p>
               <p className="text-xs text-gray-400 font-mono mt-1">
                 {lightboxIndex + 1} / {galleryImages.length}

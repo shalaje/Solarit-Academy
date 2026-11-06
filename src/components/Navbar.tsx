@@ -7,22 +7,36 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const [activeSection, setActiveSection] = useState<string>('home');
+
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      setIsScrolled(window.scrollY > 20);
+
+      // Section scroll spy
+      const sections = ['home', 'programs', 'why-solarit', 'facility', 'testimonials', 'partners', 'contact'];
+      const scrollPos = window.scrollY + 120;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i]);
+        if (el && el.offsetTop <= scrollPos) {
+          setActiveSection(sections[i]);
+          break;
+        }
+      }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navLinks = [
-    { href: '#home', label: t('nav.home') },
-    { href: '#programs', label: t('nav.programs') },
-    { href: '#why-solarit', label: t('nav.why_solarit') },
-    { href: '#facility', label: t('nav.facility') },
-    { href: '#testimonials', label: t('nav.testimonials') },
-    { href: '#partners', label: t('nav.partners') },
-    { href: '#contact', label: t('nav.contact') },
+    { href: '#home', id: 'home', label: t('nav.home') },
+    { href: '#programs', id: 'programs', label: t('nav.programs') },
+    { href: '#why-solarit', id: 'why-solarit', label: t('nav.why_solarit') },
+    { href: '#facility', id: 'facility', label: t('nav.facility') },
+    { href: '#testimonials', id: 'testimonials', label: t('nav.testimonials') },
+    { href: '#partners', id: 'partners', label: t('nav.partners') },
+    { href: '#contact', id: 'contact', label: t('nav.contact') },
   ];
 
   const toggleLanguage = () => {
@@ -30,47 +44,58 @@ export default function Navbar() {
   };
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isMobileMenuOpen 
-          ? 'bg-white py-3 shadow-sm'
-          : isScrolled 
-            ? 'bg-white/95 backdrop-blur-md border-b border-gray-200/50 py-3 shadow-sm' 
-            : 'bg-transparent py-5'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center">
-          {/* Official Solarit Academy Logo */}
-          <a href="#home" className="flex items-center group transition-transform hover:scale-[1.02] focus:outline-none">
-            {isScrolled || isMobileMenuOpen ? (
-              <img
-                src="/solarit-logo-transparent.png"
-                alt="Solarit Academy"
-                className="h-10 sm:h-11 w-auto object-contain transition-opacity duration-200"
-              />
-            ) : (
-              <img
-                src="/solarit-logo-light.png"
-                alt="Solarit Academy"
-                className="h-10 sm:h-11 w-auto object-contain transition-opacity duration-200"
-              />
-            )}
-          </a>
+    <>
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isMobileMenuOpen 
+            ? 'bg-white py-3 shadow-md'
+            : isScrolled 
+              ? 'bg-white/95 backdrop-blur-md border-b border-gray-200/60 py-3 shadow-sm' 
+              : 'bg-transparent py-5'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center">
+            {/* Official Solarit Academy Logo with Subtle Scale Transition */}
+            <a href="#home" className="flex items-center group transition-transform hover:scale-[1.02] focus:outline-none">
+              {isScrolled || isMobileMenuOpen ? (
+                <img
+                  src="/solarit-logo-transparent.png"
+                  alt="Solarit Academy"
+                  className="h-9 sm:h-10 w-auto object-contain transition-all duration-300 transform-gpu"
+                />
+              ) : (
+                <img
+                  src="/solarit-logo-light.png"
+                  alt="Solarit Academy"
+                  className="h-10 sm:h-11 w-auto object-contain transition-all duration-300 transform-gpu"
+                />
+              )}
+            </a>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-8">
-            <div className="flex space-x-6">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className={`font-medium text-sm transition-colors ${isScrolled ? 'text-brand-navy hover:text-brand-green' : 'text-white hover:text-white/80'}`}
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
+            {/* Desktop Nav with Active Section Spy Indicator */}
+            <div className="hidden md:flex items-center space-x-7">
+              <div className="flex space-x-5 lg:space-x-6">
+                {navLinks.map((link) => {
+                  const isActive = activeSection === link.id;
+                  return (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      className={`relative font-medium text-sm transition-colors py-1 group flex flex-col items-center ${
+                        isScrolled 
+                          ? isActive ? 'text-brand-green font-semibold' : 'text-brand-navy hover:text-brand-green' 
+                          : isActive ? 'text-white font-semibold' : 'text-white/80 hover:text-white'
+                      }`}
+                    >
+                      <span>{link.label}</span>
+                      {isActive && (
+                        <span className="absolute -bottom-1 w-1.5 h-1.5 rounded-full bg-brand-green transition-all duration-300"></span>
+                      )}
+                    </a>
+                  );
+                })}
+              </div>
             
             <div className={`flex items-center gap-4 border-l pl-4 transition-colors ${isScrolled ? 'border-gray-200' : 'border-white/30'}`}>
               {/* Language-Switcher Toggle */}
@@ -229,5 +254,20 @@ export default function Navbar() {
         </div>
       )}
     </nav>
+
+    {/* Mobile Floating Action Dock (Point 1: thumb-reach quick access) */}
+    {isScrolled && !isMobileMenuOpen && (
+      <div className="md:hidden fixed bottom-5 right-5 z-40 animate-in fade-in slide-in-from-bottom-2 duration-300">
+        <a
+          href="#contact"
+          className="inline-flex items-center gap-2 bg-brand-green hover:bg-brand-green/90 text-white font-heading font-bold text-xs uppercase tracking-wider py-3 px-5 rounded-full shadow-2xl shadow-brand-green/40 active:scale-95 transition-all border border-emerald-400/30"
+          aria-label={t('nav.apply')}
+        >
+          <span className="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+          <span>{t('nav.apply')}</span>
+        </a>
+      </div>
+    )}
+  </>
   );
 }
