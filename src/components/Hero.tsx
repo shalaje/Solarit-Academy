@@ -20,7 +20,7 @@ export default function Hero() {
   return (
     <section 
       id="home" 
-      className="relative min-h-screen min-h-[100dvh] w-full flex flex-col justify-end md:justify-center pt-32 pb-14 sm:pt-36 sm:pb-20 lg:pt-40 lg:pb-28 overflow-hidden"
+      className="relative min-h-screen min-h-[100dvh] w-full flex flex-col justify-end md:justify-center pt-[96vw] pb-14 sm:pb-20 md:pt-36 lg:pt-40 lg:pb-28 overflow-hidden"
     >
       {/* Background image: the training group on the solar park. Desktop: navy 85% behind the
           text fading to 20% on the right; phone: the 3:4 photo at the top, 85% at its bottom
