@@ -2,6 +2,11 @@ import { ArrowRight, Sparkles } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useSiteData } from '../context/SiteDataContext';
 
+const HERO_ALT = {
+  sq: 'Grup kursantësh me helmeta dhe jelekë të verdhë gjatë trajnimit praktik në parkun solar',
+  en: 'A group of trainees in yellow helmets and vests during hands-on training at the solar park',
+};
+
 function toSentenceCase(str: string): string {
   if (!str) return str;
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -15,23 +20,32 @@ export default function Hero() {
   return (
     <section 
       id="home" 
-      className="relative min-h-screen min-h-[100dvh] w-full flex flex-col justify-center pt-32 pb-14 sm:pt-36 sm:pb-20 lg:pt-40 lg:pb-28 overflow-hidden"
+      className="relative min-h-screen min-h-[100dvh] w-full flex flex-col justify-end md:justify-center pt-32 pb-14 sm:pt-36 sm:pb-20 lg:pt-40 lg:pb-28 overflow-hidden"
     >
-      {/* Background Image with 85% Left to 25% Right Gradient Overlay for 4.5:1 Contrast */}
+      {/* Background image: the training group on the solar park. Desktop: navy 85% behind the
+          text fading to 20% on the right; phone: the 3:4 photo at the top, 85% at its bottom
+          fading out by 55% of its height, the text below the group. */}
       <div className="absolute inset-0 z-0 bg-[#0B0F19] overflow-hidden">
         <div className="absolute inset-0 bg-solar-motif opacity-[0.04] z-10 pointer-events-none"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0B0F19]/90 via-[#0B0F19]/65 to-[#0B0F19]/25 z-10 pointer-events-none"></div>
-        <img
-          src="/solar-park.jpg"
-          alt="Trainees at solar park"
-          className="w-full h-full object-cover object-right opacity-85 transform-gpu transition-transform duration-[14000ms] ease-out hover:scale-105"
-          onError={(e) => {
-            e.currentTarget.src = 'https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=2072&auto=format&fit=crop';
-          }}
-        />
+        <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-[#0B0F19]/85 via-[#0B0F19]/85 via-35% to-[#0B0F19]/20 z-10 pointer-events-none"></div>
+        <div className="absolute inset-x-0 top-0 aspect-[3/4] md:hidden bg-gradient-to-t from-[#0B0F19]/85 to-transparent to-55% z-10 pointer-events-none"></div>
+        <picture className="absolute inset-x-0 top-0 aspect-[3/4] md:aspect-auto md:inset-0 block">
+          <source media="(max-width: 767px)" srcSet="/hero/hero-mobile-720.webp 720w, /hero/hero-mobile-1080.webp 1080w" sizes="100vw" width={1080} height={1435} />
+          <img
+            src="/hero/hero-desktop-1440.webp"
+            srcSet="/hero/hero-desktop-1440.webp 1440w, /hero/hero-desktop-2400.webp 2400w"
+            sizes="100vw"
+            width={2400}
+            height={1514}
+            fetchPriority="high"
+            loading="eager"
+            alt={HERO_ALT[currentLanguage]}
+            className="w-full h-full object-cover object-[50%_30%] md:object-[60%_50%] opacity-85 transform-gpu transition-transform duration-[14000ms] ease-out hover:scale-105"
+          />
+        </picture>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full my-auto">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-auto md:my-auto">
         <div className="max-w-4xl transition-all duration-700 ease-out animate-in fade-in slide-in-from-bottom-3">
           
           {/* Live Alert Banner if enabled by Admin */}
@@ -58,7 +72,7 @@ export default function Hero() {
           </div>
 
           {/* H1 Headline with Sentence Case and One Consistent Headline Font */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-white leading-[1.08] tracking-tight mb-5 sm:mb-7 drop-shadow-sm">
+          <h1 className="lg:max-w-[650px] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-white leading-[1.08] tracking-tight mb-5 sm:mb-7 drop-shadow-sm">
             {toSentenceCase(t('hero.title'))}
           </h1>
           
