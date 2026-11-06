@@ -1,5 +1,6 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { useSiteData } from '../context/SiteDataContext';
 
 function toSentenceCase(str: string): string {
   if (!str) return str;
@@ -8,6 +9,8 @@ function toSentenceCase(str: string): string {
 
 export default function Hero() {
   const { t } = useLanguage();
+  const { settings } = useSiteData();
+  const currentLanguage = t('nav.home') === 'Home' ? 'en' : 'sq';
 
   return (
     <section 
@@ -31,13 +34,27 @@ export default function Hero() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full my-auto">
         <div className="max-w-4xl transition-all duration-700 ease-out animate-in fade-in slide-in-from-bottom-3">
           
-          {/* Live Urgency Micro-Badge (Point 2) */}
+          {/* Live Alert Banner if enabled by Admin */}
+          {settings.announcementActive && (
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs sm:text-sm font-medium mb-4 backdrop-blur-md">
+              <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
+              <span>
+                {currentLanguage === 'sq' ? settings.announcementTextSq : settings.announcementTextEn}
+              </span>
+            </div>
+          )}
+
+          {/* Live Urgency Micro-Badge */}
           <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-heading font-medium tracking-wide mb-6 backdrop-blur-md shadow-sm">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
-            <span>{t('nav.home') === 'Home' ? 'Active enrollment for upcoming cohort' : 'Regjistrimet aktive për grupin e radhës'}</span>
+            <span>
+              {settings.isOpen
+                ? (currentLanguage === 'sq' ? (settings.cohortTitleSq || 'Regjistrimet aktive për grupin e radhës') : (settings.cohortTitleEn || 'Active enrollment for upcoming cohort'))
+                : (currentLanguage === 'sq' ? 'Grupi aktual është plotësuar' : 'Current cohort is fully booked')}
+            </span>
           </div>
 
           {/* H1 Headline with Sentence Case and One Consistent Headline Font */}

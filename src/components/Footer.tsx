@@ -1,8 +1,10 @@
-import { Facebook, Linkedin, Instagram } from 'lucide-react';
+import { Facebook, Linkedin, Instagram, Lock } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { useSiteData } from '../context/SiteDataContext';
 
 export default function Footer() {
   const { t } = useLanguage();
+  const { setIsAdminOpen } = useSiteData();
 
   return (
     <footer className="bg-gradient-to-b from-[#111625] to-black text-gray-300 py-16 border-t border-white/10 relative overflow-hidden">
@@ -101,8 +103,16 @@ export default function Footer() {
         
         {/* Copyright & Secondary Attribution */}
         <div className="flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 gap-4">
-          <div>
-            &copy; {new Date().getFullYear()} Solarit Academy. {t('footer.rights')}
+          <div className="flex items-center gap-3">
+            <span>&copy; {new Date().getFullYear()} Solarit Academy. {t('footer.rights')}</span>
+            <button
+              onClick={() => setIsAdminOpen(true)}
+              className="inline-flex items-center gap-1 text-[11px] text-gray-600 hover:text-gray-400 transition-colors cursor-pointer"
+              title="Paneli i Menaxhimit (Rita)"
+            >
+              <Lock className="w-3 h-3" />
+              <span>Admin</span>
+            </button>
           </div>
           <div className="flex items-center gap-1">
             {t('footer.built_by')}{' '}

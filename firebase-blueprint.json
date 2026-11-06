@@ -1,0 +1,80 @@
+{
+  "entities": {
+    "siteSettings": {
+      "title": "SiteSettings",
+      "description": "Global settings for cohort registration status and banner",
+      "type": "object",
+      "properties": {
+        "cohortStatusSq": { "type": "string", "maxLength": 100 },
+        "cohortStatusEn": { "type": "string", "maxLength": 100 },
+        "cohortTitleSq": { "type": "string", "maxLength": 200 },
+        "cohortTitleEn": { "type": "string", "maxLength": 200 },
+        "nextSessionDate": { "type": "string", "maxLength": 100 },
+        "isOpen": { "type": "boolean" },
+        "updatedAt": { "type": "string" },
+        "updatedBy": { "type": "string", "maxLength": 128 }
+      },
+      "required": ["isOpen", "updatedAt"]
+    },
+    "trainingCohort": {
+      "title": "TrainingCohort",
+      "description": "Individual upcoming training sessions and dates",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 64 },
+        "programKey": { "type": "string", "maxLength": 64 },
+        "titleSq": { "type": "string", "maxLength": 200 },
+        "titleEn": { "type": "string", "maxLength": 200 },
+        "startDate": { "type": "string", "maxLength": 64 },
+        "schedule": { "type": "string", "maxLength": 100 },
+        "availableSeats": { "type": "number" },
+        "status": { "type": "string", "enum": ["open", "filling", "full"] },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "programKey", "startDate", "status"]
+    },
+    "galleryPhoto": {
+      "title": "GalleryPhoto",
+      "description": "Dynamic training field photos managed by the founder",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 64 },
+        "url": { "type": "string", "maxLength": 1024 },
+        "titleSq": { "type": "string", "maxLength": 200 },
+        "titleEn": { "type": "string", "maxLength": 200 },
+        "order": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "url"]
+    },
+    "adminUser": {
+      "title": "AdminUser",
+      "description": "Authorized administrator profile",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "maxLength": 255 },
+        "role": { "type": "string", "enum": ["admin", "superadmin"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "firestore": {
+    "/settings/{settingId}": {
+      "schema": "siteSettings",
+      "description": "Global website banner and intake announcements"
+    },
+    "/cohorts/{cohortId}": {
+      "schema": "trainingCohort",
+      "description": "Upcoming cohorts, schedules, and seat statuses"
+    },
+    "/gallery/{photoId}": {
+      "schema": "galleryPhoto",
+      "description": "Field training album photos"
+    },
+    "/admins/{adminId}": {
+      "schema": "adminUser",
+      "description": "Whitelist of verified admin users"
+    }
+  }
+}

@@ -4,6 +4,7 @@
  */
 
 import { LanguageProvider } from './context/LanguageContext';
+import { SiteDataProvider } from './context/SiteDataContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import ProgramsGrid from './components/ProgramsGrid';
@@ -18,27 +19,31 @@ import FAQ from './components/FAQ';
 import EnrollContact from './components/EnrollContact';
 import Footer from './components/Footer';
 import FadeIn from './components/FadeIn';
+import AdminPortal from './components/AdminPortal';
 
 export default function App() {
   return (
     <LanguageProvider>
-      <div className="min-h-screen bg-brand-gray selection:bg-brand-green/30 selection:text-brand-navy font-body">
-        <Navbar />
-        <main>
-          <Hero />
-          <FadeIn><ProgramsGrid /></FadeIn>
-          <FadeIn><ProgramTimeline /></FadeIn>
-          <FadeIn><WhySolarit /></FadeIn>
-          <FadeIn><FacilityGallery /></FadeIn>
-          <FadeIn><TestimonialsGallery /></FadeIn>
-          <FadeIn><Leadership /></FadeIn>
-          <FadeIn><Partners /></FadeIn>
-          <FadeIn><ImpactStats /></FadeIn>
-          <FadeIn><FAQ /></FadeIn>
-          <FadeIn><EnrollContact /></FadeIn>
-        </main>
-        <Footer />
-      </div>
+      <SiteDataProvider>
+        <div className="min-h-screen bg-brand-gray selection:bg-brand-green/30 selection:text-brand-navy font-body">
+          <Navbar />
+          <main>
+            <Hero />
+            <FadeIn><ProgramsGrid /></FadeIn>
+            <FadeIn><ProgramTimeline /></FadeIn>
+            <FadeIn><WhySolarit /></FadeIn>
+            <FadeIn><FacilityGallery /></FadeIn>
+            <FadeIn><TestimonialsGallery /></FadeIn>
+            <FadeIn><Leadership /></FadeIn>
+            <FadeIn><Partners /></FadeIn>
+            <FadeIn><ImpactStats /></FadeIn>
+            <FadeIn><FAQ /></FadeIn>
+            <FadeIn><EnrollContact /></FadeIn>
+          </main>
+          <Footer />
+          <AdminPortal />
+        </div>
+      </SiteDataProvider>
     </LanguageProvider>
   );
 }

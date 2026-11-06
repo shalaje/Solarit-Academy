@@ -1,0 +1,84 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default deny all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid)) ||
+        request.auth.token.email in [
+          'shalaje60@gmail.com',
+          'solarit.academy@gmail.com',
+          'rita@solaritacademy.com',
+          'info@solaritacademy.com'
+        ]
+      );
+    }
+
+    function isValidSetting(data) {
+      return data.isOpen is bool &&
+        (!('cohortStatusSq' in data) || (data.cohortStatusSq is string && data.cohortStatusSq.size() <= 100)) &&
+        (!('cohortStatusEn' in data) || (data.cohortStatusEn is string && data.cohortStatusEn.size() <= 100)) &&
+        (!('cohortTitleSq' in data) || (data.cohortTitleSq is string && data.cohortTitleSq.size() <= 200)) &&
+        (!('cohortTitleEn' in data) || (data.cohortTitleEn is string && data.cohortTitleEn.size() <= 200)) &&
+        (!('nextSessionDate' in data) || (data.nextSessionDate is string && data.nextSessionDate.size() <= 100));
+    }
+
+    function isValidCohort(data) {
+      return data.id is string && data.id.size() <= 64 &&
+        data.programKey is string && data.programKey.size() <= 64 &&
+        data.startDate is string && data.startDate.size() <= 64 &&
+        data.status in ['open', 'filling', 'full'] &&
+        (!('titleSq' in data) || (data.titleSq is string && data.titleSq.size() <= 200)) &&
+        (!('titleEn' in data) || (data.titleEn is string && data.titleEn.size() <= 200)) &&
+        (!('schedule' in data) || (data.schedule is string && data.schedule.size() <= 100));
+    }
+
+    function isValidPhoto(data) {
+      return data.id is string && data.id.size() <= 64 &&
+        data.url is string && data.url.size() <= 1024 &&
+        (!('titleSq' in data) || (data.titleSq is string && data.titleSq.size() <= 200)) &&
+        (!('titleEn' in data) || (data.titleEn is string && data.titleEn.size() <= 200));
+    }
+
+    // Public readable site settings, admin writable
+    match /settings/{settingId} {
+      allow read: if true;
+      allow create, update: if isAdmin() && isValidId(settingId) && isValidSetting(request.resource.data);
+      allow delete: if isAdmin() && isValidId(settingId);
+    }
+
+    // Public readable cohorts/dates, admin writable
+    match /cohorts/{cohortId} {
+      allow read: if true;
+      allow create, update: if isAdmin() && isValidId(cohortId) && isValidCohort(request.resource.data);
+      allow delete: if isAdmin() && isValidId(cohortId);
+    }
+
+    // Public readable gallery photos, admin writable
+    match /gallery/{photoId} {
+      allow read: if true;
+      allow create, update: if isAdmin() && isValidId(photoId) && isValidPhoto(request.resource.data);
+      allow delete: if isAdmin() && isValidId(photoId);
+    }
+
+    // Admin whitelist collection
+    match /admins/{adminId} {
+      allow read: if isSignedIn() && (request.auth.uid == adminId || isAdmin());
+      allow write: if isAdmin();
+    }
+  }
+}

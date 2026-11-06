@@ -89,13 +89,20 @@ const translations = {
     'footer.social_title': 'Rrjetet sociale',
     'footer.built_by': 'Ndërtuar nga',
 
-    // Contact
     'contact.title': 'Apliko ose na kontaktoni',
     'contact.name': 'Emri dhe mbiemri',
     'contact.email': 'Email ose numri i telefonit',
     'contact.program': 'Programi i interesit',
     'contact.message': 'Mesazhi (opsionale)',
     'contact.send': 'Dërgo kërkesën',
+    'contact.submitting': 'Duke dërguar aplikimin...',
+    'contact.success_title': 'Aplikimi u dërgua me sukses!',
+    'contact.success_desc': 'Faleminderit! Ekipi ynë akademik do t\'ju kontaktojë brenda 24 orëve me hapat e radhës.',
+    'contact.error_title': 'Dërgimi nuk u realizua',
+    'contact.error_desc': 'Ju lutem provoni përsëri ose zgjidhni njërën nga mundësitë direkte më poshtë:',
+    'contact.email_fallback': 'Dërgo me email',
+    'contact.whatsapp_fallback': 'Kontakto në WhatsApp',
+    'contact.submit_another': 'Dërgo një aplikim tjetër',
     
     // Footer
     'footer.tagline': 'Akademia e parë profesionale për energji të ripërtëritshme në Kosovë.',
@@ -187,6 +194,14 @@ const translations = {
     'contact.program': 'Program of interest',
     'contact.message': 'Message (optional)',
     'contact.send': 'Send request',
+    'contact.submitting': 'Sending application...',
+    'contact.success_title': 'Application submitted successfully!',
+    'contact.success_desc': 'Thank you! Our academic admissions team will reach out within 24 hours with next steps.',
+    'contact.error_title': 'Submission failed',
+    'contact.error_desc': 'Please try again or select one of the direct contact channels below:',
+    'contact.email_fallback': 'Send via email',
+    'contact.whatsapp_fallback': 'Contact on WhatsApp',
+    'contact.submit_another': 'Submit another application',
     
     // Footer
     'footer.tagline': 'The first professional renewable energy academy in Kosovo.',

@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo, TouchEvent } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { useSiteData } from '../context/SiteDataContext';
 import { 
   Maximize2, 
   X, 
@@ -20,6 +21,7 @@ export interface AlbumPhoto {
 
 export default function TestimonialsGallery() {
   const { t } = useLanguage();
+  const { customPhotos } = useSiteData();
   const currentLanguage = t('nav.home') === 'Home' ? 'en' : 'sq';
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -133,9 +135,21 @@ export default function TestimonialsGallery() {
     }
   ];
 
+  // Combine custom dynamic photos from Firebase with baseline album
+  const allPhotos: AlbumPhoto[] = useMemo(() => {
+    const formattedCustom: AlbumPhoto[] = customPhotos.map((cp) => ({
+      id: cp.id,
+      url: cp.url,
+      fullUrl: cp.url,
+      titleSq: cp.titleSq,
+      titleEn: cp.titleEn
+    }));
+    return [...formattedCustom, ...photos];
+  }, [customPhotos]);
+
   // Divide into two rows for the continuous smooth marquee
-  const rowOne = useMemo(() => photos.filter((_, idx) => idx % 2 === 0), [photos]);
-  const rowTwo = useMemo(() => photos.filter((_, idx) => idx % 2 !== 0), [photos]);
+  const rowOne = useMemo(() => allPhotos.filter((_, idx) => idx % 2 === 0), [allPhotos]);
+  const rowTwo = useMemo(() => allPhotos.filter((_, idx) => idx % 2 !== 0), [allPhotos]);
 
   // Touch swipe support for mobile lightbox (Point 7)
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
@@ -150,15 +164,15 @@ export default function TestimonialsGallery() {
     const diff = touchStartX - touchEndX;
     if (diff > 45) {
       // Swiped left -> next photo
-      setLightboxIndex((prev) => (prev !== null ? (prev + 1) % photos.length : null));
+      setLightboxIndex((prev) => (prev !== null ? (prev + 1) % allPhotos.length : null));
     } else if (diff < -45) {
       // Swiped right -> previous photo
-      setLightboxIndex((prev) => (prev !== null ? (prev - 1 + photos.length) % photos.length : null));
+      setLightboxIndex((prev) => (prev !== null ? (prev - 1 + allPhotos.length) % allPhotos.length : null));
     }
     setTouchStartX(null);
   };
 
-  const activePhoto = lightboxIndex !== null ? photos[lightboxIndex] : null;
+  const activePhoto = lightboxIndex !== null ? allPhotos[lightboxIndex] : null;
 
   return (
     <section id="testimonials" className="py-20 lg:py-28 bg-[#0D111D] text-white relative overflow-hidden">
@@ -197,7 +211,7 @@ export default function TestimonialsGallery() {
         <div className="relative w-full overflow-hidden">
           <div className="flex gap-3 sm:gap-4 animate-marquee-left hover:[animation-play-state:paused] cursor-pointer">
             {[...rowOne, ...rowOne].map((photo, index) => {
-              const originalIndex = photos.findIndex(p => p.id === photo.id);
+              const originalIndex = allPhotos.findIndex(p => p.id === photo.id);
               return (
                 <div
                   key={`r1-${photo.id}-${index}`}
@@ -228,7 +242,7 @@ export default function TestimonialsGallery() {
         <div className="relative w-full overflow-hidden">
           <div className="flex gap-3 sm:gap-4 animate-marquee-right hover:[animation-play-state:paused] cursor-pointer">
             {[...rowTwo, ...rowTwo].map((photo, index) => {
-              const originalIndex = photos.findIndex(p => p.id === photo.id);
+              const originalIndex = allPhotos.findIndex(p => p.id === photo.id);
               return (
                 <div
                   key={`r2-${photo.id}-${index}`}
@@ -270,7 +284,7 @@ export default function TestimonialsGallery() {
             {/* Modal Header */}
             <div className="flex items-center justify-between p-4 sm:p-5 border-b border-white/10 bg-[#0C101A]">
               <div className="text-xs sm:text-sm text-gray-400 font-mono">
-                {lightboxIndex + 1} / {photos.length}
+                {lightboxIndex + 1} / {allPhotos.length}
               </div>
 
               <button
@@ -300,7 +314,7 @@ export default function TestimonialsGallery() {
 
               {/* Prev / Next Arrows */}
               <button
-                onClick={() => setLightboxIndex((lightboxIndex - 1 + photos.length) % photos.length)}
+                onClick={() => setLightboxIndex((lightboxIndex - 1 + allPhotos.length) % allPhotos.length)}
                 className="absolute left-3 top-1/2 -translate-y-1/2 p-2.5 sm:p-3 rounded-full bg-black/60 hover:bg-black/90 text-white border border-white/20 transition-all hover:scale-110 cursor-pointer"
                 aria-label="Previous photo"
               >
@@ -308,7 +322,7 @@ export default function TestimonialsGallery() {
               </button>
 
               <button
-                onClick={() => setLightboxIndex((lightboxIndex + 1) % photos.length)}
+                onClick={() => setLightboxIndex((lightboxIndex + 1) % allPhotos.length)}
                 className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 sm:p-3 rounded-full bg-black/60 hover:bg-black/90 text-white border border-white/20 transition-all hover:scale-110 cursor-pointer"
                 aria-label="Next photo"
               >
