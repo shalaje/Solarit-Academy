@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* hero layout: landscape screens from 768 px, and every screen from 1101 px, get the wide hero;
+   phones and portrait tablets get the portrait photo with the text below the trainees */
+@custom-variant wide (@media (min-width: 768px) and (orientation: landscape), (min-width: 1101px));
+
 @theme {
   --color-brand-green: #6FAA3C;
   --color-brand-yellow: #D8E020;

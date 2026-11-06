@@ -11,8 +11,8 @@
     <meta name="twitter:card" content="summary_large_image" />
     
     <!-- the hero photo is the LCP image: fetch it before the app script runs -->
-    <link rel="preload" as="image" href="/hero/hero-mobile-1080.webp" imagesrcset="/hero/hero-mobile-720.webp 720w, /hero/hero-mobile-1080.webp 1080w" imagesizes="100vw" type="image/webp" media="(max-width: 767px)" fetchpriority="high">
-    <link rel="preload" as="image" href="/hero/hero-desktop-1440.webp" imagesrcset="/hero/hero-desktop-1440.webp 1440w, /hero/hero-desktop-2400.webp 2400w" imagesizes="100vw" type="image/webp" media="(min-width: 768px)" fetchpriority="high">
+    <link rel="preload" as="image" href="/hero/hero-mobile-1080.webp" imagesrcset="/hero/hero-mobile-720.webp 720w, /hero/hero-mobile-1080.webp 1080w" imagesizes="100vw" type="image/webp" media="(max-width: 767px), (orientation: portrait) and (max-width: 1100px)" fetchpriority="high">
+    <link rel="preload" as="image" href="/hero/hero-desktop-1440.webp" imagesrcset="/hero/hero-desktop-1440.webp 1440w, /hero/hero-desktop-2400.webp 2400w" imagesizes="100vw" type="image/webp" media="(min-width: 768px) and (orientation: landscape), (min-width: 1101px)" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">

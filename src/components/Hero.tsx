@@ -20,17 +20,17 @@ export default function Hero() {
   return (
     <section 
       id="home" 
-      className="relative min-h-screen min-h-[100dvh] w-full flex flex-col justify-end md:justify-center pt-[96vw] pb-14 sm:pb-20 md:pt-36 lg:pt-40 lg:pb-28 overflow-hidden"
+      className="relative min-h-screen min-h-[100dvh] w-full flex flex-col justify-end wide:justify-center pt-[96vw] pb-14 sm:pb-20 wide:pt-36 lg:wide:pt-40 lg:pb-28 overflow-hidden"
     >
       {/* Background image: the training group on the solar park. Desktop: navy 85% behind the
-          text fading to 20% on the right; phone: the 3:4 photo at the top, 85% at its bottom
+          text fading to 20% on the right; phone and portrait tablet: the 3:4 photo at the top, 85% at its bottom
           fading out by 55% of its height, the text below the group. */}
       <div className="absolute inset-0 z-0 bg-[#0B0F19] overflow-hidden">
         <div className="absolute inset-0 bg-solar-motif opacity-[0.04] z-10 pointer-events-none"></div>
-        <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-[#0B0F19]/85 via-[#0B0F19]/85 via-35% to-[#0B0F19]/20 z-10 pointer-events-none"></div>
-        <div className="absolute inset-x-0 top-0 aspect-[3/4] md:hidden bg-gradient-to-t from-[#0B0F19]/85 to-transparent to-55% z-10 pointer-events-none"></div>
-        <picture className="absolute inset-x-0 top-0 aspect-[3/4] md:aspect-auto md:inset-0 block">
-          <source media="(max-width: 767px)" srcSet="/hero/hero-mobile-720.webp 720w, /hero/hero-mobile-1080.webp 1080w" sizes="100vw" width={1080} height={1435} />
+        <div className="absolute inset-0 hidden wide:block bg-gradient-to-r from-[#0B0F19]/85 via-[#0B0F19]/85 via-35% to-[#0B0F19]/20 z-10 pointer-events-none"></div>
+        <div className="absolute inset-x-0 top-0 aspect-[3/4] wide:hidden bg-gradient-to-t from-[#0B0F19]/85 to-transparent to-55% z-10 pointer-events-none"></div>
+        <picture className="absolute inset-x-0 top-0 aspect-[3/4] wide:aspect-auto wide:inset-0 block">
+          <source media="(max-width: 767px), (orientation: portrait) and (max-width: 1100px)" srcSet="/hero/hero-mobile-720.webp 720w, /hero/hero-mobile-1080.webp 1080w" sizes="100vw" width={1080} height={1435} />
           <img
             src="/hero/hero-desktop-1440.webp"
             srcSet="/hero/hero-desktop-1440.webp 1440w, /hero/hero-desktop-2400.webp 2400w"
@@ -40,12 +40,12 @@ export default function Hero() {
             fetchPriority="high"
             loading="eager"
             alt={HERO_ALT[currentLanguage]}
-            className="w-full h-full object-cover object-[50%_30%] md:object-[60%_50%] opacity-85 transform-gpu transition-transform duration-[14000ms] ease-out hover:scale-105"
+            className="w-full h-full object-cover object-[50%_30%] wide:object-[60%_50%] opacity-85 transform-gpu transition-transform duration-[14000ms] ease-out hover:scale-105"
           />
         </picture>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-auto md:my-auto">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-auto wide:my-auto">
         <div className="max-w-4xl transition-all duration-700 ease-out animate-in fade-in slide-in-from-bottom-3">
           
           {/* Live Alert Banner if enabled by Admin */}
@@ -72,12 +72,12 @@ export default function Hero() {
           </div>
 
           {/* H1 Headline with Sentence Case and One Consistent Headline Font */}
-          <h1 className="lg:max-w-[650px] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-white leading-[1.08] tracking-tight mb-5 sm:mb-7 drop-shadow-sm">
+          <h1 className="wide:max-w-[min(650px,calc(55vw-48px))] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-white leading-[1.08] tracking-tight mb-5 sm:mb-7 drop-shadow-sm">
             {toSentenceCase(t('hero.title'))}
           </h1>
           
           {/* Supporting Paragraph with High Contrast */}
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200/95 font-body font-normal mb-8 sm:mb-10 max-w-2xl leading-relaxed drop-shadow-sm">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200/95 font-body font-normal mb-8 sm:mb-10 max-w-2xl wide:max-w-[min(42rem,calc(55vw-48px))] leading-relaxed drop-shadow-sm">
             {t('hero.subtitle')}
           </p>
           
