@@ -16,7 +16,7 @@ import TacticalCard from './TacticalCard';
 
 export default function EnrollContact() {
   const { t } = useLanguage();
-  const { settings } = useSiteData();
+  const { settings, addApplication } = useSiteData();
   const currentLanguage = t('nav.home') === 'Home' ? 'en' : 'sq';
 
   const [formData, setFormData] = useState({
@@ -46,6 +46,12 @@ export default function EnrollContact() {
   };
 
   const selectedProgramName = programLabels[formData.program]?.[currentLanguage] || formData.program;
+  // Activated FormSubmit token generated for https://solaritacademy.com/
+  const FORMSUBMIT_TOKEN = '993b8dda0367608cbc32466fd462d661';
+  const formSubmitTarget = (settings.notificationEmail && settings.notificationEmail.includes('@') && !settings.notificationEmail.includes('gmail.com'))
+    ? encodeURIComponent(settings.notificationEmail)
+    : FORMSUBMIT_TOKEN;
+  const targetEmail = settings.notificationEmail || 'shalaje60@gmail.com';
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -55,8 +61,20 @@ export default function EnrollContact() {
     setErrorMessage('');
 
     try {
-      // Primary automated endpoint delivering to active inbox and cc'ing domain email
-      const response = await fetch('https://formsubmit.co/ajax/solarit.academy@gmail.com', {
+      // 1. Instantly save application to database so no lead is ever lost
+      try {
+        await addApplication({
+          name: formData.name,
+          contact: formData.contact,
+          program: selectedProgramName,
+          message: formData.message || 'Pa mesazh shtesë'
+        });
+      } catch (dbErr) {
+        console.warn('Local application save notice:', dbErr);
+      }
+
+      // 2. Primary automated endpoint delivering directly to the academy inbox
+      const response = await fetch(`https://formsubmit.co/ajax/${formSubmitTarget}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -68,7 +86,7 @@ export default function EnrollContact() {
           'Programi i përzgjedhur': selectedProgramName,
           'Mesazhi': formData.message || 'Pa mesazh shtesë',
           '_subject': `Aplikim i ri: ${formData.name} - ${selectedProgramName} (Solarit Academy)`,
-          '_cc': 'info@solaritacademy.com',
+          '_cc': 'info@solaritacademy.com,solarit.academy@gmail.com',
           '_template': 'table',
           '_captcha': 'false'
         })
@@ -104,7 +122,7 @@ export default function EnrollContact() {
   };
 
   // Pre-filled direct email link fallback
-  const directMailtoUrl = `mailto:info@solaritacademy.com?cc=solarit.academy@gmail.com&subject=${encodeURIComponent(
+  const directMailtoUrl = `mailto:${targetEmail}?cc=info@solaritacademy.com&subject=${encodeURIComponent(
     `Aplikim për trajnim - ${formData.name || 'Kandidat i ri'} (${selectedProgramName})`
   )}&body=${encodeURIComponent(
     `Përshëndetje Solarit Academy,\n\nPo aplikoj për regjistrim në programin:\n- Programi: ${selectedProgramName}\n- Emri dhe Mbiemri: ${formData.name}\n- Kontakti: ${formData.contact}\n- Mesazhi: ${formData.message || 'Nuk ka'}\n\nJu faleminderit!`

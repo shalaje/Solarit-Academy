@@ -44,8 +44,7 @@ export default function Navbar() {
   };
 
   return (
-    <>
-      <nav
+    <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isMobileMenuOpen 
             ? 'bg-white py-3 shadow-md'
@@ -254,20 +253,5 @@ export default function Navbar() {
         </div>
       )}
     </nav>
-
-    {/* Mobile Floating Action Dock (Point 1: thumb-reach quick access) */}
-    {isScrolled && !isMobileMenuOpen && (
-      <div className="md:hidden fixed bottom-5 right-5 z-40 animate-in fade-in slide-in-from-bottom-2 duration-300">
-        <a
-          href="#contact"
-          className="inline-flex items-center gap-2 bg-brand-green hover:bg-brand-green/90 text-white font-heading font-bold text-xs uppercase tracking-wider py-3 px-5 rounded-full shadow-2xl shadow-brand-green/40 active:scale-95 transition-all border border-emerald-400/30"
-          aria-label={t('nav.apply')}
-        >
-          <span className="w-2 h-2 rounded-full bg-white animate-pulse"></span>
-          <span>{t('nav.apply')}</span>
-        </a>
-      </div>
-    )}
-  </>
   );
 }

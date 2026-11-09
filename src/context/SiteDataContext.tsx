@@ -29,6 +29,7 @@ export interface SiteSettings {
   hiddenPhotoIds: string[];
   photoOverrides: Record<string, { titleSq?: string; titleEn?: string; url?: string }>;
   adminPassword?: string;
+  notificationEmail?: string;
   announcementTextSq?: string;
   announcementTextEn?: string;
   announcementActive?: boolean;
@@ -42,9 +43,20 @@ export interface DynamicPhoto {
   order?: number;
 }
 
+export interface CandidateApplication {
+  id: string;
+  name: string;
+  contact: string;
+  program: string;
+  message?: string;
+  createdAt: string;
+  status?: 'new' | 'contacted' | 'enrolled';
+}
+
 interface SiteDataContextType {
   settings: SiteSettings;
   customPhotos: DynamicPhoto[];
+  applications: CandidateApplication[];
   isAdminOpen: boolean;
   setIsAdminOpen: (open: boolean) => void;
   currentUser: User | null;
@@ -57,6 +69,9 @@ interface SiteDataContextType {
   updateAdminPassword: (newPassword: string) => Promise<void>;
   addPhoto: (photo: { url: string; titleSq?: string; titleEn?: string }) => Promise<void>;
   deletePhoto: (photoId: string) => Promise<void>;
+  addApplication: (app: { name: string; contact: string; program: string; message?: string }) => Promise<void>;
+  updateApplicationStatus: (id: string, status: 'new' | 'contacted' | 'enrolled') => Promise<void>;
+  deleteApplication: (id: string) => Promise<void>;
 }
 
 export const DEFAULT_STRONG_PASSWORD = 'Solarit!Admin2026#';
@@ -73,6 +88,7 @@ const defaultSettings: SiteSettings = {
   hiddenPhotoIds: [],
   photoOverrides: {},
   adminPassword: DEFAULT_STRONG_PASSWORD,
+  notificationEmail: 'shalaje60@gmail.com',
   announcementActive: false,
   announcementTextSq: '',
   announcementTextEn: ''
@@ -89,7 +105,8 @@ const getInitialSettings = (): SiteSettings => {
           ...parsed,
           hiddenPhotoIds: parsed.hiddenPhotoIds || [],
           photoOverrides: parsed.photoOverrides || {},
-          heroVariant: parsed.heroVariant || 'classic'
+          heroVariant: parsed.heroVariant || 'classic',
+          notificationEmail: parsed.notificationEmail || defaultSettings.notificationEmail
         };
       }
     } catch (e) {
@@ -113,11 +130,26 @@ const getInitialCustomPhotos = (): DynamicPhoto[] => {
   return [];
 };
 
+const getInitialApplications = (): CandidateApplication[] => {
+  if (typeof window !== 'undefined') {
+    try {
+      const saved = localStorage.getItem('solarit_candidate_applications');
+      if (saved) {
+        return JSON.parse(saved);
+      }
+    } catch {
+      // Ignore
+    }
+  }
+  return [];
+};
+
 const SiteDataContext = createContext<SiteDataContextType | undefined>(undefined);
 
 export function SiteDataProvider({ children }: { children: ReactNode }) {
   const [settings, setSettings] = useState<SiteSettings>(getInitialSettings);
   const [customPhotos, setCustomPhotos] = useState<DynamicPhoto[]>(getInitialCustomPhotos);
+  const [applications, setApplications] = useState<CandidateApplication[]>(getInitialApplications);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [isPasscodeUnlocked, setIsPasscodeUnlocked] = useState(false);
@@ -308,6 +340,95 @@ export function SiteDataProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  // Listen to Firestore real-time applications
+  useEffect(() => {
+    try {
+      const appsCol = collection(db, 'applications');
+      const unsub = onSnapshot(
+        appsCol,
+        (snapshot) => {
+          const appsList: CandidateApplication[] = [];
+          snapshot.forEach((d) => {
+            appsList.push({ id: d.id, ...(d.data() as Omit<CandidateApplication, 'id'>) });
+          });
+          if (appsList.length > 0) {
+            appsList.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+            setApplications(appsList);
+            try {
+              localStorage.setItem('solarit_candidate_applications', JSON.stringify(appsList));
+            } catch {
+              // Ignore
+            }
+          }
+        },
+        (error) => {
+          console.warn('Applications snapshot fallback active:', error.message);
+        }
+      );
+      return () => unsub();
+    } catch (e) {
+      console.warn('Firestore applications snapshot setup warning:', e);
+    }
+  }, []);
+
+  const addApplication = async (app: { name: string; contact: string; program: string; message?: string }) => {
+    const newEntry: CandidateApplication = {
+      id: `app-${Date.now()}`,
+      name: app.name,
+      contact: app.contact,
+      program: app.program,
+      message: app.message,
+      createdAt: new Date().toISOString(),
+      status: 'new'
+    };
+
+    const nextList = [newEntry, ...applications];
+    setApplications(nextList);
+    try {
+      localStorage.setItem('solarit_candidate_applications', JSON.stringify(nextList));
+    } catch {
+      // Ignore
+    }
+
+    try {
+      await addDoc(collection(db, 'applications'), newEntry);
+    } catch (err) {
+      console.warn('Firestore add application warning:', err);
+    }
+  };
+
+  const updateApplicationStatus = async (id: string, status: 'new' | 'contacted' | 'enrolled') => {
+    const nextList = applications.map(a => a.id === id ? { ...a, status } : a);
+    setApplications(nextList);
+    try {
+      localStorage.setItem('solarit_candidate_applications', JSON.stringify(nextList));
+    } catch {
+      // Ignore
+    }
+
+    try {
+      await setDoc(doc(db, 'applications', id), { status }, { merge: true });
+    } catch (err) {
+      console.warn('Firestore update application status warning:', err);
+    }
+  };
+
+  const deleteApplication = async (id: string) => {
+    const nextList = applications.filter(a => a.id !== id);
+    setApplications(nextList);
+    try {
+      localStorage.setItem('solarit_candidate_applications', JSON.stringify(nextList));
+    } catch {
+      // Ignore
+    }
+
+    try {
+      await deleteDoc(doc(db, 'applications', id));
+    } catch (err) {
+      console.warn('Firestore delete application warning:', err);
+    }
+  };
+
   const isAdminAuthenticated = Boolean(currentUser) || isPasscodeUnlocked;
 
   return (
@@ -315,6 +436,7 @@ export function SiteDataProvider({ children }: { children: ReactNode }) {
       value={{
         settings,
         customPhotos,
+        applications,
         isAdminOpen,
         setIsAdminOpen,
         currentUser,
@@ -326,7 +448,10 @@ export function SiteDataProvider({ children }: { children: ReactNode }) {
         updatePhotoCaption,
         updateAdminPassword,
         addPhoto,
-        deletePhoto
+        deletePhoto,
+        addApplication,
+        updateApplicationStatus,
+        deleteApplication
       }}
     >
       {children}
