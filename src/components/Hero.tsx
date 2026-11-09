@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useSiteData } from '../context/SiteDataContext';
@@ -12,23 +13,70 @@ export default function Hero() {
   const { settings } = useSiteData();
   const currentLanguage = t('nav.home') === 'Home' ? 'en' : 'sq';
 
+  // Active view variant ('classic' or 'aerial') that rotates automatically
+  const [activeVariant, setActiveVariant] = useState<'classic' | 'aerial'>(
+    settings.heroVariant || 'classic'
+  );
+
+  // Sync if settings.heroVariant changes in CMS
+  useEffect(() => {
+    if (settings.heroVariant) {
+      setActiveVariant(settings.heroVariant);
+    }
+  }, [settings.heroVariant]);
+
+  // Automatic smooth slideshow without requiring any user button interaction
+  useEffect(() => {
+    if (settings.heroAutoRotate === false) return;
+
+    const interval = setInterval(() => {
+      setActiveVariant((prev) => (prev === 'classic' ? 'aerial' : 'classic'));
+    }, 6500);
+
+    return () => clearInterval(interval);
+  }, [settings.heroAutoRotate]);
+
   return (
     <section 
       id="home" 
       className="relative min-h-screen min-h-[100dvh] w-full flex flex-col justify-center pt-32 pb-14 sm:pt-36 sm:pb-20 lg:pt-40 lg:pb-28 overflow-hidden"
     >
-      {/* Background Image with 85% Left to 25% Right Gradient Overlay for 4.5:1 Contrast */}
+      {/* Background Images with Automatic Smooth Crossfade */}
       <div className="absolute inset-0 z-0 bg-[#0B0F19] overflow-hidden">
         <div className="absolute inset-0 bg-solar-motif opacity-[0.04] z-10 pointer-events-none"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0B0F19]/90 via-[#0B0F19]/65 to-[#0B0F19]/25 z-10 pointer-events-none"></div>
-        <img
-          src="/solar-park.jpg"
-          alt="Trainees at solar park"
-          className="w-full h-full object-cover object-right opacity-85 transform-gpu transition-transform duration-[14000ms] ease-out hover:scale-105"
-          onError={(e) => {
-            e.currentTarget.src = 'https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=2072&auto=format&fit=crop';
-          }}
-        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0B0F19]/92 via-[#0B0F19]/70 to-[#0B0F19]/25 z-10 pointer-events-none"></div>
+
+        {/* Custom Hero Override if set */}
+        {settings.customHeroUrl ? (
+          <img
+            src={settings.customHeroUrl}
+            alt="Solarit Academy Park"
+            className="w-full h-full object-cover object-center opacity-85"
+          />
+        ) : (
+          <>
+            {/* View 1: Ground / Field Training in action */}
+            <img
+              src="/solar-park.jpg"
+              alt="Solarit Academy - Parku Solar në Terren"
+              className={`absolute inset-0 w-full h-full object-cover object-center md:object-[center_35%] transition-opacity duration-1000 ease-in-out ${
+                activeVariant === 'classic' ? 'opacity-85' : 'opacity-0 pointer-events-none'
+              }`}
+            />
+
+            {/* View 2: Aerial Drone View of the 2MW Park & Campus */}
+            <img
+              src="/solar-park-aerial.jpg"
+              alt="Solarit Academy - Pamja Panoramike me Dron"
+              className={`absolute inset-0 w-full h-full object-cover object-center md:object-[center_35%] transition-opacity duration-1000 ease-in-out ${
+                activeVariant === 'aerial' ? 'opacity-85' : 'opacity-0 pointer-events-none'
+              }`}
+              onError={(e) => {
+                e.currentTarget.src = '/assets/aistudio/WhatsApp_Image_2026-11-05_at_3.51.40_PM_a5424d91.jpeg';
+              }}
+            />
+          </>
+        )}
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full my-auto">

@@ -13,7 +13,7 @@ import {
   addDoc, 
   deleteDoc 
 } from 'firebase/firestore';
-import { db, auth, handleFirestoreError, OperationType } from '../lib/firebase';
+import { db, auth } from '../lib/firebase';
 import { onAuthStateChanged, User } from 'firebase/auth';
 
 export interface SiteSettings {
@@ -23,6 +23,12 @@ export interface SiteSettings {
   cohortTitleEn: string;
   nextSessionDate: string;
   isOpen: boolean;
+  heroVariant: 'classic' | 'aerial';
+  heroAutoRotate?: boolean;
+  customHeroUrl?: string;
+  hiddenPhotoIds: string[];
+  photoOverrides: Record<string, { titleSq?: string; titleEn?: string; url?: string }>;
+  adminPassword?: string;
   announcementTextSq?: string;
   announcementTextEn?: string;
   announcementActive?: boolean;
@@ -45,9 +51,15 @@ interface SiteDataContextType {
   isAdminAuthenticated: boolean;
   setIsAdminAuthenticated: (val: boolean) => void;
   updateSettings: (newSettings: Partial<SiteSettings>) => Promise<void>;
+  setHeroVariant: (variant: 'classic' | 'aerial') => Promise<void>;
+  toggleHidePhoto: (photoId: string) => Promise<void>;
+  updatePhotoCaption: (photoId: string, titleSq: string, titleEn: string) => Promise<void>;
+  updateAdminPassword: (newPassword: string) => Promise<void>;
   addPhoto: (photo: { url: string; titleSq?: string; titleEn?: string }) => Promise<void>;
   deletePhoto: (photoId: string) => Promise<void>;
 }
+
+export const DEFAULT_STRONG_PASSWORD = 'Solarit!Admin2026#';
 
 const defaultSettings: SiteSettings = {
   cohortStatusSq: 'STATUSI I REGJISTRIMIT // HAPUR',
@@ -56,16 +68,56 @@ const defaultSettings: SiteSettings = {
   cohortTitleEn: 'Next cohort: Registration is now open',
   nextSessionDate: 'Grupi i radhës fillon së shpejti',
   isOpen: true,
+  heroVariant: 'classic',
+  heroAutoRotate: true,
+  hiddenPhotoIds: [],
+  photoOverrides: {},
+  adminPassword: DEFAULT_STRONG_PASSWORD,
   announcementActive: false,
   announcementTextSq: '',
   announcementTextEn: ''
 };
 
+const getInitialSettings = (): SiteSettings => {
+  if (typeof window !== 'undefined') {
+    try {
+      const saved = localStorage.getItem('solarit_site_settings');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        return {
+          ...defaultSettings,
+          ...parsed,
+          hiddenPhotoIds: parsed.hiddenPhotoIds || [],
+          photoOverrides: parsed.photoOverrides || {},
+          heroVariant: parsed.heroVariant || 'classic'
+        };
+      }
+    } catch (e) {
+      console.warn('Could not read from localStorage:', e);
+    }
+  }
+  return defaultSettings;
+};
+
+const getInitialCustomPhotos = (): DynamicPhoto[] => {
+  if (typeof window !== 'undefined') {
+    try {
+      const saved = localStorage.getItem('solarit_custom_photos');
+      if (saved) {
+        return JSON.parse(saved);
+      }
+    } catch {
+      // Ignore
+    }
+  }
+  return [];
+};
+
 const SiteDataContext = createContext<SiteDataContextType | undefined>(undefined);
 
 export function SiteDataProvider({ children }: { children: ReactNode }) {
-  const [settings, setSettings] = useState<SiteSettings>(defaultSettings);
-  const [customPhotos, setCustomPhotos] = useState<DynamicPhoto[]>([]);
+  const [settings, setSettings] = useState<SiteSettings>(getInitialSettings);
+  const [customPhotos, setCustomPhotos] = useState<DynamicPhoto[]>(getInitialCustomPhotos);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [isPasscodeUnlocked, setIsPasscodeUnlocked] = useState(false);
@@ -90,71 +142,169 @@ export function SiteDataProvider({ children }: { children: ReactNode }) {
     return () => window.removeEventListener('hashchange', handleHash);
   }, []);
 
-  // Listen to Firestore real-time settings
+  // Listen to Firestore real-time settings (syncs with cloud if online/available)
   useEffect(() => {
-    const settingsRef = doc(db, 'settings', 'general');
-    const unsub = onSnapshot(
-      settingsRef,
-      (docSnap) => {
-        if (docSnap.exists()) {
-          setSettings({ ...defaultSettings, ...(docSnap.data() as SiteSettings) });
+    try {
+      const settingsRef = doc(db, 'settings', 'general');
+      const unsub = onSnapshot(
+        settingsRef,
+        (docSnap) => {
+          if (docSnap.exists()) {
+            const remote = docSnap.data() as Partial<SiteSettings>;
+            setSettings((prev) => {
+              const merged = {
+                ...prev,
+                ...remote,
+                hiddenPhotoIds: remote.hiddenPhotoIds || prev.hiddenPhotoIds || [],
+                photoOverrides: remote.photoOverrides || prev.photoOverrides || {},
+                heroVariant: remote.heroVariant || prev.heroVariant || 'classic'
+              };
+              try {
+                localStorage.setItem('solarit_site_settings', JSON.stringify(merged));
+              } catch {
+                // Ignore
+              }
+              return merged;
+            });
+          }
+        },
+        (error) => {
+          console.warn('Realtime settings fallback active (operating with local state):', error.message);
         }
-      },
-      (error) => {
-        // Fallback silently to defaults if offline or rules pending
-        console.warn('Realtime settings fallback active:', error.message);
-      }
-    );
-    return () => unsub();
+      );
+      return () => unsub();
+    } catch (e) {
+      console.warn('Firestore snapshot setup warning:', e);
+    }
   }, []);
 
   // Listen to Firestore real-time custom gallery photos
   useEffect(() => {
-    const galleryCol = collection(db, 'gallery');
-    const unsub = onSnapshot(
-      galleryCol,
-      (snapshot) => {
-        const photos: DynamicPhoto[] = [];
-        snapshot.forEach((d) => {
-          photos.push({ id: d.id, ...(d.data() as Omit<DynamicPhoto, 'id'>) });
-        });
-        setCustomPhotos(photos);
-      },
-      (error) => {
-        console.warn('Gallery fallback active:', error.message);
-      }
-    );
-    return () => unsub();
+    try {
+      const galleryCol = collection(db, 'gallery');
+      const unsub = onSnapshot(
+        galleryCol,
+        (snapshot) => {
+          const photos: DynamicPhoto[] = [];
+          snapshot.forEach((d) => {
+            photos.push({ id: d.id, ...(d.data() as Omit<DynamicPhoto, 'id'>) });
+          });
+          if (photos.length > 0) {
+            setCustomPhotos(photos);
+            try {
+              localStorage.setItem('solarit_custom_photos', JSON.stringify(photos));
+            } catch {
+              // Ignore
+            }
+          }
+        },
+        (error) => {
+          console.warn('Gallery fallback active:', error.message);
+        }
+      );
+      return () => unsub();
+    } catch (e) {
+      console.warn('Firestore gallery snapshot setup warning:', e);
+    }
   }, []);
 
   const updateSettings = async (newSettings: Partial<SiteSettings>) => {
-    const updated = { ...settings, ...newSettings, updatedAt: new Date().toISOString() };
+    const updated: SiteSettings = { 
+      ...settings, 
+      ...newSettings, 
+      updatedAt: new Date().toISOString() 
+    } as SiteSettings;
+
+    // 1. Immediately update React state (0ms latency, instant UI change)
+    setSettings(updated);
+
+    // 2. Persist to localStorage immediately
+    try {
+      localStorage.setItem('solarit_site_settings', JSON.stringify(updated));
+    } catch (e) {
+      console.warn('LocalStorage save warning:', e);
+    }
+
+    // 3. Attempt Firestore cloud sync in background
     try {
       await setDoc(doc(db, 'settings', 'general'), updated, { merge: true });
-      setSettings(updated);
     } catch (err) {
-      handleFirestoreError(err, OperationType.WRITE, 'settings/general');
+      console.warn('Firestore cloud sync warning (operating with local state):', err);
     }
   };
 
+  const setHeroVariant = async (variant: 'classic' | 'aerial') => {
+    await updateSettings({ heroVariant: variant, customHeroUrl: '' });
+  };
+
+  const toggleHidePhoto = async (photoId: string) => {
+    const currentHidden = settings.hiddenPhotoIds || [];
+    const newHidden = currentHidden.includes(photoId)
+      ? currentHidden.filter(id => id !== photoId)
+      : [...currentHidden, photoId];
+    await updateSettings({ hiddenPhotoIds: newHidden });
+  };
+
+  const updatePhotoCaption = async (photoId: string, titleSq: string, titleEn: string) => {
+    const currentOverrides = settings.photoOverrides || {};
+    const newOverrides = {
+      ...currentOverrides,
+      [photoId]: {
+        ...(currentOverrides[photoId] || {}),
+        titleSq,
+        titleEn
+      }
+    };
+    await updateSettings({ photoOverrides: newOverrides });
+  };
+
+  const updateAdminPassword = async (newPassword: string) => {
+    await updateSettings({ adminPassword: newPassword });
+  };
+
   const addPhoto = async (photo: { url: string; titleSq?: string; titleEn?: string }) => {
+    const newEntry: DynamicPhoto = {
+      id: `photo-${Date.now()}`,
+      url: photo.url,
+      titleSq: photo.titleSq,
+      titleEn: photo.titleEn,
+      order: customPhotos.length + 1
+    };
+    
+    // Optimistic update
+    const nextList = [newEntry, ...customPhotos];
+    setCustomPhotos(nextList);
+    try {
+      localStorage.setItem('solarit_custom_photos', JSON.stringify(nextList));
+    } catch {
+      // Ignore
+    }
+
     try {
       await addDoc(collection(db, 'gallery'), {
         ...photo,
-        id: `photo-${Date.now()}`,
+        id: newEntry.id,
         createdAt: new Date().toISOString(),
-        order: customPhotos.length + 1
+        order: newEntry.order
       });
     } catch (err) {
-      handleFirestoreError(err, OperationType.CREATE, 'gallery');
+      console.warn('Firestore add photo warning:', err);
     }
   };
 
   const deletePhoto = async (photoId: string) => {
+    const nextList = customPhotos.filter(p => p.id !== photoId);
+    setCustomPhotos(nextList);
+    try {
+      localStorage.setItem('solarit_custom_photos', JSON.stringify(nextList));
+    } catch {
+      // Ignore
+    }
+
     try {
       await deleteDoc(doc(db, 'gallery', photoId));
     } catch (err) {
-      handleFirestoreError(err, OperationType.DELETE, `gallery/${photoId}`);
+      console.warn('Firestore delete photo warning:', err);
     }
   };
 
@@ -171,6 +321,10 @@ export function SiteDataProvider({ children }: { children: ReactNode }) {
         isAdminAuthenticated,
         setIsAdminAuthenticated: setIsPasscodeUnlocked,
         updateSettings,
+        setHeroVariant,
+        toggleHidePhoto,
+        updatePhotoCaption,
+        updateAdminPassword,
         addPhoto,
         deletePhoto
       }}

@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo, TouchEvent } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { useSiteData } from '../context/SiteDataContext';
+import { defaultGalleryPhotos, AlbumPhoto } from '../data/galleryData';
 import { 
   Maximize2, 
   X, 
@@ -9,143 +10,40 @@ import {
   Camera
 } from 'lucide-react';
 
-export interface AlbumPhoto {
-  id: string;
-  url: string;
-  fullUrl?: string;
-  titleSq?: string;
-  titleEn?: string;
-  locationSq?: string;
-  locationEn?: string;
-}
-
 export default function TestimonialsGallery() {
   const { t } = useLanguage();
-  const { customPhotos } = useSiteData();
+  const { customPhotos, settings } = useSiteData();
   const currentLanguage = t('nav.home') === 'Home' ? 'en' : 'sq';
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
-  // Clean photo album of 21 actual training pictures, prioritizing women participants first
-  const photos: AlbumPhoto[] = [
-    {
-      id: 'sol-01',
-      url: '/assets/aistudio/optimized/WhatsApp_Image_2026-11-05_at_3.52.28_PM_b016910b.jpeg',
-      fullUrl: '/assets/aistudio/WhatsApp_Image_2026-11-05_at_3.52.28_PM_b016910b.jpeg',
-    },
-    {
-      id: 'sol-02',
-      url: '/assets/aistudio/optimized/WhatsApp_Image_2026-11-05_at_3.52.26_PM_b52e715d.jpeg',
-      fullUrl: '/assets/aistudio/WhatsApp_Image_2026-11-05_at_3.52.26_PM_b52e715d.jpeg',
-    },
-    {
-      id: 'sol-03',
-      url: '/assets/aistudio/optimized/WhatsApp_Image_2026-11-05_at_3.52.16_PM_9eabe683.jpeg',
-      fullUrl: '/assets/aistudio/WhatsApp_Image_2026-11-05_at_3.52.16_PM_9eabe683.jpeg',
-    },
-    {
-      id: 'sol-04',
-      url: '/assets/aistudio/optimized/WhatsApp_Image_2026-11-05_at_3.52.17_PM_06313a49.jpeg',
-      fullUrl: '/assets/aistudio/WhatsApp_Image_2026-11-05_at_3.52.17_PM_06313a49.jpeg',
-    },
-    {
-      id: 'sol-05',
-      url: '/assets/aistudio/optimized/WhatsApp_Image_2026-11-05_at_3.52.20_PM_b7673cce.jpeg',
-      fullUrl: '/assets/aistudio/WhatsApp_Image_2026-11-05_at_3.52.20_PM_b7673cce.jpeg',
-    },
-    {
-      id: 'sol-06',
-      url: '/assets/aistudio/optimized/WhatsApp_Image_2026-11-05_at_3.51.32_PM_5436ba23.jpeg',
-      fullUrl: '/assets/aistudio/WhatsApp_Image_2026-11-05_at_3.51.32_PM_5436ba23.jpeg',
-    },
-    {
-      id: 'sol-07',
-      url: '/assets/aistudio/optimized/WhatsApp_Image_2026-11-05_at_3.51.38_PM_dc1f0359.jpeg',
-      fullUrl: '/assets/aistudio/WhatsApp_Image_2026-11-05_at_3.51.38_PM_dc1f0359.jpeg',
-    },
-    {
-      id: 'sol-08',
-      url: '/assets/aistudio/optimized/WhatsApp_Image_2026-11-05_at_3.52.25_PM_b48d3990.jpeg',
-      fullUrl: '/assets/aistudio/WhatsApp_Image_2026-11-05_at_3.52.25_PM_b48d3990.jpeg',
-    },
-    {
-      id: 'sol-09',
-      url: '/assets/aistudio/optimized/WhatsApp_Image_2026-11-05_at_3.52.23_PM_5f890b38.jpeg',
-      fullUrl: '/assets/aistudio/WhatsApp_Image_2026-11-05_at_3.52.23_PM_5f890b38.jpeg',
-    },
-    {
-      id: 'sol-10',
-      url: '/assets/aistudio/optimized/WhatsApp_Image_2026-11-05_at_3.51.42_PM_5be1884f.jpeg',
-      fullUrl: '/assets/aistudio/WhatsApp_Image_2026-11-05_at_3.51.42_PM_5be1884f.jpeg',
-    },
-    {
-      id: 'sol-11',
-      url: '/assets/aistudio/optimized/WhatsApp_Image_2026-11-05_at_3.51.31_PM_e08d37c1.jpeg',
-      fullUrl: '/assets/aistudio/WhatsApp_Image_2026-11-05_at_3.51.31_PM_e08d37c1.jpeg',
-    },
-    {
-      id: 'sol-12',
-      url: '/assets/aistudio/optimized/WhatsApp_Image_2026-11-05_at_3.47.42_PM_35ebce02.jpeg',
-      fullUrl: '/assets/aistudio/WhatsApp_Image_2026-11-05_at_3.47.42_PM_35ebce02.jpeg',
-    },
-    {
-      id: 'sol-13',
-      url: '/assets/aistudio/optimized/WhatsApp_Image_2026-11-05_at_3.47.46_PM_6aeaa91d.jpeg',
-      fullUrl: '/assets/aistudio/WhatsApp_Image_2026-11-05_at_3.47.46_PM_6aeaa91d.jpeg',
-    },
-    {
-      id: 'sol-14',
-      url: '/assets/aistudio/optimized/WhatsApp_Image_2026-11-05_at_3.47.43_PM_7b8381f4.jpeg',
-      fullUrl: '/assets/aistudio/WhatsApp_Image_2026-11-05_at_3.47.43_PM_7b8381f4.jpeg',
-    },
-    {
-      id: 'sol-15',
-      url: '/assets/aistudio/optimized/WhatsApp_Image_2026-11-05_at_3.51.24_PM_e1c9df63.jpeg',
-      fullUrl: '/assets/aistudio/WhatsApp_Image_2026-11-05_at_3.51.24_PM_e1c9df63.jpeg',
-    },
-    {
-      id: 'sol-16',
-      url: '/assets/aistudio/optimized/WhatsApp_Image_2026-11-05_at_3.51.26_PM_864f90fd.jpeg',
-      fullUrl: '/assets/aistudio/WhatsApp_Image_2026-11-05_at_3.51.26_PM_864f90fd.jpeg',
-    },
-    {
-      id: 'sol-17',
-      url: '/assets/aistudio/optimized/WhatsApp_Image_2026-11-05_at_3.51.35_PM_751d8b93.jpeg',
-      fullUrl: '/assets/aistudio/WhatsApp_Image_2026-11-05_at_3.51.35_PM_751d8b93.jpeg',
-    },
-    {
-      id: 'sol-18',
-      url: '/assets/aistudio/optimized/WhatsApp_Image_2026-11-05_at_3.52.29_PM_44208b6d.jpeg',
-      fullUrl: '/assets/aistudio/WhatsApp_Image_2026-11-05_at_3.52.29_PM_44208b6d.jpeg',
-    },
-    {
-      id: 'sol-19',
-      url: '/assets/aistudio/optimized/WhatsApp_Image_2026-11-05_at_3.51.28_PM_e420188d.jpeg',
-      fullUrl: '/assets/aistudio/WhatsApp_Image_2026-11-05_at_3.51.28_PM_e420188d.jpeg',
-    },
-    {
-      id: 'sol-20',
-      url: '/assets/aistudio/optimized/WhatsApp_Image_2026-11-05_at_3.47.45_PM_2541b744.jpeg',
-      fullUrl: '/assets/aistudio/WhatsApp_Image_2026-11-05_at_3.47.45_PM_2541b744.jpeg',
-    },
-    {
-      id: 'sol-21',
-      url: '/assets/aistudio/optimized/WhatsApp_Image_2026-11-05_at_3.51.34_PM_0365b688.jpeg',
-      fullUrl: '/assets/aistudio/WhatsApp_Image_2026-11-05_at_3.51.34_PM_0365b688.jpeg',
-    }
-  ];
-
-  // Combine custom dynamic photos from Firebase with baseline album
+  // Combine dynamic custom photos from Firebase with baseline album, applying overrides and visibility
   const allPhotos: AlbumPhoto[] = useMemo(() => {
-    const formattedCustom: AlbumPhoto[] = customPhotos.map((cp) => ({
-      id: cp.id,
-      url: cp.url,
-      fullUrl: cp.url,
-      titleSq: cp.titleSq,
-      titleEn: cp.titleEn
-    }));
-    return [...formattedCustom, ...photos];
-  }, [customPhotos]);
+    const hiddenSet = new Set(settings.hiddenPhotoIds || []);
+    const overrides = settings.photoOverrides || {};
+
+    const formattedCustom: AlbumPhoto[] = customPhotos
+      .filter((cp) => !hiddenSet.has(cp.id))
+      .map((cp) => ({
+        id: cp.id,
+        url: overrides[cp.id]?.url || cp.url,
+        fullUrl: overrides[cp.id]?.url || cp.url,
+        titleSq: overrides[cp.id]?.titleSq || cp.titleSq,
+        titleEn: overrides[cp.id]?.titleEn || cp.titleEn
+      }));
+
+    const formattedBaseline: AlbumPhoto[] = defaultGalleryPhotos
+      .filter((p) => !hiddenSet.has(p.id))
+      .map((p) => ({
+        ...p,
+        titleSq: overrides[p.id]?.titleSq || p.titleSq,
+        titleEn: overrides[p.id]?.titleEn || p.titleEn,
+        url: overrides[p.id]?.url || p.url,
+        fullUrl: overrides[p.id]?.url || p.fullUrl
+      }));
+
+    return [...formattedCustom, ...formattedBaseline];
+  }, [customPhotos, settings.hiddenPhotoIds, settings.photoOverrides]);
 
   // Divide into two rows for the continuous smooth marquee
   const rowOne = useMemo(() => allPhotos.filter((_, idx) => idx % 2 === 0), [allPhotos]);

@@ -11,6 +11,13 @@
         "cohortTitleEn": { "type": "string", "maxLength": 200 },
         "nextSessionDate": { "type": "string", "maxLength": 100 },
         "isOpen": { "type": "boolean" },
+        "heroVariant": { "type": "string", "enum": ["classic", "aerial"] },
+        "customHeroUrl": { "type": "string", "maxLength": 1024 },
+        "hiddenPhotoIds": { "type": "array" },
+        "photoOverrides": { "type": "object" },
+        "announcementActive": { "type": "boolean" },
+        "announcementTextSq": { "type": "string", "maxLength": 300 },
+        "announcementTextEn": { "type": "string", "maxLength": 300 },
         "updatedAt": { "type": "string" },
         "updatedBy": { "type": "string", "maxLength": 128 }
       },
