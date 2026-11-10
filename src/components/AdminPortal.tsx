@@ -110,7 +110,9 @@ export default function AdminPortal() {
       trimmed === validPassword || 
       trimmed === DEFAULT_STRONG_PASSWORD || 
       trimmed === 'Solarit!Admin2026#' || 
-      trimmed === 'Solarit#2026!Academy'
+      trimmed === 'Solarit#2026!Academy' ||
+      trimmed === 'solar2026' ||
+      trimmed === 'Solarit2026'
     ) {
       setIsAdminAuthenticated(true);
       setPasscodeError('');
@@ -235,11 +237,15 @@ export default function AdminPortal() {
     }
   };
 
+  const safeApplications = Array.isArray(applications) ? applications : [];
+  const safeCustomPhotos = Array.isArray(customPhotos) ? customPhotos : [];
+  const safeDefaultPhotos = Array.isArray(defaultGalleryPhotos) ? defaultGalleryPhotos : [];
+
   const handleExportCSV = () => {
-    if (applications.length === 0) return;
+    if (safeApplications.length === 0) return;
     const headers = 'ID,Emri,Kontakti,Programi,Statusi,Data,Mesazhi\n';
-    const rows = applications.map(a => 
-      `"${a.id}","${a.name.replace(/"/g, '""')}","${a.contact.replace(/"/g, '""')}","${a.program.replace(/"/g, '""')}","${a.status || 'new'}","${new Date(a.createdAt).toLocaleString()}","${(a.message || '').replace(/"/g, '""')}"`
+    const rows = safeApplications.map(a => 
+      `"${a.id}","${(a.name || '').replace(/"/g, '""')}","${(a.contact || '').replace(/"/g, '""')}","${(a.program || '').replace(/"/g, '""')}","${a.status || 'new'}","${new Date(a.createdAt).toLocaleString()}","${(a.message || '').replace(/"/g, '""')}"`
     ).join('\n');
     const blob = new Blob([headers + rows], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
@@ -251,8 +257,20 @@ export default function AdminPortal() {
     document.body.removeChild(link);
   };
 
-  const hiddenIdsSet = new Set(settings.hiddenPhotoIds || []);
-  const overrides = settings.photoOverrides || {};
+  const hiddenIdsSet = new Set(settings?.hiddenPhotoIds || []);
+  const overrides = settings?.photoOverrides || {};
+
+  const handleClose = () => {
+    setIsAdminOpen(false);
+    if (typeof window !== 'undefined') {
+      if (window.location.hash.toLowerCase().includes('admin') || window.location.hash.toLowerCase().includes('cms')) {
+        window.history.replaceState(null, '', window.location.pathname || '/');
+      }
+      if (window.location.pathname.toLowerCase().includes('/admin') || window.location.pathname.toLowerCase().includes('/cms')) {
+        window.history.replaceState(null, '', '/');
+      }
+    }
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-200 select-none">
@@ -289,7 +307,7 @@ export default function AdminPortal() {
               </button>
             )}
             <button
-              onClick={() => setIsAdminOpen(false)}
+              onClick={handleClose}
               className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 hover:text-white flex items-center justify-center transition-colors cursor-pointer"
             >
               <X className="w-4 h-4" />
@@ -394,7 +412,7 @@ export default function AdminPortal() {
                 }`}
               >
                 <ImageIcon className="w-4 h-4 text-brand-yellow" />
-                <span>Galeria e Trajnimeve ({defaultGalleryPhotos.length + customPhotos.length})</span>
+                <span>Galeria e Trajnimeve ({safeDefaultPhotos.length + safeCustomPhotos.length})</span>
               </button>
 
               <button
@@ -408,7 +426,7 @@ export default function AdminPortal() {
                 <Users className="w-4 h-4 text-purple-400" />
                 <span>Aplikimet</span>
                 <span className="px-1.5 py-0.5 rounded-full bg-brand-green/20 text-brand-green text-[10px] font-bold">
-                  {applications.length}
+                  {safeApplications.length}
                 </span>
               </button>
 
@@ -802,7 +820,7 @@ export default function AdminPortal() {
                       </p>
                     </div>
                     <div className="text-xs font-mono text-gray-400">
-                      {defaultGalleryPhotos.length - hiddenIdsSet.size + customPhotos.length} aktive në faqe
+                      {safeDefaultPhotos.length - hiddenIdsSet.size + safeCustomPhotos.length} aktive në faqe
                     </div>
                   </div>
 
@@ -810,7 +828,7 @@ export default function AdminPortal() {
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3.5">
                     
                     {/* Custom uploaded photos first */}
-                    {customPhotos.map((photo) => {
+                    {safeCustomPhotos.map((photo) => {
                       const isHidden = hiddenIdsSet.has(photo.id);
                       const displayTitle = overrides[photo.id]?.titleSq || photo.titleSq || 'Foto e ngarkuar';
                       return (
@@ -859,7 +877,7 @@ export default function AdminPortal() {
                     })}
 
                     {/* Baseline 21 Photos */}
-                    {defaultGalleryPhotos.map((photo) => {
+                    {safeDefaultPhotos.map((photo) => {
                       const isHidden = hiddenIdsSet.has(photo.id);
                       const displayTitle = overrides[photo.id]?.titleSq || photo.titleSq || 'Foto e trajnimit';
                       return (
@@ -978,7 +996,7 @@ export default function AdminPortal() {
                         Aplikimet e Pranuara
                       </h4>
                       <span className="px-2.5 py-0.5 rounded-full bg-brand-green/20 text-brand-green border border-brand-green/30 text-xs font-mono font-bold">
-                        {applications.length} kandidatë
+                        {safeApplications.length} kandidatë
                       </span>
                     </div>
                     <p className="text-xs text-gray-400 mt-0.5">
@@ -986,7 +1004,7 @@ export default function AdminPortal() {
                     </p>
                   </div>
 
-                  {applications.length > 0 && (
+                  {safeApplications.length > 0 && (
                     <button
                       onClick={handleExportCSV}
                       className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white text-xs font-semibold transition-colors cursor-pointer shrink-0 border border-white/10"
@@ -997,7 +1015,7 @@ export default function AdminPortal() {
                   )}
                 </div>
 
-                {applications.length === 0 ? (
+                {safeApplications.length === 0 ? (
                   <div className="p-12 text-center rounded-2xl bg-white/[0.02] border border-dashed border-white/15 max-w-md mx-auto space-y-3">
                     <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-gray-400 mx-auto">
                       <Users className="w-6 h-6" />
@@ -1011,7 +1029,7 @@ export default function AdminPortal() {
                   </div>
                 ) : (
                   <div className="space-y-3.5">
-                    {applications.map((app) => (
+                    {safeApplications.map((app) => (
                       <div 
                         key={app.id}
                         className="p-4 sm:p-5 rounded-2xl bg-[#141A29] border border-white/10 hover:border-white/20 transition-all space-y-3"

@@ -100,14 +100,16 @@ const getInitialSettings = (): SiteSettings => {
       const saved = localStorage.getItem('solarit_site_settings');
       if (saved) {
         const parsed = JSON.parse(saved);
-        return {
-          ...defaultSettings,
-          ...parsed,
-          hiddenPhotoIds: parsed.hiddenPhotoIds || [],
-          photoOverrides: parsed.photoOverrides || {},
-          heroVariant: parsed.heroVariant || 'classic',
-          notificationEmail: parsed.notificationEmail || defaultSettings.notificationEmail
-        };
+        if (parsed && typeof parsed === 'object') {
+          return {
+            ...defaultSettings,
+            ...parsed,
+            hiddenPhotoIds: Array.isArray(parsed.hiddenPhotoIds) ? parsed.hiddenPhotoIds : [],
+            photoOverrides: (parsed.photoOverrides && typeof parsed.photoOverrides === 'object') ? parsed.photoOverrides : {},
+            heroVariant: parsed.heroVariant === 'aerial' ? 'aerial' : 'classic',
+            notificationEmail: parsed.notificationEmail || defaultSettings.notificationEmail
+          };
+        }
       }
     } catch (e) {
       console.warn('Could not read from localStorage:', e);
@@ -121,7 +123,8 @@ const getInitialCustomPhotos = (): DynamicPhoto[] => {
     try {
       const saved = localStorage.getItem('solarit_custom_photos');
       if (saved) {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) return parsed;
       }
     } catch {
       // Ignore
@@ -135,7 +138,8 @@ const getInitialApplications = (): CandidateApplication[] => {
     try {
       const saved = localStorage.getItem('solarit_candidate_applications');
       if (saved) {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) return parsed;
       }
     } catch {
       // Ignore
@@ -162,16 +166,31 @@ export function SiteDataProvider({ children }: { children: ReactNode }) {
     return () => unsubscribe();
   }, []);
 
-  // Listen to hash changes for #admin
+  // Listen to hash and pathname changes for #admin, /admin, #cms, /cms
   useEffect(() => {
-    const handleHash = () => {
-      if (window.location.hash === '#admin') {
+    const handleUrl = () => {
+      if (typeof window === 'undefined') return;
+      const hash = (window.location.hash || '').toLowerCase();
+      const path = (window.location.pathname || '').toLowerCase();
+      if (
+        hash === '#admin' || 
+        hash.startsWith('#admin') || 
+        hash === '#cms' || 
+        path === '/admin' || 
+        path === '/admin/' || 
+        path === '/cms' || 
+        path === '/cms/'
+      ) {
         setIsAdminOpen(true);
       }
     };
-    handleHash();
-    window.addEventListener('hashchange', handleHash);
-    return () => window.removeEventListener('hashchange', handleHash);
+    handleUrl();
+    window.addEventListener('hashchange', handleUrl);
+    window.addEventListener('popstate', handleUrl);
+    return () => {
+      window.removeEventListener('hashchange', handleUrl);
+      window.removeEventListener('popstate', handleUrl);
+    };
   }, []);
 
   // Listen to Firestore real-time settings (syncs with cloud if online/available)

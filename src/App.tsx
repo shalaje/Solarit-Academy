@@ -20,12 +20,14 @@ import EnrollContact from './components/EnrollContact';
 import Footer from './components/Footer';
 import FadeIn from './components/FadeIn';
 import AdminPortal from './components/AdminPortal';
+import ErrorBoundary from './components/ErrorBoundary';
 
 export default function App() {
   return (
-    <LanguageProvider>
-      <SiteDataProvider>
-        <div className="min-h-screen bg-brand-gray selection:bg-brand-green/30 selection:text-brand-navy font-body">
+    <ErrorBoundary>
+      <LanguageProvider>
+        <SiteDataProvider>
+          <div className="min-h-screen bg-brand-gray selection:bg-brand-green/30 selection:text-brand-navy font-body">
           <Navbar />
           <main>
             <Hero />
@@ -45,5 +47,6 @@ export default function App() {
         </div>
       </SiteDataProvider>
     </LanguageProvider>
+  </ErrorBoundary>
   );
 }
