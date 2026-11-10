@@ -19,8 +19,9 @@ export default function TestimonialsGallery() {
 
   // Combine dynamic custom photos from Firebase with baseline album, applying overrides and visibility
   const allPhotos: AlbumPhoto[] = useMemo(() => {
-    const hiddenSet = new Set(settings.hiddenPhotoIds || []);
-    const overrides = settings.photoOverrides || {};
+    const hiddenIds = Array.isArray(settings?.hiddenPhotoIds) ? settings.hiddenPhotoIds : [];
+    const hiddenSet = new Set(hiddenIds);
+    const overrides = (settings?.photoOverrides && typeof settings.photoOverrides === 'object') ? settings.photoOverrides : {};
 
     const formattedCustom: AlbumPhoto[] = customPhotos
       .filter((cp) => !hiddenSet.has(cp.id))

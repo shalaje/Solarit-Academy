@@ -43,7 +43,9 @@ export default function App() {
             <FadeIn><EnrollContact /></FadeIn>
           </main>
           <Footer />
-          <AdminPortal />
+          <ErrorBoundary fallbackTitle="Paneli Administrativ (CMS)">
+            <AdminPortal />
+          </ErrorBoundary>
         </div>
       </SiteDataProvider>
     </LanguageProvider>

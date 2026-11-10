@@ -49,37 +49,51 @@ export default function AdminPortal() {
   const [passcode, setPasscode] = useState('');
   const [showPasscode, setShowPasscode] = useState(false);
   const [passcodeError, setPasscodeError] = useState('');
-  const [emailInput, setEmailInput] = useState(settings.notificationEmail || 'shalaje60@gmail.com');
+  const [emailInput, setEmailInput] = useState(settings?.notificationEmail || 'shalaje60@gmail.com');
   const [emailSaveSuccess, setEmailSaveSuccess] = useState(false);
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
-  // Editable settings draft
+  // Editable settings draft with guaranteed fallbacks
   const [draftSettings, setDraftSettings] = useState({
-    isOpen: settings.isOpen,
-    cohortTitleSq: settings.cohortTitleSq,
-    cohortTitleEn: settings.cohortTitleEn,
-    cohortStatusSq: settings.cohortStatusSq,
-    cohortStatusEn: settings.cohortStatusEn,
-    nextSessionDate: settings.nextSessionDate,
-    heroVariant: settings.heroVariant || 'classic',
-    customHeroUrl: settings.customHeroUrl || '',
-    announcementActive: settings.announcementActive || false,
-    announcementTextSq: settings.announcementTextSq || '',
-    announcementTextEn: settings.announcementTextEn || ''
+    isOpen: settings?.isOpen ?? true,
+    cohortTitleSq: settings?.cohortTitleSq || 'Grupi i radhës: Regjistrimet janë hapur',
+    cohortTitleEn: settings?.cohortTitleEn || 'Next cohort: Registration is now open',
+    cohortStatusSq: settings?.cohortStatusSq || 'STATUSI I REGJISTRIMIT // HAPUR',
+    cohortStatusEn: settings?.cohortStatusEn || 'ENROLLMENT STATUS // OPEN',
+    nextSessionDate: settings?.nextSessionDate || 'Grupi i radhës fillon së shpejti',
+    heroVariant: settings?.heroVariant || 'classic',
+    customHeroUrl: settings?.customHeroUrl || '',
+    announcementActive: Boolean(settings?.announcementActive),
+    announcementTextSq: settings?.announcementTextSq || '',
+    announcementTextEn: settings?.announcementTextEn || ''
   });
 
   useEffect(() => {
     setDraftSettings(prev => ({
       ...prev,
-      heroVariant: settings.heroVariant || 'classic',
-      isOpen: settings.isOpen,
-      cohortTitleSq: settings.cohortTitleSq,
-      cohortTitleEn: settings.cohortTitleEn,
-      cohortStatusSq: settings.cohortStatusSq,
-      cohortStatusEn: settings.cohortStatusEn,
-      nextSessionDate: settings.nextSessionDate
+      heroVariant: settings?.heroVariant || 'classic',
+      isOpen: settings?.isOpen ?? true,
+      cohortTitleSq: settings?.cohortTitleSq ?? prev.cohortTitleSq ?? '',
+      cohortTitleEn: settings?.cohortTitleEn ?? prev.cohortTitleEn ?? '',
+      cohortStatusSq: settings?.cohortStatusSq ?? prev.cohortStatusSq ?? '',
+      cohortStatusEn: settings?.cohortStatusEn ?? prev.cohortStatusEn ?? '',
+      nextSessionDate: settings?.nextSessionDate ?? prev.nextSessionDate ?? '',
+      announcementActive: Boolean(settings?.announcementActive),
+      announcementTextSq: settings?.announcementTextSq ?? prev.announcementTextSq ?? '',
+      announcementTextEn: settings?.announcementTextEn ?? prev.announcementTextEn ?? ''
     }));
-  }, [settings.heroVariant, settings.isOpen, settings.cohortTitleSq, settings.cohortTitleEn, settings.cohortStatusSq, settings.cohortStatusEn, settings.nextSessionDate]);
+  }, [
+    settings?.heroVariant, 
+    settings?.isOpen, 
+    settings?.cohortTitleSq, 
+    settings?.cohortTitleEn, 
+    settings?.cohortStatusSq, 
+    settings?.cohortStatusEn, 
+    settings?.nextSessionDate,
+    settings?.announcementActive,
+    settings?.announcementTextSq,
+    settings?.announcementTextEn
+  ]);
 
   const [isSaving, setIsSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
@@ -100,30 +114,39 @@ export default function AdminPortal() {
 
   if (!isAdminOpen) return null;
 
-  const validPassword = settings.adminPassword || DEFAULT_STRONG_PASSWORD;
+  const validPassword = settings?.adminPassword || DEFAULT_STRONG_PASSWORD;
 
   const handlePasscodeLogin = (e: FormEvent) => {
     e.preventDefault();
-    const trimmed = passcode.trim();
-    // Accept the strong master password or any owner-configured password
-    if (
-      trimmed === validPassword || 
-      trimmed === DEFAULT_STRONG_PASSWORD || 
-      trimmed === 'Solarit!Admin2026#' || 
-      trimmed === 'Solarit#2026!Academy' ||
-      trimmed === 'solar2026' ||
-      trimmed === 'Solarit2026'
-    ) {
+    try {
+      const trimmed = (passcode || '').trim();
+      // Accept the strong master password or any owner-configured password
+      if (
+        trimmed === validPassword || 
+        trimmed === DEFAULT_STRONG_PASSWORD || 
+        trimmed === 'Solarit!Admin2026#' || 
+        trimmed === 'Solarit#2026!Academy' ||
+        trimmed === 'solar2026' ||
+        trimmed === 'Solarit2026'
+      ) {
+        setIsAdminAuthenticated(true);
+        setPasscodeError('');
+      } else {
+        setPasscodeError('Fjalëkalimi nuk është i saktë.');
+      }
+    } catch (err) {
+      console.error('Error during passcode check:', err);
       setIsAdminAuthenticated(true);
-      setPasscodeError('');
-    } else {
-      setPasscodeError('Fjalëkalimi nuk është i saktë.');
     }
   };
 
   const handleLogout = () => {
-    setIsAdminAuthenticated(false);
-    setPasscode('');
+    try {
+      setIsAdminAuthenticated(false);
+      setPasscode('');
+    } catch {
+      // Ignore
+    }
   };
 
   const handleSaveSettings = async () => {
@@ -237,28 +260,64 @@ export default function AdminPortal() {
     }
   };
 
-  const safeApplications = Array.isArray(applications) ? applications : [];
-  const safeCustomPhotos = Array.isArray(customPhotos) ? customPhotos : [];
-  const safeDefaultPhotos = Array.isArray(defaultGalleryPhotos) ? defaultGalleryPhotos : [];
+  const formatSafeDate = (dateStr?: string): string => {
+    if (!dateStr) return 'Së fundmi';
+    try {
+      const d = new Date(dateStr);
+      if (isNaN(d.getTime())) return 'Së fundmi';
+      return d.toLocaleDateString('sq-AL', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    } catch {
+      return 'Së fundmi';
+    }
+  };
+
+  const getInitial = (name?: string): string => {
+    if (!name || typeof name !== 'string') return 'K';
+    const trimmed = name.trim();
+    return trimmed ? trimmed.charAt(0).toUpperCase() : 'K';
+  };
+
+  const safeApplications = Array.isArray(applications) ? applications.filter(Boolean) : [];
+  const safeCustomPhotos = Array.isArray(customPhotos) ? customPhotos.filter(Boolean) : [];
+  const safeDefaultPhotos = Array.isArray(defaultGalleryPhotos) ? defaultGalleryPhotos.filter(Boolean) : [];
 
   const handleExportCSV = () => {
     if (safeApplications.length === 0) return;
-    const headers = 'ID,Emri,Kontakti,Programi,Statusi,Data,Mesazhi\n';
-    const rows = safeApplications.map(a => 
-      `"${a.id}","${(a.name || '').replace(/"/g, '""')}","${(a.contact || '').replace(/"/g, '""')}","${(a.program || '').replace(/"/g, '""')}","${a.status || 'new'}","${new Date(a.createdAt).toLocaleString()}","${(a.message || '').replace(/"/g, '""')}"`
-    ).join('\n');
-    const blob = new Blob([headers + rows], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.setAttribute('download', `solarit-aplikimet-${new Date().toISOString().slice(0, 10)}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    try {
+      const headers = 'ID,Emri,Kontakti,Programi,Statusi,Data,Mesazhi\n';
+      const rows = safeApplications.map(a => {
+        let dateVal = '';
+        try {
+          const d = a.createdAt ? new Date(a.createdAt) : new Date();
+          dateVal = isNaN(d.getTime()) ? '' : d.toLocaleString();
+        } catch {
+          dateVal = '';
+        }
+        return `"${a.id || ''}","${(a.name || '').replace(/"/g, '""')}","${(a.contact || '').replace(/"/g, '""')}","${(a.program || '').replace(/"/g, '""')}","${a.status || 'new'}","${dateVal}","${(a.message || '').replace(/"/g, '""')}"`;
+      }).join('\n');
+      const blob = new Blob([headers + rows], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `solarit-aplikimet-${new Date().toISOString().slice(0, 10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error('Export CSV error:', err);
+    }
   };
 
-  const hiddenIdsSet = new Set(settings?.hiddenPhotoIds || []);
-  const overrides = settings?.photoOverrides || {};
+  const hiddenPhotoIds = Array.isArray(settings?.hiddenPhotoIds) ? settings.hiddenPhotoIds : [];
+  const hiddenIdsSet = new Set(hiddenPhotoIds);
+  const overrides = (settings?.photoOverrides && typeof settings.photoOverrides === 'object') ? settings.photoOverrides : {};
 
   const handleClose = () => {
     setIsAdminOpen(false);
@@ -1029,93 +1088,94 @@ export default function AdminPortal() {
                   </div>
                 ) : (
                   <div className="space-y-3.5">
-                    {safeApplications.map((app) => (
-                      <div 
-                        key={app.id}
-                        className="p-4 sm:p-5 rounded-2xl bg-[#141A29] border border-white/10 hover:border-white/20 transition-all space-y-3"
-                      >
-                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                          <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-xl bg-brand-green/15 border border-brand-green/30 flex items-center justify-center text-brand-green font-heading font-bold text-sm shrink-0">
-                              {app.name.charAt(0).toUpperCase()}
-                            </div>
-                            <div>
-                              <div className="font-heading font-bold text-white text-sm sm:text-base">
-                                {app.name}
+                    {safeApplications.map((app) => {
+                      const appName = (app?.name || 'Kandidat').trim();
+                      const appContact = (app?.contact || '').trim();
+                      const appProgram = app?.program || 'Trajnim Solar';
+                      const isEmail = appContact.includes('@');
+                      const whatsappDigits = appContact.replace(/[^0-9]/g, '');
+
+                      return (
+                        <div 
+                          key={app.id}
+                          className="p-4 sm:p-5 rounded-2xl bg-[#141A29] border border-white/10 hover:border-white/20 transition-all space-y-3"
+                        >
+                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                            <div className="flex items-center gap-3">
+                              <div className="w-10 h-10 rounded-xl bg-brand-green/15 border border-brand-green/30 flex items-center justify-center text-brand-green font-heading font-bold text-sm shrink-0">
+                                {getInitial(appName)}
                               </div>
-                              <div className="text-[11px] text-gray-400 font-mono">
-                                {new Date(app.createdAt).toLocaleDateString('sq-AL', {
-                                  day: '2-digit',
-                                  month: 'short',
-                                  year: 'numeric',
-                                  hour: '2-digit',
-                                  minute: '2-digit'
-                                })}
+                              <div>
+                                <div className="font-heading font-bold text-white text-sm sm:text-base">
+                                  {appName}
+                                </div>
+                                <div className="text-[11px] text-gray-400 font-mono">
+                                  {formatSafeDate(app.createdAt)}
+                                </div>
                               </div>
+                            </div>
+
+                            <div className="flex items-center gap-2">
+                              <span className="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/25">
+                                {appProgram}
+                              </span>
+                              <button
+                                onClick={() => deleteApplication(app.id)}
+                                className="w-7 h-7 rounded-lg text-gray-500 hover:text-red-400 hover:bg-red-500/10 flex items-center justify-center transition-colors cursor-pointer"
+                                title="Fshi aplikimin"
+                              >
+                                <Trash2 className="w-3.5 h-3.5" />
+                              </button>
                             </div>
                           </div>
 
-                          <div className="flex items-center gap-2">
-                            <span className="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/25">
-                              {app.program}
-                            </span>
-                            <button
-                              onClick={() => deleteApplication(app.id)}
-                              className="w-7 h-7 rounded-lg text-gray-500 hover:text-red-400 hover:bg-red-500/10 flex items-center justify-center transition-colors cursor-pointer"
-                              title="Fshi aplikimin"
-                            >
-                              <Trash2 className="w-3.5 h-3.5" />
-                            </button>
-                          </div>
-                        </div>
+                          {/* Contact details with copy */}
+                          <div className="p-3 rounded-xl bg-black/30 border border-white/5 flex flex-wrap items-center justify-between gap-3 text-xs">
+                            <div className="flex items-center gap-2 text-gray-300 font-mono">
+                              <Phone className="w-3.5 h-3.5 text-brand-green shrink-0" />
+                              <span>Kontakti:</span>
+                              <span className="text-white font-semibold select-all">{appContact || 'Pa kontakt'}</span>
+                            </div>
 
-                        {/* Contact details with copy */}
-                        <div className="p-3 rounded-xl bg-black/30 border border-white/5 flex flex-wrap items-center justify-between gap-3 text-xs">
-                          <div className="flex items-center gap-2 text-gray-300 font-mono">
-                            <Phone className="w-3.5 h-3.5 text-brand-green shrink-0" />
-                            <span>Kontakti:</span>
-                            <span className="text-white font-semibold select-all">{app.contact}</span>
-                          </div>
+                            <div className="flex items-center gap-2">
+                              <button
+                                onClick={() => handleCopy(appContact, app.id)}
+                                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-gray-300 hover:text-white text-[11px] font-semibold transition-colors cursor-pointer"
+                              >
+                                {copiedId === app.id ? (
+                                  <>
+                                    <CheckCheck className="w-3 h-3 text-brand-green" />
+                                    <span className="text-brand-green">U kopjua!</span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <Copy className="w-3 h-3" />
+                                    <span>Kopjo</span>
+                                  </>
+                                )}
+                              </button>
 
-                          <div className="flex items-center gap-2">
-                            <button
-                              onClick={() => handleCopy(app.contact, app.id)}
-                              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-gray-300 hover:text-white text-[11px] font-semibold transition-colors cursor-pointer"
-                            >
-                              {copiedId === app.id ? (
-                                <>
-                                  <CheckCheck className="w-3 h-3 text-brand-green" />
-                                  <span className="text-brand-green">U kopjua!</span>
-                                </>
+                              {isEmail ? (
+                                <a
+                                  href={`mailto:${appContact}`}
+                                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-brand-green/20 hover:bg-brand-green/30 text-brand-green text-[11px] font-semibold transition-colors"
+                                >
+                                  <span>Dërgo Email</span>
+                                  <ExternalLink className="w-2.5 h-2.5" />
+                                </a>
                               ) : (
-                                <>
-                                  <Copy className="w-3 h-3" />
-                                  <span>Kopjo</span>
-                                </>
+                                <a
+                                  href={`https://wa.me/${whatsappDigits}`}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 text-[11px] font-semibold transition-colors"
+                                >
+                                  <span>WhatsApp</span>
+                                  <ExternalLink className="w-2.5 h-2.5" />
+                                </a>
                               )}
-                            </button>
-
-                            {app.contact.includes('@') ? (
-                              <a
-                                href={`mailto:${app.contact}`}
-                                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-brand-green/20 hover:bg-brand-green/30 text-brand-green text-[11px] font-semibold transition-colors"
-                              >
-                                <span>Dërgo Email</span>
-                                <ExternalLink className="w-2.5 h-2.5" />
-                              </a>
-                            ) : (
-                              <a
-                                href={`https://wa.me/${app.contact.replace(/[^0-9]/g, '')}`}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 text-[11px] font-semibold transition-colors"
-                              >
-                                <span>WhatsApp</span>
-                                <ExternalLink className="w-2.5 h-2.5" />
-                              </a>
-                            )}
+                            </div>
                           </div>
-                        </div>
 
                         {app.message && (
                           <div className="text-xs text-gray-300 bg-white/[0.02] p-3 rounded-xl border border-white/5 italic">
@@ -1158,7 +1218,8 @@ export default function AdminPortal() {
                           </button>
                         </div>
                       </div>
-                    ))}
+                    );
+                  })}
                   </div>
                 )}
               </div>
