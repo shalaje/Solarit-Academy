@@ -111,8 +111,7 @@ export default function AdminPortal() {
   // Password change state
   const [newPasswordInput, setNewPasswordInput] = useState('');
   const [passwordChangeSuccess, setPasswordChangeSuccess] = useState(false);
-
-  if (!isAdminOpen) return null;
+  const [heroSwitchFeedback, setHeroSwitchFeedback] = useState('');
 
   const validPassword = settings?.adminPassword || DEFAULT_STRONG_PASSWORD;
 
@@ -162,8 +161,6 @@ export default function AdminPortal() {
       setIsSaving(false);
     }
   };
-
-  const [heroSwitchFeedback, setHeroSwitchFeedback] = useState('');
 
   const handleHeroSelect = async (variant: 'classic' | 'aerial') => {
     setDraftSettings(prev => ({ ...prev, heroVariant: variant, customHeroUrl: '' }));
@@ -330,6 +327,8 @@ export default function AdminPortal() {
       }
     }
   };
+
+  if (!isAdminOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-200 select-none">
